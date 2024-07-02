@@ -1,3 +1,25 @@
-Nav.Link{
-    background-color: aqua;
+.navi{
+    gap:10%;
+    width: 100%;
+    justify-content: center;
+    justify-items: space-between;
+    text-align: center;
+    align-items: center;
+}
+.nav-link{
+     color: black;
+    border-radius: 30px;
+      font-weight: bold;
+    justify-content: center;
+     justify-items: space-between;
+    text-align: center;
+    align-items: center;
+}
+
+
+@media screen and (max-width: 968px) {
+    .navi{
+        align-items: start;
+    }
+    
 }

@@ -1,0 +1,112 @@
+.homepro{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-items: space-between;
+}
+ h2{
+    
+           padding:2% ; 
+      justify-content: center;
+      text-align: center;
+      font-size: 30px;
+     font-weight: 500;
+     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+     
+ 
+  }
+ /* 
+   .card-add{
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     min-width: 0;
+     word-wrap: break-word;
+     background-color: #fff;
+     background-clip: border-box;
+     border: 1px solid rgba(0, 0, 0, 0.125);
+     border-radius: 0.25rem;
+     height: 200%;
+     
+ 
+     
+   } */
+ .card{
+   
+     filter: drop-shadow(0 0 0.75rem rgb(0, 0, 0));
+     background-color: rgb(10, 10, 10);
+     border-radius: 5px;
+     padding: 3px;
+     width: 300px;
+     filter: drop-shadow(0 0 0.25rem rgb(226, 225, 225));
+     color:rgb(255, 249, 249);
+     height: 90%;
+   
+    }
+    .card-img-top{
+      aspect-ratio: 1 / 1;
+    }
+ .bi-heart{
+      position: absolute;
+      width: 20px;
+      top: 25px;
+      right: 19px;
+      cursor: pointer;
+      align-items: center;
+       color: rgb(255, 251, 251);
+     justify-content:space-around;
+     justify-items: center;
+     background-color: transparent;
+     color: red;
+      
+ }
+ 
+    .card:hover{
+     filter: drop-shadow(0 0 0.75rem rgb(0, 0, 0));
+      border-radius: 5px;
+     padding: 3px;
+     width: 300px;
+     filter: drop-shadow(0 0 0.25rem rgb(226, 225, 225));
+     background-color: rgb(255, 254, 254);
+      transition: all 0.3s ease;
+      transform: scale(1.01);
+      color: black;
+ 
+ 
+    }
+ 
+    .btn-card{
+       margin-left: 10px;
+       
+          background-color: rgb(245, 6, 6);
+          color: rgb(246, 244, 244);
+          border-radius: 5px;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+        height: 40px;
+        font-size: small;
+      
+    }
+    .btn-card:hover{
+       background-color: rgb(232, 223, 223);
+       color: rgb(222, 9, 9);
+    }
+ 
+ .detaprice{
+    margin-left:10px;
+    gap:10px
+ }
+ 
+ 
+ @media screen and (max-width: 600px) {
+    .card{
+       width: 100%;
+       margin-top: 10px;
+       margin-bottom: 10px;
+       height:50% ;
+       font-size: medium;
+ 
+    }
+    
+ }

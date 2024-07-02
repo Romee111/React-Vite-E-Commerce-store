@@ -1,0 +1,83 @@
+import React, { useState, useEffect } from 'react';
+import '../styling/arrivals.css';
+import useProducts from '../hooks/producthooks';
+
+const Arrivals = () => {
+    const [products, setProducts] = useState([]);
+    const { getProducts } = useProducts();
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const data = await getProducts();
+            setProducts(data);
+        };
+
+        fetchProducts();
+    }, []);
+
+    return (
+
+              
+
+        <div className="container-fluid newArrivals">
+             
+            <div className="row">
+                <div className="col-md-3">
+                    <div className="card mx-auto col-10 mt-5">
+                        <img
+                            className="mx-auto img-thumbnail"
+                            src="https://i.imgur.com/pjITBzX.jpg"
+                            alt="Yail wrist watch"
+                            width="auto"
+                            height="auto"
+                        />
+                        <div className="card-body text-center mx-auto">
+                            <div className="cvp">
+                                <h5 className="card-title font-weight-bold">Yail wrist watch</h5>
+                                <p className="card-text">$299</p>
+                                <button className="btn details">View details</button><br />
+                                <button className="btn cart">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="col-md-9">
+                      <ul className='d-flex  justify-content-center  featuring'>
+              <li><a href="">newArrivals</a></li>  
+                <li><a href="">Featured</a></li>
+               <li><a href="">Top Rated</a></li> 
+             
+               </ul>
+               <hr />
+                    <div className="grid-container">
+                        {products.map((product) => (
+                            <div key={product.id} className="cards">
+                                <img
+                                    src={product.image}
+                                    alt={product.name}
+                                    className="cards-img"
+                                    
+                                />
+                                
+                                <div className="cards-body">
+                                    
+                                    <h5>{product.name}</h5>
+                                    <p>{product.description}</p>
+                                    <p>${product.price.toFixed(2)}</p>
+                                    <button className="btn cart">Add to cart</button>
+                                  
+                                </div>
+                                
+                                
+                            </div>
+                            
+                        ))}
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Arrivals;

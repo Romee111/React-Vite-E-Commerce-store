@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import '../styling/topheader.css'
 function topheader() {
   return (
     <>
@@ -24,6 +25,12 @@ function topheader() {
             />
             <Button variant="outline-success">Search</Button>
           </Form>
+          <Nav className="ms-auto">
+            <Nav.Link href="#home"><i className="bi bi-cart"></i></Nav.Link>
+            <Nav.Link href="#features"><i className="bi bi-person-circle"></i></Nav.Link>
+          
+          </Nav>
+        
         
       </Container>
     </Navbar>

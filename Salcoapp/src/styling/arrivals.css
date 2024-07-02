@@ -1,0 +1,142 @@
+.newArrivals {
+    margin-top: 50px;
+    margin-left: 40px;
+}
+.details {
+    border: 1.5px solid grey;
+    color: #212121;
+    width: 100%;
+    height: auto;
+    box-shadow: 0px 0px 10px #212121;
+}
+
+.cart {
+    background-color: #212121;
+    color: white;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 900;
+    width: 100%;
+    height: 39px;
+    padding-top: 9px;
+    box-shadow: 0px 5px 10px  #212121;
+}
+
+.card {
+    width: fit-content;
+   
+}
+
+.card-body {
+    width: fit-content;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.img-thumbnail {
+    border: none;
+}
+
+.card {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    padding-bottom: 10px;
+}
+
+
+<!--cards-griding--
+.col-md-9{
+    display: flex;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  
+  }
+  
+  .cards {
+    margin-top: -15px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    text-align: center;
+       color: rgb(11, 11, 11);
+       height: 100%;
+
+
+    
+    
+
+  }
+  .cards-img{
+    width: fit-content;
+    aspect-ratio: 1 / 1;
+  }
+  
+  .cards:hover {
+    filter: drop-shadow(0 0 0.75rem rgb(185, 184, 184));
+    border-radius: 5px;
+  
+   filter: drop-shadow(0 0 0.25rem rgb(226, 225, 225));
+   background-color: rgb(240, 240, 240);
+    transition: all 0.3s ease;
+    transform: scale(1.01);
+    color: black;
+
+  }
+ 
+
+  
+  .span-full {
+    grid-column: span 4;
+  }
+
+
+ ul{
+    list-style-type: none;
+    text-align: center;
+    text-decoration: none;
+
+}
+   ul li{
+
+  
+    text-align: center;
+    text-decoration: none;
+    list-style: none;
+    justify-content: space-between;
+    justify-self: center;
+    text-align: end;
+    margin-left: 5%;
+
+}
+
+ ul li a{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    justify-content: space-between;
+    justify-self: center;
+    text-align: end;
+    ;
+
+}
+
+ul li a:hover{
+    background-color: #f7f7f7;
+    color: yellowgreen;
+    border-radius: 5px solid yellow;
+    border-color: yellow;
+    padding: 10px;
+    transition: all 0.3s ease ;
+    transform: scale(1.01) ;
+    
+}
+
+    
+.vertical-line {
+            border-left: 2px solid black; /* Adjust thickness and color as needed */
+            height: 200px; /* Adjust height as needed */
+            margin: 0 auto}
