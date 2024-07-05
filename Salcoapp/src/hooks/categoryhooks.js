@@ -12,8 +12,12 @@ export function useCategories(){
         }
         catch(err){
             console.log(err);
-     }
+ 
+        }
+        
 }
+
+
 
 return {getCat}
 }

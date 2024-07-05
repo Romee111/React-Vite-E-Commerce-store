@@ -5,9 +5,10 @@
     justify-items: space-between;
     text-align: center;
     align-items: center;
+    color: aqua;
 }
 .nav-link{
-     color: black;
+     color: rgb(4, 232, 248);
     border-radius: 30px;
       font-weight: bold;
     justify-content: center;
@@ -16,6 +17,15 @@
     align-items: center;
 }
 
+.nav-link:hover{
+  
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.3s ease ;
+    transform: scale(1.01) ;
+    background-color: #f7f7f7;
+    color: aqua;
+}
 
 @media screen and (max-width: 968px) {
     .navi{

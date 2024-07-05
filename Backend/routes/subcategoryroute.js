@@ -11,8 +11,12 @@ router
 .get(subcategorycontroller.getsubcategory);
 
 router
-.route("/getallsubcategory/:categoryid")
+.route("/getallsubcategory/:category_id")
 .get(subcategorycontroller.getallsubcategory);
+
+router
+.route("/getAllSub")
+.get(subcategorycontroller.getAllSub);
 
 router
 .route("/updatesubcategory/:id")

@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../styling/navbar.css'
-
+import { Link } from 'react-router-dom'
 
 function navbar() {
   return (
@@ -17,10 +17,10 @@ function navbar() {
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav navi">
-        <a className="nav-link active" aria-current="page" href="#">Brands</a>
-        <a className="nav-link" href="#">Categories</a>
-        <a className="nav-link" href="#">Become a Seller</a>
-        <a className="nav-link" href="#" tabIndex="-1" >help & support</a>
+        <Link className="nav-link active" aria-current="page" to="#">Brands</Link>
+        <Link className="nav-link" to="#">Categories</Link>
+        <Link className="nav-link" to="/seller">Become a Seller</Link>
+        <Link className="nav-link" to="#" tabIndex="-1" >help & support</Link>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-.homepro{
+.productpro{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -18,7 +18,7 @@
      
  } 
 
- .home-cards-pro{
+ .product-cards-pro{
    display: grid;
    grid-template-columns: repeat(10, 1fr);
    height: 130%;
@@ -30,7 +30,7 @@
    
  }
 
- .home-card{
+ .product-card{
    width: 100%;
    background-color: rgb(200, 203, 203);
    height: 100%;
@@ -38,31 +38,31 @@
   
  }
 
- .home-card-img-top{
+ .product-card-img-top{
    width: 100%;
   aspect-ratio: 1/1;
   object-fit: 100% ;
  }
 
- .home-card-body{
+ .product-card-body{
    padding: 10px;
    text-align: center;
  }
 
- .home-card-body h5{
+ .product-card-body h5{
    font-weight: 500;
    font-size: 14px;
  }
 
- .home-card-body p{  
+ .product-card-body p{  
    font-size: 12px;
  }
 
- .home-card-body .detaprice{
+ .product-card-body .detaprice{
    color: red;
  }
 
- .home-card:hover{
+ .product-card:hover{
    transform: scale(1.05);
    transition: all 0.3s ease;
    cursor: pointer;

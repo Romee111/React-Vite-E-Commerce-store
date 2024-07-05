@@ -1,14 +1,13 @@
-import React from 'react';
-import HomeProducts from '../components/homeproducts';
+ import React from 'react'
 import img1 from '../assets/Eiiffel.jpg';
 import img2 from '../assets/Jeddah.jpg';
 import img3 from '../assets/Siddeny.jpg';
-import '../styling/home.css';
-import Arrivals from '../components/arrivals';
-import Categories from '../components/categories';
-function Home() {
-  return (
-    <div>
+import '../styling/sellers.css';
+
+ function seller() {
+   return (
+     <div>
+        
       <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -35,12 +34,10 @@ function Home() {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-      <HomeProducts />
-      <Arrivals />
-      <Categories />
-
-    </div>
-  );
-}
-
-export default Home;
+       
+     </div>
+   )
+ }
+ 
+ export default seller
+ 

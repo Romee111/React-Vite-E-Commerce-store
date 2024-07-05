@@ -1,0 +1,67 @@
+.sidebar {
+    position: fixed;
+    top: 110px;
+    left: 0;
+    bottom: 0;
+    width: 220px;
+    border-right: 2px solid #eee;
+    padding: 10px 30px;
+    overflow: auto;
+  }
+  
+  .filter-type label {
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  input[name="filter-type"] {
+    display: none;
+  }
+  
+  input[name="filter-type"]:checked~ul {
+    max-height: 300px;
+  }
+  
+  .filter-type ul {
+    list-style: none;
+    padding-left: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+  
+  .filter-type ul li {
+    line-height: 30px;
+    color: #666;
+  }
+  h6{
+    font-size: 30px;
+    font-weight: bolder;
+    color: #fbfbfa;
+  }
+ 
+.samples{
+  
+  padding-left: 0;
+  max-height: 0;
+  overflow: hidden;
+  font-size: 20px;
+  color: aliceblue;
+}
+.samples li{
+  line-height: 30px;
+  color: aliceblue;
+  font-size: 20px;
+  list-style: circle white;
+  list-style-type: circle;
+  
+}
+.samples a{
+  text-decoration: none;
+  color: aliceblue;
+  list-style:circle ;
+}
+h4{
+  font-size: 20px;
+ font-weight: bolder;
+ color: #fbfbfa;
+ }

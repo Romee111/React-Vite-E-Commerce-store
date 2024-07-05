@@ -3,8 +3,11 @@ import './App.css'
 import Navbar from './components/navbar'
 import Topheader from './components/topheader'
 import Home from './pages/home'
+import Seller from './pages/seller'
+import ProductInventory from './pages/productinventory'
+
 import Footer from './components/footer'
-import { Route, Routes } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
 
@@ -16,6 +19,9 @@ function App() {
     <Navbar />
     <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/becomeseller" element={<Seller />} />
+            <Route path="/productlisting/:productId" element={<ProductInventory />} />
+          
         </Routes>
      <Footer />
       </div>

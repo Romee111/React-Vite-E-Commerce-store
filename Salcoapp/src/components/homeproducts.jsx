@@ -1,11 +1,11 @@
-
-
 import React, { useEffect, useState } from "react";
 import useProducts from "../hooks/producthooks";
+import { useNavigate } from "react-router-dom";
 import '../styling/homeproducts.css';
 const HomeProducts = () => {
     const [products, setProducts] = useState([]);
     const { getProducts } = useProducts();
+     const navigate=useNavigate();
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -17,42 +17,43 @@ const HomeProducts = () => {
         fetchProducts();
     }, []);
 
+    const handleProductClick = (productId) => {
+        navigate.push(`/productlisting/${productId}`);
+    };
+
     return (
         <div>
-            <h2>Our Products</h2>
-            <div className="homepro">
+            <h2>Just For You</h2>
+          
+            <div className="homepro d-flex">
+                <div className="home-cards-pro">
+                    
             {products.map((data) => (
-                        <div key={data.id} className="card d-flex" >
-                            <div className="card-body">
-                                <i className="bi bi-heart"></i>
-                                <img src={data.image} className="card-img-top" alt="Product" />
+                        <div key={data.id} className="home-card d-flex"   onClick={() => handleProductClick(data.id)}>
+                            <div className="home-card-body">
+                                
+                                <img src={data.image} className="home-card-img-top" alt="Product" />
                                 <h5 className="card-title">
                                     {data.name.length > 20 ? data.name.slice(0, 20) + "..." : data.name}
                                 </h5>
                                 <p className="card-text">
-                                    {data.description.length > 20 ? data.description.slice(0, 20) + "..." : data.description}
+                                 
                                 </p>
                                 <div className="detaprice d-flex">
-                                    <p className="card-text">${data.price.toFixed(2)}</p>
+                                    <p className="card-price">${data.price.toFixed(2)}</p>
                                     <p className="card-text">{data.rating}</p>
-                                    <p
-                                        className="stock"
-                                        style={{ color: data.instock ? "green" : "red" }}
-                                    >
-                                        {data.instock ? "In stock" : "Out of stock"}
-                                    </p>
                                 </div>
-                                <div className="btn d-flex ml-2">
-                                    <button className="btn-card">Add to cart</button>
-                                    <button className="btn-card">Buy Now</button>
-                                </div>
+                                
 
                             </div>
                             
                         </div>
                         
                         
+                        
                     ))}
+                </div>
+                
             </div>
         </div>
     );

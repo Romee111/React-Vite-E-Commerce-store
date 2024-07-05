@@ -5,7 +5,7 @@ export function useProducts() {
        try{
         const response = await axios.get("http://localhost:2900/product/getAllProducts");
          console.log(response.data);
-        const data =  response.data.data.slice(0,4);
+        const data =  response.data.data.slice(0,16);
       console.log(data);
         return data;
        }

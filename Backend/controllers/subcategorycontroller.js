@@ -3,10 +3,11 @@ const category = require("../models/categorymodel");
 
 exports.addsubcategory = async (req, res) => {
     try {
-        const { name,category_id } = req.body;
+        const { name,category_id,image } = req.body;
         const newsubCategory =await subcategory.create({
             name,  
-            category_id 
+            category_id ,
+            image
             
         })
 
@@ -29,7 +30,7 @@ exports.getsubcategory = async (req, res) => {
 
 exports.getallsubcategory = async (req, res) => {
     try {
-        const {category_id} = req.params
+        const {category_id} = req.params;
         const subCategory = await subcategory.find({category_id:category_id}).populate("category_id");
         res.status(200).json(subCategory);
     } catch (error) {
@@ -37,14 +38,24 @@ exports.getallsubcategory = async (req, res) => {
     }
 
 }
+ exports.getAllSub= async(req,res)=>{
+    try {
+        const subCategory = await subcategory.find();
+        res.status(200).json(subCategory);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+ }
 
  exports.updatesubcategory = async (req, res) => {
     try {
         const { id } = req.params;
         const { name } = req.body;
+        const {image}=req.body
         
         const subCategory = await subcategory.findByIdAndUpdate(id, {
-         name
+         name,
+         image
         });
         res.status(200).json(subCategory);
     } catch (error) {
