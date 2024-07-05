@@ -18,7 +18,7 @@ const HomeProducts = () => {
     }, []);
 
     const handleProductClick = (productId) => {
-        navigate.push(`/productlisting/${productId}`);
+        navigate(`/productlisting/${productId}`);
     };
 
     return (
