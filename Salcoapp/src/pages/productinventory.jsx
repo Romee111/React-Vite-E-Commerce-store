@@ -7,13 +7,15 @@ function productinventory() {
   const {productId}=useParams();
   return (
     <div>
-        <div className="container">
+        <div className="container-fluid">
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-2">
                     <Porductsidebar />
                 </div>
-                <div className="col-md-9">
-                    <ListsProduct productId={productId} />
+                <div className="col-md-10">
+                  <ListsProduct productId={productId} />
+                 
+                    
                 </div>
             </div>
 

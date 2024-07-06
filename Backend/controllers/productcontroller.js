@@ -173,7 +173,7 @@ exports.createProduct = async (req, res) => {
 
          exports.newArrivals= async (req, res) => {
             try{
-                const products = await Product.find().sort({createdAt: -1}).limit(8);
+                const products = await Product.find().sort({createdAt: -1}).limit(15);
                 res.status(200).json({
                     success:true,
                     data:products   

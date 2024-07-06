@@ -15,24 +15,25 @@ function porductsidebar() {
     }, [])
   return (
     <div>
+          
         <div className="sidebar">
+     
             <div className="filter-type">
+            <h5>Category</h5>
                 <input
                     id="filter-cat"
                     type="checkbox"
                     name="filter-type"
                     defaultChecked
                 />
-                <label htmlFor="filter-cat">
-                    <h6>Category</h6>
-                </label>
+                       
                 <ul className="samples">
                 {Array.isArray(sidebar) && sidebar.map((list, index) => (
                         <div key={index} className="cat-name">
                             <a href="#">{list.name}</a> {/* Use anchor or link */}
                             <ul>
                             {Array.isArray(list.subcategory) && list.subcategory.map((item, idx) => (
-                                    <li key={idx}>{item.name}</li>
+                                    <li key={idx} className='subcat'>{item.name}</li>
                                 ))}
                             </ul>
                         </div>
@@ -47,7 +48,7 @@ function porductsidebar() {
                     defaultChecked
                 />
                 <label htmlFor="filter-sty">
-                    <h4>Redoock Hub</h4>
+                    <h4>Brands</h4>
                 </label>
                 <ul>
                     <li>Redock Fragrances</li>

@@ -48,8 +48,8 @@ const Arrivals = () => {
              
                </ul>
                <hr />
-                    <div className="grid-container d-flex">
-                        <div className="arrival-card-1 d-flex">
+                    <div className="container ">
+                        <div className="arrival-card-1">
                             
                         {newArrival.map((product) => (
                             <div key={product.id} className="arrival-cards">
@@ -77,7 +77,7 @@ const Arrivals = () => {
                             
                         ))}
                         </div>
-                        <div className="vertical-line"></div>
+                    
                       
                     </div>
                     

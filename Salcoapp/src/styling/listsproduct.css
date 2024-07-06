@@ -12,7 +12,7 @@
 .productpro{
   display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
     justify-items: space-between;
     margin-top: -2%;
     
@@ -32,13 +32,14 @@
  .product-cards-pro{
    display: grid;
    grid-template-columns: repeat(5, 1fr);
-   
+    
    height: 130%;
    width: 100%;
    padding: 1%;
-   place-items: center;
-   align-items: center;
-   background-color: whitesmoke
+   place-items: left;
+   align-items: left;
+   background-color: whitesmoke;
+   
    
  }
 
@@ -81,3 +82,32 @@
    background-color: white;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
  } 
+
+
+ @media screen and (max-width: 600px) {
+   .product-cards-pro{  
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     width: 100%; 
+
+     
+   };
+   .product-card{
+     width: 100%;
+     background-color: rgb(253, 253, 253);
+     height: 100%;
+     justify-content: center;
+      
+   }
+  
+ }
+
+ @media screen and (max-width: 400px) {
+   .product-cards-pro{
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     width: 100%;
+     
+   }
+  
+ }

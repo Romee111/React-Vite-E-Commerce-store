@@ -1,6 +1,6 @@
 .sidebar {
-    position: fixed;
-    top: 110px;
+    position: absolute;
+    top: 210px;
     left: 0;
     bottom: 0;
     width: 220px;
@@ -36,7 +36,7 @@
   h6{
     font-size: 30px;
     font-weight: bolder;
-    color: #fbfbfa;
+    color: #0d0d0d;
   }
  
 .samples{
@@ -49,19 +49,34 @@
 }
 .samples li{
   line-height: 30px;
-  color: aliceblue;
+  color: rgb(7, 7, 7);
   font-size: 20px;
-  list-style: circle white;
+  list-style: circle rgb(8, 8, 8);
   list-style-type: circle;
   
 }
 .samples a{
-  text-decoration: none;
-  color: aliceblue;
+  text-decoration:dotted;
+  color: rgb(10, 11, 11);
   list-style:circle ;
+  
 }
 h4{
   font-size: 20px;
  font-weight: bolder;
  color: #fbfbfa;
+ }
+
+ @media screen and (max-width: 400px) {
+   .sidebar {
+ 
+     display: none;
+   }
+ }
+
+ @media screen and (max-width: 600px) {
+   .sidebar {
+ 
+     display: none;
+   }  
  }

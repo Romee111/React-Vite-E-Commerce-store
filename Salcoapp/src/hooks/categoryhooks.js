@@ -4,7 +4,7 @@ export function useCategories(){
      const getCat = async () =>{
         try{
             const response = await axios.get("http://localhost:2900/category/getallCategory");
-                   const data = response.data.Category.slice(3,8)
+                   const data = response.data.Category.slice(3,5)
                    console.log(data);
                    return data;
 

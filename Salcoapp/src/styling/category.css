@@ -23,11 +23,12 @@
     background-color: #f7f7f7;
 }
 .cat-card-1{
-   background-color: rgb(251, 245, 245);
+   
    padding: 2%;
    margin-top: -1%;
    border-radius: 2%;
    align-items: center;
+   background-color: #f7f7f7;
 }
 
 .cat-cards{
@@ -93,5 +94,45 @@
 }
 
 
+@media screen and (max-width: 400px) {
+   .cat-cards{
+        display: grid;
+      grid-template-columns: repeat(2, 1fr);
+
+   }
+   .category ul{
+       margin-left: 20%;
+       margin-top: 20%;
+
+   }
+   .cat-card-title{
+       position: relative;
+       margin-top: -20%;
+       display: grid;
+       grid-template-columns: repeat(2, 1fr);
+   }
+   .category ul li{
+       font-size: 12px;
+       
+       gap: 10%;
+   }
 
 
+
+}
+
+@media screen and (max-width: 600px) and (min-width: 400px) {
+   .cat-cards{
+        display: grid;
+      grid-template-columns: repeat(4, 1fr);
+   }
+   
+}
+
+@media screen and (max-width: 800px) and (min-width: 600px) {
+   .cat-cards{
+        display: grid;
+      grid-template-columns: repeat(4, 1fr);
+   }
+   
+}

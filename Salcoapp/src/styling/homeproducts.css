@@ -97,3 +97,31 @@
    background-color: white;
    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
  } 
+
+
+ @media screen and (max-width: 400px) {
+   .home-cards-pro{
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     width: 100%;
+     
+   }
+  
+ }
+
+ @media screen and (max-width: 600px) and (min-width: 400px) {
+   .home-cards-pro{
+     display: grid;
+     grid-template-columns: repeat(4, 1fr);
+     width: 100%;
+     
+   }
+  
+ }
+
+ @media screen and (max-width: 800px) and (min-width: 600px) {
+   .home-cards-pro{
+     display: grid;
+     grid-template-columns: repeat(5, 1fr);
+  
+ }

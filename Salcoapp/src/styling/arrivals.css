@@ -2,26 +2,21 @@
     margin-top: 50px;
     margin-left: 40px;
 }
-
-
-
-
-
-
-
-
-
-
 <!--cards-griding--
 
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.container {
+   
         height: 80%;  
    place-items: center;
    align-items: center;
 
+
+}
+.arrival-card-1{
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    
 }
   
   .arrival-cards {
@@ -30,10 +25,10 @@
        text-align: center;
        color: rgb(11, 11, 11);
        height: 80%;
-       width: 20%;
+       width: 100%;
        place-items: center;
       align-items: center;   
-    
+                 
 
     
     
@@ -148,4 +143,26 @@ ul li a:hover{
             width: 20px;
             position:absolute;
           
+          }
+
+          @media screen and (max-width: 400px) {
+           
+            
+            .arrival-card-1{
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+          }
+          @media screen and (max-width: 600px) and (min-width: 400px) {
+                    .arrival-card-1 {
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr);
+                        height: 80%;  
+                       place-items: center;
+                       align-items: center;
+                    }
+
+
           }
