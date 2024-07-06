@@ -17,19 +17,22 @@ const HomeProducts = () => {
         fetchProducts();
     }, []);
 
-    const handleProductClick = (productId) => {
-        navigate(`/productlisting/${productId}`);
+    const handleProductClick = () => {
+        navigate(`/productinventory`);
     };
 
     return (
         <div>
-            <h2>Just For You</h2>
+            <p className="d-flex homepro-heading">
+            <h2 >Just For You</h2>
+            <button className="seemore" onClick={() => handleProductClick()}>See More</button>
+            </p>
           
             <div className="homepro d-flex">
                 <div className="home-cards-pro">
                     
             {products.map((data) => (
-                        <div key={data.id} className="home-card d-flex"   onClick={() => handleProductClick(data.id)}>
+                        <div key={data.id} className="home-card d-flex"   >
                             <div className="home-card-body">
                                 
                                 <img src={data.image} className="home-card-img-top" alt="Product" />

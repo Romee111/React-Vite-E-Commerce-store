@@ -62,11 +62,10 @@ const Arrivals = () => {
                                 
                                 <div className="arrival-cards-body">
                                     
-                                    <h5>{product.name}</h5>
-                                    <p>{product.description}</p>
-                                        <div className="arrival-price-cost d-flex">
+                                    <h5>{product.name.length > 15 ? product.name.slice(0, 15) + "..." : product.name}</h5>
+                                    <p>{product.description.length > 20 ? product.description.slice(0, 20) + "..." : product.description}</p>
+                                        <div className="arrival-price-cost">
                                         <p>${product.price.toFixed(2)}</p>
-                                    <button className="btn-cart">Add to cart</button>
                                   
                                             </div>                
                                     

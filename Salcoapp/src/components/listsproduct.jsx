@@ -1,13 +1,30 @@
 import React from 'react'
 import '../styling/listsproduct.css'
+import { useState,useEffect } from 'react'
+import {useProducts} from "../hooks/producthooks";
 
 function listsproduct() {
+    const [product,setProduct]=useState([]);
+    const { getProducts } = useProducts();
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const data = await getProducts();
+            setProduct(data);
+            console.log(data);
+        };
+
+        fetchProducts();
+    }, []);
+
   return (
     <div>
+        <div className="container-fluid">
+            
           <div className="product-cards-pro">
                     
-                    {products.map((data) => (
-                                <div key={data.id} className="product-card d-flex"   onClick={() => handleProductClick(data.id)}>
+                    {product.map((data) => (
+                                <div key={data.id} className="product-card d-flex"  >
                                     <div className="product-card-body">
                                         
                                         <img src={data.image} className="product-card-img-top" alt="Product" />
@@ -31,6 +48,7 @@ function listsproduct() {
                                 
                             ))}
                         </div>
+        </div>
       
     </div>
   )

@@ -20,7 +20,7 @@ function App() {
     <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/becomeseller" element={<Seller />} />
-            <Route path="/productlisting/:productId" element={<ProductInventory />} />
+            <Route path="/productinventory" element={<ProductInventory />} />
           
         </Routes>
      <Footer />
