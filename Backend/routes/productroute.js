@@ -8,8 +8,8 @@ router
 .post(productcontroller.createProduct);
 
 router
-.route("/getproducts/:id")
-.get(productcontroller.getproduct);
+.route("/getProduct/:id")
+.get(productcontroller.getProduct);
 
 router
 .route("/getAllProducts")  

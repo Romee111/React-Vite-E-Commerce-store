@@ -1,13 +1,15 @@
 .category ul{
     display: flex;
     margin-top: 25%;
-    margin-left: 40%;
+    margin-left: 70%;
   
 }
  .category ul li{
     list-style: none;
    font-size: 16px;
    gap:30%;
+   align-items: center;    
+   font-weight: bolder;
    
    
     
@@ -16,11 +18,12 @@
 
 .category ul li:hover{
      cursor: pointer;
-    color: yellowgreen;
-    border-radius: 10px;
+    color: rgb(50, 190, 205);
+    border-radius: 5px solid yellow;
     transition: all 0.3s ease ;
     transform: scale(1.01) ;
     background-color: #f7f7f7;
+
 }
 .cat-card-1{
    
@@ -101,7 +104,7 @@
 
    }
    .category ul{
-       margin-left: 20%;
+       margin-left: 10%;
        margin-top: 20%;
 
    }
@@ -126,13 +129,65 @@
         display: grid;
       grid-template-columns: repeat(4, 1fr);
    }
+   .category ul{
+       margin-left: 20%;
+       margin-top: 20%;
    
-}
+   }
+   .category ul li{
+       font-size: 12px;
+       
+       gap: 10%;
+   }
+   } 
 
 @media screen and (max-width: 800px) and (min-width: 600px) {
    .cat-cards{
         display: grid;
       grid-template-columns: repeat(4, 1fr);
    }
+   .category ul{
+       margin-left: 20%;
+       margin-top: 20%;
    
+   }
+   .category ul li{
+       font-size: 12px;
+   
+   }
+
+}
+
+@media screen and (max-width: 1200px) and (min-width: 800px) {
+   .cat-card-1{
+       margin-top: 0%;
+       margin-left: 10%;
+   }
+   .cat-cards{
+        display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      align-items: center;
+      justify-items: center;
+      margin-left:20% ;
+   }
+   .category ul{
+       margin-left: 20%;
+       margin-top: 20%;
+   
+   }
+   .category ul li{
+       font-size: 12px;
+   }
+   .cat-card-title{
+       position: relative;
+       margin-top: -30%;
+   }
+   .cat-card-img-top{
+       width: 100%;
+       aspect-ratio: 1/1;
+       object-fit: 100%;
+       z-index: -1;
+   }
+   
+
 }

@@ -4,16 +4,31 @@ import { useArrivals } from '../hooks/arrivals';
 
 const Arrivals = () => {
     const [newArrival, setArrival] = useState([]);
+    const [filterProduct,setfilterProduct]=useState([])
     const { getArrivals } = useArrivals();
 
     useEffect(() => {
         const fetchProducts = async () => {
             const data = await getArrivals();
             setArrival(data);
+            setfilterProduct(data);
         };
 
         fetchProducts();
     }, []);
+
+
+    const handleFilter = (filter) => {
+        if (filter === 'newArrivals') {
+            setfilterProduct(products); // Show all products
+        } else if (filter === 'Featured') {
+            // Implement your logic to filter featured products
+            setfilterProduct(products.filter(product => product.isFeatured));
+        } else if (filter === 'TopRated') {
+            // Implement your logic to filter top-rated products
+            setfilterProduct(products.filter(product => product.isTopRated));
+        }
+    };
 
     return (
 
@@ -42,9 +57,9 @@ const Arrivals = () => {
                 </div>
                 <div className="col-md-9">
                       <ul className='d-flex  justify-content-center  featuring'>
-              <li><a href="">newArrivals</a></li>  
-                <li><a href="">Featured</a></li>
-               <li><a href="">Top Rated</a></li> 
+              <li><a href="" onClick={() => handleFilter('newArrivals')}>newArrivals</a></li>  
+                <li><a href=""onClick={() => handleFilter('Featured')}>Featured</a></li>
+               <li><a href=""onClick={() => handleFilter('TopRated')}>Top Rated</a></li> 
              
                </ul>
                <hr />

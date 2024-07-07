@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useProducts from "../hooks/producthooks";
 import { useNavigate } from "react-router-dom";
 import '../styling/homeproducts.css';
+import { useParams } from "react-router-dom";
 const HomeProducts = () => {
     const [products, setProducts] = useState([]);
     const { getProducts } = useProducts();
@@ -20,6 +21,9 @@ const HomeProducts = () => {
     const handleProductClick = () => {
         navigate(`/productinventory`);
     };
+    const handleProductdetailClick = (id) => {
+        navigate(`/product/Id`);
+      };
 
     return (
         <div>
@@ -29,10 +33,10 @@ const HomeProducts = () => {
             </p>
           
             <div className="homepro d-flex">
-                <div className="home-cards-pro">
+                <div className="home-cards-pro" >
                     
             {products.map((data) => (
-                        <div key={data.id} className="home-card d-flex"   >
+                        <div key={data.id} className="home-card d-flex"   onClick={() => handleProductdetailClick(data.id)} >
                             <div className="home-card-body">
                                 
                                 <img src={data.image} className="home-card-img-top" alt="Product" />

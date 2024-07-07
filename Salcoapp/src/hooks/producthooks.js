@@ -14,7 +14,36 @@ export function useProducts() {
        }      
        
     };
-    return { getProducts };
+
+    const getDetailProduct=async(Id )=>{
+      try{
+        const response = await axios.get(`http://localhost:2900/product/getProduct/${Id}`);
+         console.log(response.data);
+         const data=response.data
+         console.log(data);
+         return data;
+      
+      }
+      catch(err){
+          console.log(err);
+      }
+    }
+    
+  const getSearch=async( query )=>{
+      try{
+        const response = await axios.get(`http://localhost:2900/product/searchProduct/${query}`);
+         console.log(response.data);
+         const data=response.data
+         console.log(data);
+         return data;
+      
+      }
+      catch(err){
+          console.log(err);
+      }
+    }
+
+    return { getProducts,getDetailProduct,getSearch };
 }
 
 export default useProducts

@@ -5,7 +5,7 @@ import Topheader from './components/topheader'
 import Home from './pages/home'
 import Seller from './pages/seller'
 import ProductInventory from './pages/productinventory'
-
+import ProductDetail from './pages/productdetail'
 import Footer from './components/footer'
 import { Routes, Route } from 'react-router-dom'
 
@@ -21,6 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/becomeseller" element={<Seller />} />
             <Route path="/productinventory" element={<ProductInventory />} />
+            <Route path='/product/:Id' element={<ProductDetail  />} />
           
         </Routes>
      <Footer />

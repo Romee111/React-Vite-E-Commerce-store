@@ -30,7 +30,7 @@
   border: none;
   align-items: end;
   font-size: large;
-  font-weight: bolder;
+ 
 
 
  }
@@ -106,7 +106,27 @@
      width: 100%;
      
    }
-  
+   .homepro-heading{
+    gap:30%;
+    align-items: center;
+    margin-bottom: -2%;
+  }
+  .homepro-heading h2{
+    font-size: 10px;
+    margin-top: 2%;
+    
+
+  }
+  .seemore{
+    height: 50%;
+      background-color: white;
+    color: black;
+    border: none;
+    align-items: end;
+    font-size: small;
+    font-weight: bolder;
+
+  }
  }
 
  @media screen and (max-width: 600px) and (min-width: 400px) {
@@ -116,12 +136,57 @@
      width: 100%;
      
    }
-  
+   .homepro-heading{
+    gap:30%;
+    align-items: center;
+    margin-bottom: -2%;
+  }
+  .homepro-heading h2{
+    font-size: 20px;
+    margin-top: 2%;
+    font-weight: bolder;
+    
+ }
+ .seemore{
+    height: 50%;
+      background-color: white;
+    color: black;
+    border: none;
+    align-items: end;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left:20%;
+
  }
 
- @media screen and (max-width: 800px) and (min-width: 600px) {
-   .home-cards-pro{
-     display: grid;
-     grid-template-columns: repeat(5, 1fr);
-  
  }
+
+ @media screen and (max-width: 800px)   and (min-width: 600px) {
+  .home-cards-pro{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+ 
+}
+.homepro-heading{
+ gap:30%;
+ align-items: center;
+ margin-bottom: -2%;
+}
+.homepro-heading h2{
+ font-size: 20px;
+ margin-top: 2%;
+ font-weight: bolder;
+ 
+}
+.seemore{
+ height: 50%;
+   background-color: white;
+ color: black;
+ border: none;
+ align-items: end;
+ font-size: 10px;
+ font-weight: bold;
+ margin-left:20%;
+}
+ }
+ 

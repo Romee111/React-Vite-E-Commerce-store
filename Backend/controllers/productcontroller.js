@@ -49,10 +49,10 @@ exports.createProduct = async (req, res) => {
     }
 };
 
-  exports.getproduct= async (req, res) => {
+  exports.getProduct= async (req, res) => {
     try{
         const id = req.params.id;
-        const products = await Product.findOne( id);
+        const products = await Product.findById(id);
         res.json(products);
     }catch(err){
         res.status(500).json({message: err.message});
@@ -173,7 +173,7 @@ exports.createProduct = async (req, res) => {
 
          exports.newArrivals= async (req, res) => {
             try{
-                const products = await Product.find().sort({createdAt: -1}).limit(15);
+                const products = await Product.find().sort({createdAt: -1}).limit(19);
                 res.status(200).json({
                     success:true,
                     data:products   
