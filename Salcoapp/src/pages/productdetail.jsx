@@ -5,7 +5,7 @@ import { useProducts } from '../hooks/producthooks';
 import axios from 'axios';
 
 const ProductDetail = () => {
-  const { Id } = useParams();
+  const {Id } = useParams();
   console.log(Id);
   const [product, setProduct] = useState(null);
   const {getDetailProduct} = useProducts();

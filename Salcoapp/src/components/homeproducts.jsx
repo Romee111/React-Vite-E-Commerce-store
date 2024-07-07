@@ -22,7 +22,9 @@ const HomeProducts = () => {
         navigate(`/productinventory`);
     };
     const handleProductdetailClick = (id) => {
-        navigate(`/product/Id`);
+        console.log(id);
+        navigate(`/product/${id}`);
+        
       };
 
     return (
@@ -34,9 +36,10 @@ const HomeProducts = () => {
           
             <div className="homepro d-flex">
                 <div className="home-cards-pro" >
-                    
+              
             {products.map((data) => (
-                        <div key={data.id} className="home-card d-flex"   onClick={() => handleProductdetailClick(data.id)} >
+                        <div key={data._id} className="home-card d-flex"   onClick={() => handleProductdetailClick(data._id)} >
+                          
                             <div className="home-card-body">
                                 
                                 <img src={data.image} className="home-card-img-top" alt="Product" />

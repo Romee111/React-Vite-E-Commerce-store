@@ -15,7 +15,7 @@ export function useProducts() {
        
     };
 
-    const getDetailProduct=async(Id )=>{
+    const getDetailProduct=async(Id)=>{
       try{
         const response = await axios.get(`http://localhost:2900/product/getProduct/${Id}`);
          console.log(response.data);
