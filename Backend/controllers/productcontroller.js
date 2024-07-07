@@ -80,7 +80,7 @@ exports.createProduct = async (req, res) => {
     }
  }
 
-  exports.UpdateProducts= async (req, res) => {
+  exports.updateProducts= async (req, res) => {
     try{
         const {id}=req.params;
         const {name,description,price,image,rating,instock,brand,numReviews,countInStock,}=req.body;

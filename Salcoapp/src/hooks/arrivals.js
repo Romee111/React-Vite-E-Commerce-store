@@ -5,7 +5,7 @@ export function useArrivals() {
         try {
             const response = await axios.get("http://localhost:2900/product/newArrivals");
             console.log(response.data);
-            const data = response.data.data.slice(0, 16);
+            const data = response.data.data.slice(0, 18);
             console.log(data);  
             return data;
         } catch (err) {

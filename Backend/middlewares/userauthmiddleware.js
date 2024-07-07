@@ -60,7 +60,7 @@ exports.isForget=async(req,res,next)=>{
       }
     }
     exports.isauthorized=async(req,res,next)=>{
-        const token=req.headers.authorization.split(' ')[1];
+        const token=req.headers.authorization//.split(' ')[1];
         console.log(token);
         if(!token){
             res.status(403).end("forbidden response")
