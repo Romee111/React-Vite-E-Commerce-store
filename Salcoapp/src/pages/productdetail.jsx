@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProducts } from '../hooks/producthooks';
+import '../styling/productdetail.css';
 import axios from 'axios';
 
 const ProductDetail = () => {
@@ -15,6 +16,7 @@ const ProductDetail = () => {
       try {
         const data=await getDetailProduct(Id);
         setProduct(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching product:", error);
       }
@@ -27,33 +29,35 @@ const ProductDetail = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col lg:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="flex-shrink-0">
-          <img className="h-full w-full object-cover lg:w-96" src={product.image} alt={product.name} />
+    <div className="prd-container py-4 my-4   " > 
+      <div className="prd-row d-flex justify-content-center ">
+        <div className="col-md-4 d-flex align-items-center justify-content-center">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="img-fluid"
+          />
+        
         </div>
-        <div className="p-8 flex-1 flex flex-col justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">{product.name}</h2>
-            <p className="mt-4 text-gray-700">{product.description}</p>
-            <div className="mt-4 flex items-center">
-              <span className="text-yellow-400">&#9733;</span>
-              <span className="ml-2 text-gray-600">{product.rating} / 5</span>
-            </div>
-          </div>
-          <div className="mt-6">
-            <span className="text-2xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
-          </div>
+        <div className="col-md-4 d-flex flex-column justify-content-center">
+          <h1>{product.name}</h1>
+          <p>{product.description}</p>
+           <p>Rating: {product.rating}</p>
+           <p>Brand: {product.brand}</p>      
+           <hr />        
+          <h5 className='prd-price'>${product.price.toFixed(2)}</h5>
+         <div className="pprd-btn d-flex mt-2">
+         <button className="btn btn-primary ">Add to Cart</button>
+         <button className="btn btn-success">Buy Now</button>
+         </div>
         </div>
-        <div className="p-8 flex-shrink-0 bg-gray-50">
-          <div className="text-center">
-            <button className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
-              Add to Cart
-            </button>
-            <button className="w-full mt-4 bg-green-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300">
-              Buy Now
-            </button>
-          </div>
+        <div className="col-md-4 prd-similar">
+          <h3>Similar Products</h3>
+          <ul>
+            <li>Product 1</li>
+            <li>Product 2</li>
+            <li>Product 3</li>
+          </ul>
         </div>
       </div>
     </div>

@@ -33,7 +33,9 @@ function porductsidebar() {
                             <a href="#">{list.name}</a> {/* Use anchor or link */}
                             <ul>
                             {Array.isArray(list.subcategory) && list.subcategory.map((item, idx) => (
+                                 
                                     <li key={idx} className='subcat'>{item.name}</li>
+                                   
                                 ))}
                             </ul>
                         </div>

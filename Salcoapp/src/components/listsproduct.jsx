@@ -2,29 +2,36 @@ import React from 'react'
 import '../styling/listsproduct.css'
 import { useState,useEffect } from 'react'
 import {useProducts} from "../hooks/producthooks";
+import { useNavigate } from 'react-router-dom';
 
 function listsproduct() {
-    const [product,setProduct]=useState([]);
-    const { getProducts } = useProducts();
+    const [products,setProducts]=useState([]);
+    const { listProduct } = useProducts();
+     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const data = await getProducts();
-            setProduct(data);
-            console.log(data);
+            const data = await listProduct();
+            setProducts(data.data);
+            console.log(data.data);
         };
 
         fetchProducts();
     }, []);
 
+   const handleProductdetailClick = (id) => {
+       navigate(`/productdetail/${id}`);
+   } 
+ console.log(products);
   return (
     <div>
         <div className="container-fluid">
             
           <div className="product-cards-pro">
                     
-                    {product.map((data) => (
-                                <div key={data.id} className="product-card d-flex"  >
+                    {products?.map((data) => (
+                
+                                <div key={data._id} className="product-card d-flex"  onClick={() => handleProductdetailClick(data._id)} >
                                     <div className="product-card-body">
                                         
                                         <img src={data.image} className="product-card-img-top" alt="Product" />

@@ -11,8 +11,6 @@ const {getCat} = useCategories();
 const [subCategories,setSubCatgory] = useState([]);
 const {getsubCat} = useSubCategories();
 
-const [products,setProducts] = useState([]);
-const {getProducts} = useProducts();
 
 useEffect(() => {
     const fetchCatgory=async()=>{
@@ -51,7 +49,7 @@ useEffect(() => {
         <div className="cat-card-1 ">
        <div className="cat-cards ">
        {subCategories.map((data) => (
-                        <div key={data.id} className="cat-card" >
+                        <div key={data.id} className="cat-card"  >
                             <div className="cat-card-body">
                             
                                 <img src={data.image} className="cat-card-img-top" alt="Product" />

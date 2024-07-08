@@ -3,19 +3,7 @@ import '../styling/footer.css'
 function footer (){
   return (
     <div>
-        <div className="container-fluid flex-grow-1 flex-shrink-0">
-    <div className="px-lg-5">
-      <div className="row py-5">
-        <div className="col-lg-12 mx-auto text-white text-center">
-          <h1 className="display-4">Bootstrap 4 footer</h1>
-          <p className="lead mb-0">Build a nicely styled light footer using Bootstrap 4.</p>
-          <p className="lead">Snippet by <a href="https://bootstrapious.com/snippets" className="text-white">
-                        <u>Bootstrapious</u></a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+     
 
 
 

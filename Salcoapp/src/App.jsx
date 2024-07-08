@@ -9,6 +9,7 @@ import ProductDetail from './pages/productdetail'
 import Footer from './components/footer'
 import { Routes, Route } from 'react-router-dom'
 
+
 function App() {
 
 
@@ -19,9 +20,9 @@ function App() {
     <Navbar />
     <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/becomeseller" element={<Seller />} />
+            <Route path="/seller" element={<Seller />} />
             <Route path="/productinventory" element={<ProductInventory />} />
-            <Route path='/product/:Id' element={<ProductDetail  />} />
+            <Route path='/productdetail/:Id' element={<ProductDetail  />} />
           
         </Routes>
      <Footer />

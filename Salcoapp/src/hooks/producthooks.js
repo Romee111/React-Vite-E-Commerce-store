@@ -32,6 +32,20 @@ export function useProducts() {
   const getSearch=async( query )=>{
       try{
         const response = await axios.get(`http://localhost:2900/product/searchProduct/${query}`);
+         console.log(response.data.data);
+         const data=response.data
+         console.log(data);
+         return data;
+      
+      }
+      catch(err){
+          console.log(err);
+      }
+    }
+
+    const listProduct=async()=>{
+      try{
+        const response = await axios.get(`http://localhost:2900/product/getAllProducts`);
          console.log(response.data);
          const data=response.data
          console.log(data);
@@ -43,7 +57,7 @@ export function useProducts() {
       }
     }
 
-    return { getProducts,getDetailProduct,getSearch };
+    return { getProducts,getDetailProduct,getSearch,listProduct };
 }
 
 export default useProducts

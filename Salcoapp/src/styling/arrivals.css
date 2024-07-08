@@ -29,11 +29,21 @@
        place-items: center;
       align-items: center;   
                  
+      cursor: pointer;
 
     
     
 
   }
+  .arrival-cards:hover {
+    box-shadow:  0 0 10px 0 rgba(0, 0, 0, 0.2);
+     border-radius: 5px;
+ 
+     transition: all 0.3s ease;
+     transform: scale(1.01);
+     color: black;
+ 
+   }
   .arrival-cards-img{
     width: 100%;
     aspect-ratio: 1/1;
@@ -113,7 +123,7 @@
 
 }
 
- ul li a{
+ ul li p{
     text-decoration: none;
     color: black;
     font-weight: 500;
@@ -124,7 +134,7 @@
 
 }
 
-ul li a:hover{
+ul li p:hover{
     background-color: #f7f7f7;
     color: rgb(50, 190, 205);
     border-radius: 5px solid yellow;

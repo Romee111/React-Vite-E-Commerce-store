@@ -17,10 +17,10 @@ function navbar() {
     </button>
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav navi">
-        <Nav.Link className="nav-link" aria-current="page" to="#">Brands</Nav.Link>
-        <Nav.Link className="nav-link" to="#">Categories</Nav.Link>
-        <Nav.Link className="nav-link" to="/seller">Become a Seller</Nav.Link>
-        <Nav.Link className="nav-link" to="#" tabIndex="-1" >help & support</Nav.Link>
+        <Link className="nav-link" aria-current="page" to="#">Brands</Link>
+        <Link className="nav-link" to="#">Categories</Link>
+        <Link className="nav-link" to="/seller">Become a Seller</Link>
+        <Link className="nav-link" to="#" tabIndex="-1" >help & support</Link>
       </div>
     </div>
   </div>
