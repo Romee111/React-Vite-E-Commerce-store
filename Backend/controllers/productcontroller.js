@@ -1,5 +1,6 @@
 const Product = require("../models/productmodel");
 const Category = require("../models/categorymodel");
+const subcategory = require("../models/subcategorymodel");
 exports.createProduct = async (req, res) => {
     try{
         const matchCategory=await Category.findById(req.body.category_id);
@@ -7,6 +8,14 @@ exports.createProduct = async (req, res) => {
             return res.status(400).json({
                 success:false,
                 message:"category not found"
+            })
+        }
+
+        const matchSubcategory=await subcategory.findById(req.body.subcategory_id);
+        if(!matchSubcategory){
+            return res.status(400).json({
+                success:false,
+                message:"subcategory not found"
             })
         }
       
@@ -21,6 +30,7 @@ exports.createProduct = async (req, res) => {
             numReviews,
             category_id,
             user_id,
+            subcategory_id,
 
             
             
@@ -36,6 +46,7 @@ exports.createProduct = async (req, res) => {
             numReviews,
             category_id,
             user_id,
+       
             
         });
          const createdProduct = await product.save();
@@ -63,7 +74,6 @@ exports.createProduct = async (req, res) => {
   exports.getAllProducts= async (req, res) => {
     try{
         const products = await Product.find().populate('category_id');
-        
         res.status(200).json({
             success:true,
             data:products

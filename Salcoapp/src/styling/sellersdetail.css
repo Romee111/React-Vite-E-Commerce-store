@@ -1,0 +1,113 @@
+.join-sellers{
+
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    position: relative;
+     margin-top: 0%;
+     margin-left: 10%;
+    
+}
+
+.howsell h3{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+     margin-top: 5%;
+     margin-left: 5%;
+
+ 
+ }
+
+ .howsell .sellpara{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     
+     text-align: start;
+     margin-left: 5%;
+ }
+ .restorexselling .sellpara h6{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+         text-align: start;
+     margin-left: 5%;
+   
+ }
+
+ .restorexselling h3{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: bold;
+     margin-left: 5%;
+     
+ }
+
+ .sellparagraph{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+             text-align: start ;
+     margin-right: 20%;
+ }
+
+ .stepselling h3{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   margin-left: 5%;
+   font-weight: bold;
+ }
+ .stepselling .sellpara{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     text-align: start;
+     margin-left: 5%;
+ }
+ .stepselling h6{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     text-align: start;
+     margin-left: 20%;
+     margin-top: 5%;
+     
+ }
+ .stepselling .sellparagraph{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     text-align: start;
+     margin-left: 20%;
+     margin-right: 20%;
+ }
+
+.selling-info{
+    display: flex;
+}
+.selling-img{
+    background-color: azure;
+    margin-left: 50%;
+}
+.sell-img{
+ 
+    
+    aspect-ratio: 1/1;
+    margin-left: 20%;
+}
+
+ .stepsell{
+    display: flex;
+ }
+.sell-img{
+    width: 300px;
+    height: 10%;
+    border-radius: 10%;
+    margin-left: 30%;
+} 
+ .img-fluid{
+ 
+     height: 100%;
+     border-radius: 10%;
+
+ }
+
+ .sellparagraph1{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     text-align: start;
+     margin-left: 10%;
+     margin-right: 20%;     
+ }
+ .sellheading{
+     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     font-weight: bold;
+     text-align: start;
+     margin-left: 10%;
+     
+ }

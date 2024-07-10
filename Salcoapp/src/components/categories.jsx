@@ -4,10 +4,11 @@ import { NavLink } from 'react-bootstrap';
 import { useCategories,  } from '../hooks/categoryhooks';
 import { useSubCategories } from '../hooks/subcategoryhooks';
 import {useProducts } from '../hooks/producthooks';
+import { useNavigate } from 'react-router-dom';
 function categories() {
 const [categories,setCatgory] = useState([]);
 const {getCat} = useCategories();
-
+const navigate = useNavigate();
 const [subCategories,setSubCatgory] = useState([]);
 const {getsubCat} = useSubCategories();
 
@@ -29,14 +30,19 @@ useEffect(() => {
 }    ,[])
 
 
+const handlecategoryClick = () => {
+    console.log();
+    navigate(`/productinventory`);
+};
+
   return (
     <div>
          <div className="category">
         <ul >
             {categories.map((category, index) => (
-          <li className="list-group " key={index}>{category.name}</li>
-          
-        ))}
+          <li className="list-group "  key={index}  >{category.name}</li>
+          ))}
+          <li className="list-group" onClick={() => handlecategoryClick()}>view all</li>
 
       </ul>
         </div>
@@ -49,7 +55,7 @@ useEffect(() => {
         <div className="cat-card-1 ">
        <div className="cat-cards ">
        {subCategories.map((data) => (
-                        <div key={data.id} className="cat-card"  >
+                        <div key={data.id} className="cat-card"  onClick={() => handlecategoryClick()} >
                             <div className="cat-card-body">
                             
                                 <img src={data.image} className="cat-card-img-top" alt="Product" />

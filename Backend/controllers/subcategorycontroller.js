@@ -7,7 +7,8 @@ exports.addsubcategory = async (req, res) => {
         const newsubCategory =await subcategory.create({
             name,  
             category_id ,
-            image
+            image,
+            
             
         })
 

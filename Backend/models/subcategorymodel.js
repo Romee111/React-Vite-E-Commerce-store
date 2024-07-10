@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Product = require("./productmodel");
 const subcategorySchema = new mongoose.Schema({ 
     name: {
         type: String,
@@ -12,7 +13,12 @@ const subcategorySchema = new mongoose.Schema({
     image: {
         type: String,
         required: true
-    }
+    },
+    // Product_id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Product",
+    //     required: true
+    // }
 });
 const subcategory = mongoose.model("subcategory", subcategorySchema);
 module.exports = subcategory

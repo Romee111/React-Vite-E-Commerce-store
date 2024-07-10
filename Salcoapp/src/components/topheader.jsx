@@ -6,21 +6,26 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../styling/topheader.css';
 import { useProducts } from '../hooks/producthooks';
-
+import { useAuth } from '../hooks/userauthhooks';
+import Login from './login';
 function TopHeader() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  
+  const [showModal, setShowModal] = useState(false);
+   const { login } = useAuth();
+
   const { getSearch } = useProducts();
 
+  const handleShow = () => setShowModal(true);
+  const handleClose = () => setShowModal(false);
 
   
   const handleSearch = async () => {
     try {
       const results = await getSearch(searchTerm);
       console.log(results);
-      debugger
+      
       // setSearchResults(Array.isArray(results) ? results : []);
       setSearchResults(results.data)
       // console.log(searchResults);
@@ -110,13 +115,13 @@ function TopHeader() {
               <i className="bi bi-cart"></i>
             </Nav.Link>
             <Nav.Link href="#features">
-              <i className="bi bi-person-circle" ></i>
+              <i className="bi bi-person-circle" onClick={ handleShow} ></i>
             </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-            
-     
+      
+      <Login show={showModal} handleClose={handleClose} login={login} />     
       </div>
   );
 }

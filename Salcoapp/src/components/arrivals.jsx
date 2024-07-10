@@ -89,10 +89,9 @@ const Arrivals = () => {
 
                                         <h5>{data.name.length > 10 ? data.name.slice(0, 10) + "..." : data.name}</h5>
                                         <p>{data.description.length > 12 ? data.description.slice(0, 12) + "..." : data.description}</p>
-                                        <div className="arrival-price-cost">
-                                            <p>${data.price.toFixed(2)}</p>
+                                          <h6 className="arrival-cards-price">${data.price.toFixed(2)}</h6>
 
-                                        </div>
+                                       
 
                                     </div>
 

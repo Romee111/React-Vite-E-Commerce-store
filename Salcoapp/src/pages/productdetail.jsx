@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProducts } from '../hooks/producthooks';
 import '../styling/productdetail.css';
-import axios from 'axios';
+
 
 const ProductDetail = () => {
   const {Id } = useParams();
