@@ -9,7 +9,7 @@ function footer (){
 
 
 
-  <footer className="bg-white">
+  <footer  style={{backgroundColor: '#8697C4'}}>
     <div className="container py-5">
       <div className="row py-4">
         <div className="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" className="mb-3"/>
@@ -57,7 +57,7 @@ function footer (){
     </div>
 
     
-    <div className="bg-light py-4">
+    <div className=" py-4" style={{backgroundColor: '#8697C4'}}>
       <div className="container text-center">
         <p className="text-muted mb-0 py-2">© 2024 Restorex  copy right all</p>
       </div>

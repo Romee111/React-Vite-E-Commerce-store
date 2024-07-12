@@ -5,7 +5,7 @@
   justify-items: space-between;
   margin-top: -2%;
   
-  background-color: aliceblue;
+  
   
 }
 
@@ -38,15 +38,19 @@
    padding: 1%;
    place-items: left;
    align-items: left;
-   background-color: whitesmoke;
+   margin-top: 5%;
    
    
  }
 
  .product-card{
    width: 100%;
-   background-color: rgb(253, 253, 253);
-   height: 100%;
+    border-radius: 5%;
+    background-color: rgb(253, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    filter: box-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+    height: 100%;
+    margin-top: 5%;
    justify-content: center;
   
  }
@@ -79,7 +83,7 @@
    transform: scale(1.05);
    transition: all 0.3s ease;
    cursor: pointer;
-   background-color: white;
+   background-color: #8697C4;
    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
  } 
 

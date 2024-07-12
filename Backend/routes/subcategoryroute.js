@@ -11,8 +11,8 @@ router
 .get(subcategorycontroller.getsubcategory);
 
 router
-.route("/getallsubcategory/:category_id")
-.get(subcategorycontroller.getallsubcategory);
+.route("/getallsubCategory/:category_id")
+.get(subcategorycontroller.getallsubCategory);
 
 router
 .route("/getAllSub")

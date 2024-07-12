@@ -29,7 +29,7 @@ exports.getsubcategory = async (req, res) => {
     }
 }
 
-exports.getallsubcategory = async (req, res) => {
+exports.getallsubCategory = async (req, res) => {
     try {
         const {category_id} = req.params;
         const subCategory = await subcategory.find({category_id:category_id}).populate("category_id");

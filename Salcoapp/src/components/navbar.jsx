@@ -1,35 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import '../styling/navbar.css'
-import { Link } from 'react-router-dom'
+import '../styling/navbar.css';
+import { Link } from 'react-router-dom';
+import { useCategories } from '../hooks/categoryhooks';
 
-function navbar() {
+function CustomNavbar() {
+  const { getallCategory } = useCategories();
+  const [categories, setCategories] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleCategoriesClick = async () => {
+    setShowDropdown(!showDropdown);
+    if (!showDropdown) {
+      const categories = await getallCategory();
+      setCategories(categories || []);
+    }
+  };
+
   return (
-    
+    <nav className="navbar navbar-expand-lg " style={{ backgroundColor: '#8697C4' }}>
+      <div className="container-fluid">
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div className="navbar-nav navi">
+            <Link className="nav-link" aria-current="page" to="#">Brands</Link>
+            <div className="nav-link" onClick={handleCategoriesClick} style={{ cursor: 'pointer' }}>
+              Categories
+              {showDropdown && (
+                <div className="dropdown-menu show">
+                  {categories.map((category) => (
+                    <Link key={category.id} className="dropdown-item" to={`/category/${category.id}`}>
+                      {category.name}
+                    </Link>
+                  ))}
+                  
+                </div>
+              )}
+            </div>
+            <Link className="nav-link" to="/seller">Become a Seller</Link>
+            <Link className="nav-link" to="#" tabIndex="-1">Help & Support</Link>
+          </div>
 
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <div className="container-fluid">
-  
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div className="navbar-nav navi">
-        <Link className="nav-link" aria-current="page" to="#">Brands</Link>
-        <Link className="nav-link" to="#">Categories</Link>
-        <Link className="nav-link" to="/seller">Become a Seller</Link>
-        <Link className="nav-link" to="#" tabIndex="-1" >help & support</Link>
+        </div>
       </div>
-    </div>
-  </div>
-</nav>
-     
-    
+    </nav>
   );
 }
 
-
-export default navbar
-
+export default CustomNavbar;

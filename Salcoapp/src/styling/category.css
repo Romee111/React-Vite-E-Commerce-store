@@ -18,11 +18,11 @@
 
 .category ul li:hover{
      cursor: pointer;
-    color: rgb(50, 190, 205);
+    color: Blue;
     border-radius: 5px solid yellow;
     transition: all 0.3s ease ;
     transform: scale(1.01) ;
-    background-color: #f7f7f7;
+    background-color: #070F2B;
 
 }
 .cat-card-1{
@@ -31,7 +31,7 @@
    margin-top: -1%;
    border-radius: 2%;
    align-items: center;
-   background-color: #f7f7f7;
+   background-color: #ADBBDA
 }
 
 .cat-cards{
@@ -72,12 +72,12 @@
 }
 .cat-card:hover{
    cursor: pointer;
-   color: yellowgreen;
+   color: #070F2B;
    border-radius: 10px;
    transition: all 0.3s ease ;
    transform: scale(1.01) ;
    transition: all 0.3s ease ;
-   filter: drop-shadow(0 0 10px #fb0e0e);
+   filter: drop-shadow(0 0 10px #0F0F2B);
    
 }
 

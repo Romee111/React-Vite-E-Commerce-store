@@ -3,6 +3,7 @@ import './App.css'
 import Navbar from './components/navbar'
 import Topheader from './components/topheader'
 import Home from './pages/home'
+import Signup from './components/signup'
 import Seller from './pages/seller'
 import About from './pages/about'
 import ProductInventory from './pages/productinventory'
@@ -21,6 +22,7 @@ function App() {
     <Navbar />
     <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/seller" element={<Seller />} />
             <Route path="/about" element={<About />} />
             <Route path="/productinventory" element={<ProductInventory />} />

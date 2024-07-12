@@ -8,27 +8,24 @@ import '../styling/topheader.css';
 import { useProducts } from '../hooks/producthooks';
 import { useAuth } from '../hooks/userauthhooks';
 import Login from './login';
+
 function TopHeader() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [showModal, setShowModal] = useState(false);
-   const { login } = useAuth();
+  const { login } = useAuth();
 
   const { getSearch } = useProducts();
 
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
-  
   const handleSearch = async () => {
     try {
       const results = await getSearch(searchTerm);
-      console.log(results);
-      
-      // setSearchResults(Array.isArray(results) ? results : []);
-      setSearchResults(results.data)
-      // console.log(searchResults);
+      setSearchResults(results.data);
+      setShowResults(true);
     } catch (error) {
       console.error('Error fetching search results:', error);
     }
@@ -37,38 +34,29 @@ function TopHeader() {
   useEffect(() => {
     if (searchTerm.trim() !== '') {
       handleSearch();
-      console.log(searchResults);
-      console.log(searchTerm);
     } else {
       setSearchResults([]);
-      console.log(searchResults);
     }
   }, [searchTerm]);
-
 
   const handleFocus = () => {
     if (searchResults.length > 0) {
       setShowResults(true);
-      console.log(searchResults);
-
     }
   };
 
   const handleBlur = () => {
     setTimeout(() => {
       setShowResults(false);
-      console.log(setShowResults);
-    }, 20); // Delay to allow click events to be registered
+    }, 200);
   };
 
   return (
     <div>
-      <Navbar bg="dark">
+      <Navbar style={{ backgroundColor: '#070F2B' }}>
         <Container fluid>
           <Navbar.Brand href="#" className="navbar-brand">
             Salco
-           
-
           </Navbar.Brand>
           <Form className="d-flex" style={{ width: '70%' }}>
             <Form.Control
@@ -79,6 +67,7 @@ function TopHeader() {
                 border: 'none',
                 fontSize: '16px',
                 borderRadius: '50px',
+                padding: '10px 20px'
               }}
               aria-label="Search"
               value={searchTerm}
@@ -95,34 +84,34 @@ function TopHeader() {
                 border: 'none',
                 fontSize: '16px',
                 padding: '10px',
-                borderRadius: '50px',
+                borderRadius: '50px'
               }}
             >
-              { searchResults && searchResults.length > 0 && (
-        <div className="search-results">
-          <ul>
-            {searchResults.map((result) => (
-              <li key={result.id}>{result.name}</li>
-            ))}
-          </ul>
-    </div>
-      )}
               <i className="bi bi-search"></i>
             </Button>
+            {showResults && (
+              <div className="search-results">
+                <ul>
+                  {searchResults.map((result) => (
+                    <li key={result.id}>{result.name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </Form>
           <Nav className="ms-auto">
             <Nav.Link href="#home">
               <i className="bi bi-cart"></i>
             </Nav.Link>
             <Nav.Link href="#features">
-              <i className="bi bi-person-circle" onClick={ handleShow} ></i>
+              <i className="bi bi-person-circle" onClick={handleShow}></i>
             </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       
-      <Login show={showModal} handleClose={handleClose} login={login} />     
-      </div>
+      <Login show={showModal} handleClose={handleClose} />     
+    </div>
   );
 }
 

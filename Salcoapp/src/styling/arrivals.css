@@ -17,14 +17,15 @@
     display: grid;
     grid-template-columns: repeat(8,1fr);
     
+    
 }
   
   .arrival-cards {
    
-    background-color: white;
+    background-color: #ADBBDa;
        text-align: center;
        color: rgb(11, 11, 11);
-       height: 80%;
+       height: 100%;
        width: 100%;
        place-items: center;
       align-items: center;   
@@ -36,13 +37,13 @@
 
   }
   .arrival-cards:hover {
-    box-shadow:  0 0 10px 0 rgba(0, 0, 0, 0.2);
-     border-radius: 5px;
+    box-shadow:  0 0 10px 0 #070F2B;
+         border-radius: 5px;
+         background-color: #8697C4;
  
      transition: all 0.3s ease;
      transform: scale(1.01);
-     color: black;
- 
+   
    }
   .arrival-cards-img{
     width: 100%;
@@ -54,15 +55,7 @@
   }
 
   
-  .arrival-cards:hover {
-   box-shadow:  0 0 10px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-  
-    transition: all 0.3s ease;
-    transform: scale(1.01);
-    color: black;
 
-  }
  .arrival-cards-body {
     width: fit-content;
 }
