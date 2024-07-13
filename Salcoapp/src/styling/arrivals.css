@@ -16,20 +16,24 @@
 .arrival-card-1{
     display: grid;
     grid-template-columns: repeat(8,1fr);
+    column-gap:15px;
+    row-gap:15px;
     
     
 }
   
   .arrival-cards {
    
-    background-color: #ADBBDa;
-       text-align: center;
-       color: rgb(11, 11, 11);
+    background-color: #001f3f;
+       text-align: center; ;
        height: 100%;
        width: 100%;
        place-items: center;
-      align-items: center;   
-                 
+      align-items: center;    
+      border-radius: 5%;
+      border: 3px solid #001f3f;
+  filter: drop-shadow(0 0 10px #001f3f);
+  color:#FFFFFF;
       cursor: pointer;
 
     
@@ -37,9 +41,9 @@
 
   }
   .arrival-cards:hover {
-    box-shadow:  0 0 10px 0 #070F2B;
+    box-shadow:  0 0 10px 0 #001f3f;
          border-radius: 5px;
-         background-color: #8697C4;
+         background-color: #001f3f;
  
      transition: all 0.3s ease;
      transform: scale(1.01);
@@ -61,18 +65,18 @@
 }
 .arrival-cards-body h5{
     text-align: center;
-    color: black;
+    color: #FFFFFF;
     font-weight: 500;
     font-size: 14px;
 }
 .arrival-cards-body p{
     text-align: left;
-    color: black;
+    color: #FFFFFF;
     font-size: 10px;
 }
 
 .arrival-cards-price{
-  color: red;
+  color:#FFFFFF;
   font-size: 16px;
   margin-top: -20%;
 }
@@ -114,25 +118,33 @@
 
  ul li p{
     text-decoration: none;
-    color: black;
+     color:#001f3f;
     font-weight: 500;
     justify-content: space-between;
     justify-self: center;
     text-align: end;
-    ;
+    
 
 }
 
-ul li p:hover{
-    background-color: #f7f7f7;
-    color: rgb(50, 190, 205);
-    border-radius: 5px solid yellow;
-    border-color: yellow;
-    padding: 10px;
-    padding: 10px;
-    transition: all 0.3s ease ;
-    transform: scale(1.01) ;
+ul li p::after{
+  
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #001f3f;
+  transition:  ease-in .3s;
+  transform: center;
+  margin: 0 auto; 
+ color:#001f3f;
     
+}
+
+ul li p:hover::after{
+  color: #001f3f;
+  width: 100%;
+  transition:ease .3s;
 }
 
     

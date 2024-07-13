@@ -7,19 +7,18 @@ import Navbar from 'react-bootstrap/Navbar';
 import '../styling/topheader.css';
 import { useProducts } from '../hooks/producthooks';
 import { useAuth } from '../hooks/userauthhooks';
-import Login from './login';
-
+import Login from '../components/login'; // Assuming your Login component is named Login and in lowercase
+import logo from '../assets/reslogo.png';
 function TopHeader() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false); // State to control modal visibility
+  const { getSearch } = useProducts();
   const { login } = useAuth();
 
-  const { getSearch } = useProducts();
-
-  const handleShow = () => setShowModal(true);
-  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true); // Function to show modal
+  const handleClose = () => setShowModal(false); // Function to hide modal
 
   const handleSearch = async () => {
     try {
@@ -53,10 +52,10 @@ function TopHeader() {
 
   return (
     <div>
-      <Navbar style={{ backgroundColor: '#070F2B' }}>
+      <Navbar style={{ backgroundColor: '#001F3F' }}>
         <Container fluid>
           <Navbar.Brand href="#" className="navbar-brand">
-            Salco
+            <img src={logo} alt="Logo"  style={{ width: '100px', height: '50px' }} className="logo" /> 
           </Navbar.Brand>
           <Form className="d-flex" style={{ width: '70%' }}>
             <Form.Control
@@ -104,13 +103,13 @@ function TopHeader() {
               <i className="bi bi-cart"></i>
             </Nav.Link>
             <Nav.Link href="#features">
-              <i className="bi bi-person-circle" onClick={handleShow}></i>
+              <i className="bi bi-person-circle" onClick={handleShow}></i> {/* Open Login component */}
             </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       
-      <Login show={showModal} handleClose={handleClose} />     
+      <Login show={showModal} handleClose={handleClose} /> {/* Pass showModal state and handleClose function to Login component */}
     </div>
   );
 }

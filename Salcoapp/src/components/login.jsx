@@ -3,6 +3,7 @@ import { Form, Button, Modal,} from 'react-bootstrap';
 import { useAuth } from '../hooks/userauthhooks';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import '../styling/login.css';
 function Login({ show, handleClose }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -61,16 +62,17 @@ function Login({ show, handleClose }) {
     }, [show]);
 
     return (
-        <Modal show={show} onHide={handleClose} style={{marginTop: '10%',width: '300px,height: 150px,marginLeft: 500px'}}>
-            <Modal.Header closeButton>
-                <Modal.Title style={{ textAlign: 'center', margin: 'auto' }}>Welcome To Restorex</Modal.Title>
+      <div className="div">
+          <Modal show={show} onHide={handleClose} style={{marginTop: '10%'}} className='login' >
+            <Modal.Header closeButton style={{ backgroundColor: '#001F3f',width: '100%', }}>
+                <Modal.Title style={{ textAlign: 'center', margin: 'auto',color:'#ffffff' }}>Welcome To Restorex</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{  backgroundColor: '#001F3F',}}>
                 <Form onSubmit={handleLogin}>
                     <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email :</Form.Label>
+                        <Form.Label style={{color:'#ffffff'}}>Email :</Form.Label>
                         <Form.Control
-                            
+                             
                             type="email"
                             placeholder="Type your email here"
                             value={email}
@@ -79,29 +81,30 @@ function Login({ show, handleClose }) {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label style={{color:'#ffffff'}}>Password:</Form.Label>
                         <Form.Control
                             type="password"
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <Button variant="link" onClick={handleForgotPassword}>
-                    Forgot Password?
-                </Button>
-                      <p>Dont have an account? <Link to="/signup">Signup</Link></p>
+                     
                     </Form.Group>
 
                     {error && <p className="text-danger">{error}</p>}
                 </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="primary" onClick={handleLogin}>
+                
+                <Button variant="link nodecoration" onClick={handleForgotPassword} style={{color:'#ffffff',textAlign: 'center'}}>
+                    Forgot Password?
+                </Button>
+                <p style={{color:'#ffffff',textAlign: 'center'}}>Dont have an account? <Link to="/signup" style={{color:'#ffffff',textAlign: 'center'}}>Signup</Link></p>
+                <Button  onClick={handleLogin}  className='loginbtn'>
                     Login
                 </Button>
-                
-            </Modal.Footer>
+            </Modal.Body>
+            
         </Modal>
+      </div>
     );
 }
 

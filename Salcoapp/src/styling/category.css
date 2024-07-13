@@ -10,38 +10,49 @@
    gap:30%;
    align-items: center;    
    font-weight: bolder;
-   
+   color:#001f3f;   
    
     
 
 }
 
-.category ul li:hover{
-     cursor: pointer;
-    color: Blue;
-    border-radius: 5px solid yellow;
-    transition: all 0.3s ease ;
-    transform: scale(1.01) ;
-    background-color: #070F2B;
+.category ul li::after{
+    content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #001f3f;
+  transition:  ease-in .3s;
+  transform: center;
+  margin: 0 auto; 
+ color:#001f3f;
 
+}
+
+.category ul li:hover::after{
+    color: #001f3f;
+  width: 100%;
+  transition:ease .3s;
 }
 .cat-card-1{
    
    padding: 2%;
    margin-top: -1%;
-   border-radius: 2%;
+
    align-items: center;
-   background-color: #ADBBDA
+   background-color:#001f3f;
 }
 
 .cat-cards{
    display: grid;
    grid-template-columns: repeat(8, 1fr);
+   column-gap:2%;
    height: 120%;  
    place-items: center;
    align-items: center;
    border:#fb0e0e;
    margin-top: -1%;
+   border-radius:10px;
    
 }
 .cat-card-img-top{
@@ -49,14 +60,15 @@
     aspect-ratio: 1/1;
     object-fit: 100%;
     z-index: -1;
+    border-radius:10px;
 }
 .cat-card-title{
-   position: relative;
+  
    text-align: center;
    z-index: 1;
    font-size: 20px;
-   color: #fb0e0e;
-   margin-top: -20%;
+   color: #ffffff;
+
    
 }
 
@@ -72,12 +84,17 @@
 }
 .cat-card:hover{
    cursor: pointer;
-   color: #070F2B;
+
    border-radius: 10px;
    transition: all 0.3s ease ;
    transform: scale(1.01) ;
    transition: all 0.3s ease ;
    filter: drop-shadow(0 0 10px #0F0F2B);
+   background-color:#ffffff;
+   
+}
+.cat-card-title:hover{
+    color:#001f3f;
    
 }
 

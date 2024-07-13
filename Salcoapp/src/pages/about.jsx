@@ -1,5 +1,5 @@
 import React from 'react'
-import rec from '../assets/mine.jpg'
+import rec from '../assets/reslogo.png'
 function about() {
   return (
     <div>

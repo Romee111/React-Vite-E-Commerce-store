@@ -31,12 +31,12 @@
   
   .filter-type ul li {
     line-height: 30px;
-    color: #666;
+    color: #001F3F;
   }
   h6{
     font-size: 30px;
     font-weight: bolder;
-    color: #0d0d0d;
+    color: #001F3F;
   }
  
 .samples{
@@ -45,11 +45,11 @@
   max-height: 0;
   overflow: hidden;
   font-size: 20px;
-  color: aliceblue;
+  color: #001F3F;
 }
 .samples li{
   line-height: 30px;
-  color: rgb(7, 7, 7);
+  color: #001F3F;
   font-size: 20px;
   list-style: circle rgb(8, 8, 8);
   list-style-type: circle;
@@ -57,14 +57,14 @@
 }
 .samples a{
   text-decoration:dotted;
-  color: rgb(10, 11, 11);
+   color: #001F3F;
   list-style:circle ;
   
 }
 h4{
   font-size: 20px;
  font-weight: bolder;
- color: #fbfbfa;
+ color: color: #001F3F;
  }
 
  @media screen and (max-width: 400px) {

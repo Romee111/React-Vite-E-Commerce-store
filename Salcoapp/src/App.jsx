@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-    <div>
+    
     <Topheader />
     <Navbar />
     <Routes>
@@ -30,7 +30,7 @@ function App() {
           
         </Routes>
      <Footer />
-      </div>
+      
    </>
     
 )

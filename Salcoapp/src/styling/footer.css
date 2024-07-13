@@ -1,27 +1,60 @@
+.footer-start{
+  margin-top: 20%;
+}
 
-#button-addon1 {
-    color: #ffc371;
-  }
-  
-  i {
-    color: #ffc371;
-  }
-  
-  .form-control::placeholder {
-    font-size: 0.95rem;
-    color: #aaa;
-    font-style: italic;
-  }
-  
-  .form-control.shadow-0:focus {
-    box-shadow: none;
-  }
-.ul{
-   display: block;
+.footer-social span{
+  color: #ffffff;
+}
+
+.footer-social Link{
+  color: #ffffff;
+}
+
+.bi-facebook{
+   color: #ffffff;
+}
+
+.bi-instagram{
+  color: #ffffff;
+}
+.bi-google{
+  color: #ffffff;
+}
+.bi-twitter{
+  color: #ffffff;
+}
+
+.footer-brand h6{
+  color: #ffffff;
+}
+.footer-brand p{
+  color: #ffffff;
 }
 
 .footer-links{
+  color: #ffffff;
+}
+.footer-links p{
       text-align: right;
       margin-right: 40%;
+      color:#ffffff;
 
+}
+
+.footer-info{
+  color: #ffffff;
+}
+.footer-address{
+  color: #ffffff;
+}
+.footer-address p{
+  color: #ffffff;
+}
+
+.footer-end{
+  color:#ffffff;
+}
+
+.footer-end p{
+    color: #ffffff;
 }

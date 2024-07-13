@@ -4,67 +4,84 @@ import { Link } from 'react-router-dom'
 function footer (){
   return (
     <div>
-     
-
-
-
-
-  <footer  style={{backgroundColor: '#8697C4'}}>
-    <div className="container py-5">
-      <div className="row py-4">
-        <div className="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" className="mb-3"/>
-            <h5>Restorex</h5>
-          <p className="font-italic text-muted"> Office.44,street No-1,Near Jamia Masjid Al Raheem,P-Block,Johartown,Lahore-Pakistan</p>
-          <ul className="list-inline mt-4">
-            <li className="list-inline-item"><Link href="#" target="_blank" title="twitter"><i className="bi bi-twitter"></i></Link></li>
-            <li className="list-inline-item"><Link href="#" target="_blank" title="facebook"><i className="bi bi-facebook"></i></Link></li>
-            <li className="list-inline-item"><Link href="#" target="_blank" title="instagram"><i className="bi bi-instagram"></i></Link></li>
-            <li className="list-inline-item"><Link href="#" target="_blank" title="pinterest"><i className="bi bi-pinterest"></i></Link></li>
-            <li className="list-inline-item"><Link href="#" target="_blank" title="vimeo"><i className="bi bi-vimeo"></i></Link></li>
-          </ul>
+       
+    <footer className="text-center text-lg-start text-white footer-start" style={{ backgroundColor: '#001F3f' }}>
+      <section className="d-flex justify-content-between p-4 text-white" style={{ backgroundColor: '#001f3f3' }}>
+        <div className="me-5 footer-social">
+          <span>Get connected with us on social networks:</span>
         </div>
-        <div className="col-lg-2 col-md-6 mb-4 mb-lg-0">
-          <h6 className="text-uppercase font-weight-bold mb-4">Shop</h6>
-          <ul className="list-unstyled mb-0 footer-links">
-            <li className="mb-2"><Link to="/about" className="text-muted">About Us</Link></li>
-            <li className="mb-2"><Link href="#" className="text-muted">Contact Us</Link></li>
-            <li className="mb-2"><Link href="#" className="text-muted">help Center</Link></li>
-            <li className="mb-2"><Link href="#" className="text-muted">Our Blog</Link></li>
-          </ul>
+        <div>
+          <Link href="#" className="text-white me-4">
+            <i className="bi bi-facebook"></i>
+          </Link>
+          <Link href="#" className="text-white me-4">
+            <i className="bi bi-twitter"></i>
+          </Link>
+          <Link href="#" className="text-white me-4">
+            <i className="bi bi-google"></i>
+          </Link>
+          <Link href="#" className="text-white me-4">
+            <i className="bi bi-instagram"></i>
+          </Link>
+          <Link href="#" className="text-white me-4">
+            <i className="bi bi-linkedin"></i>
+          </Link>
+          <Link href="#" className="text-white me-4">
+            <i className="bi bi-github"></i>
+          </Link>
         </div>
-        <div className="col-lg-2 col-md-6 mb-4 mb-lg-0">
-          <h6 className="text-uppercase font-weight-bold mb-4">Company</h6>
-          <ul className="list-unstyled mb-0">
-            <li className="mb-2"><a href="#" className="text-muted">Login</a></li>
-            <li className="mb-2"><a href="#" className="text-muted">Register</a></li>
-            <li className="mb-2"><a href="#" className="text-muted">Wishlist</a></li>
-            <li className="mb-2"><a href="#" className="text-muted">Our Products</a></li>
-          </ul>
-        </div>
-        <div className="col-lg-4 col-md-6 mb-lg-0">
-          <h6 className="text-uppercase font-weight-bold mb-4">Email us</h6>
-          <p className="text-muted mb-4">If you have any questions or suggestions, feel free to email us at ceorestorex@gmai.com</p>
-          <div className="p-1 rounded border">
-            <div className="input-group">
-              <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" className="form-control border-0 shadow-0"/>
-              <div className="input-group-append">
-                <button id="button-addon1" type="submit" className="btn btn-link"><i className="fa fa-paper-plane"></i></button>
-              </div>
+      </section>
+
+      <section className="">
+        <div className="container text-center text-md-start mt-5 footer-brand">
+          <div className="row mt-3">
+            <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <h6 className="text-uppercase fw-bold">Restorex</h6>
+              <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
+              <p>
+                when restoration meets innovation.Get connected with Restorex  a project by RGC              </p>
+            </div>
+            <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 footer-links">
+              <h6 className="text-uppercase fw-bold">Restorex support</h6>
+              <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
+              <p><Link to="#!" className="text-white">Help Center</Link></p>
+              <p><Link to="#!" className="text-white">Contact Us</Link></p>
+              <p><Link to="#!" className="text-white">start selling</Link></p>
+              <p><Link to="#!" className="text-white">Become a member</Link></p>
+            </div>
+            <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 footer-info">
+              <h6 className="text-uppercase fw-bold">Know US</h6>
+              <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
+              <p><Link to="about" className="text-white">About us</Link></p>
+              <p><Link to="#!" className="text-white">Term & Condtions</Link></p>
+              <p><Link to="#!" className="text-white">Services & Polices</Link></p>
+              <p><Link to="#!" className="text-white">Help & Support</Link></p>
+            </div>
+            <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 footer-address">
+              <h6 className="text-uppercase fw-bold">Contact</h6>
+              <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px',color:'#FFFFFF' }} />
+              <p><i className="fas fa-home mr-3"></i> Lahore, Pakistan,</p>
+              <p><i className="fas fa-envelope mr-3"></i> ceo@restorex.com</p>
+              <p><i className="fas fa-phone mr-3"></i> + 92 318 710 1450 </p>
+              <p><i className="fas fa-print mr-3"></i> + 111 318 710 1450</p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
 
-    
-    <div className=" py-4" style={{backgroundColor: '#8697C4'}}>
-      <div className="container text-center">
-        <p className="text-muted mb-0 py-2">© 2024 Restorex  copy right all</p>
+      <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+        <Link className="text-white" href=""> Copyright by Restorex 2024</Link>
       </div>
-    </div>
-  </footer>
+    </footer>
+ 
+
+
+
+
+
       
     </div>
+    
   )
 }
 

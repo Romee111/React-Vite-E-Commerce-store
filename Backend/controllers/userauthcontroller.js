@@ -24,7 +24,7 @@ exports.register=async(req,res)=>{
             state:state,
             isAdmin:isAdmin,
             isShipper:isShipper,
-            image:image,
+            image:image || '../assests/reslogo.png',
             retypePassword:retypePassword
            
 

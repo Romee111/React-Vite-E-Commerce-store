@@ -66,6 +66,7 @@ function Signup() {
                 lastName,
                 email,
                 password,
+                retypePassword,
                 phone,
                 address1,
                 address2,
@@ -73,7 +74,8 @@ function Signup() {
                 pincode,
                 country,
                 state,
-                image
+                image,
+
             );
             console.log('Signup successful:', data);
             // handle successful signup, e.g., redirect or show success message
@@ -84,17 +86,17 @@ function Signup() {
     };
 
     return (
-        <section className="h-100 " style={{ backgroundColor: '#070A27' }}> 
-            <div className="container py-5 h-100">
-                <div className="row d-flex justify-content-center align-items-center h-100">
+        <section className="h-100 " style={{ backgroundColor: '#d3d3d3' }}> 
+            <div className="container py-5 h-100" >
+                <div className="row d-flex justify-content-center align-items-center h-100" >
                     <div className="col-8">
-                        <div className="card card-registration my-4">
+                        <div className="card card-registration my-4 "style={{ backgroundColor: '#001f3f,', }}>
                             <div className="row g-0">
                                 <div className="col-xl-6 d-none d-xl-block">
                                     <img src={res} alt="Sample photo" className="img-fluid" style={{ height:"100%" }} />
                                 </div>
                                 <div className="col-xl-6">
-                                    <div className="card-body p-md-5 text-black">
+                                    <div className="card-body p-md-5 " style={{Color:'#FFFFFF'}}>
                                         <h3 className="mb-5 text-uppercase">Sign UP Restorex</h3>
                                         <form onSubmit={handleSignup}>
                                             <div className="row">
@@ -191,7 +193,7 @@ function Signup() {
                                          
                                             {error && <p className="text-danger">{error}</p>}
                                             <div className="d-flex justify-content-end pt-3">
-                                            <button type="submit" className="btn-sm ms-2" style={{ backgroundColor: '#8690FB',color:"#070F2B",borderColor: '#8690FB',borderRadius: '10px',fontWeight:"bold" }}>SignUp</button>
+                                            <button type="submit" className="btn-sm ms-2" style={{ backgroundColor: '#001F3F',color:"#FFFFFf",border:'none',borderRadius: '10px',fontWeight:"bold" }}>SignUp</button>
                                             </div>
                                         </form>
                                     </div>

@@ -1,5 +1,7 @@
 /* topheader.css */
-
+.bi-search{
+  color: white;
+}
 .navbar-brand {
     color: white;
     font-size: 24px;

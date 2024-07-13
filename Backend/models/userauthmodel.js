@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     retypePassword:{
     type:String,
-    required:true
+    required:false
     },
     phone:{
     type:String,
@@ -52,7 +52,8 @@ const userSchema = new mongoose.Schema({
     },
     image:{
     type:String,
-    required:true
+    default:"../assets/reslogo.png"
+    
     },
     isAdmin:{
     type:String,

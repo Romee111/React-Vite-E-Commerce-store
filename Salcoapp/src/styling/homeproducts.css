@@ -21,13 +21,13 @@
       font-size: 30px;
      font-weight: 500;
      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-      color: rgb(43, 4, 97);
+      color: #001F3F;
      
  } 
  .seemore{
   height: 50%;
-  background-color: #ADBBDA;
-  color:#8697C4;
+  background-color: #d3d3d3;
+  color:#001F3F;
   border: none;
   align-items: end;
   font-size: large;
@@ -39,7 +39,10 @@
  .seemore:hover{
  
   
-  color: rgb(43, 4, 97);
+  color:#001F3F;
+  border-color: #001F3F;
+  border-radius: 5px solid #001F3F;
+  box-shadow: #001F3F 0px 0px 10px;
   padding: 5px;
   transition: all 0.3s ease ;
   transform: scale(1.01) ;
@@ -49,21 +52,26 @@
    display: grid;
    grid-template-columns: repeat(10, 1fr);
    height: 130%;
+    column-gap:15px;
+    row-gap:15px;
    width: 100%;
    padding: 1%;
    place-items: center;
    align-items: center;
-   background-color: #ADBBDA
+ 
    
  }
 
  .home-card{
    width: 100%;
-   background-color:#8697C4;
+   background-color:#001f3f;
    height: 100%;
    justify-content: center;
    justify-items: space-between;
    margin-top: -2%;
+   border-radius: 5%;
+   filter: drop-shadow(0 0 10px #001F3F);
+   border: #001F3F 2px solid;
   
  }
 
@@ -89,15 +97,15 @@
  }
 
  .home-card-body .detaprice{
-   color: #ADBBDA
+   color: #ffffff
  }
 
  .home-card:hover{
    transform: scale(1.05);
    transition: all 0.3s ease;
    cursor: pointer;
-   background-color: #ADBBDA;
-   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+   background-color: #001F3F;
+   box-shadow: 0 0 10px 0  #001F3F ;
    border-radius: 5px;
     
  } 

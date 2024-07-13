@@ -28,11 +28,14 @@ export function useAuth() {
         }
      };
 
-        const register=async(firstName,lastName,email,password,phone,isAdmin,address1,address2,city,pincode,country,state,isShipper,image)=>{   
+        const register=async(firstName,lastName,email,password,phone,isAdmin,address1,address2,city,pincode,country,state,isShipper,image,retypePassword)=>{   
             try{
-                  const response=await axios.post("http://localhost:2900/userauth/register",{firstName,lastName,email,password,phone,isAdmin,address1,address2,city,pincode,country,state,isShipper,image})
-                  console.log(response.data)
-                  const data=response.data
+                  const response=await axios.post("http://localhost:2900/userauth/register",{firstName,retypePassword,lastName,email,password,phone,isAdmin,address1,address2,city,pincode,country,state,isShipper,image})
+                  console.log(response.data.data);
+                  
+                  const data=response.data;
+                  localStorage.setItem('user', JSON.stringify(response.data));
+                  console.log(data);
                   return data
               }
               catch(err){

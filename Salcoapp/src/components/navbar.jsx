@@ -20,7 +20,7 @@ function CustomNavbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg " style={{ backgroundColor: '#8697C4' }}>
+    <nav className="navbar navbar-expand-lg " style={{ backgroundColor: '#001F3F' }}>
       <div className="container-fluid">
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -31,9 +31,9 @@ function CustomNavbar() {
             <div className="nav-link" onClick={handleCategoriesClick} style={{ cursor: 'pointer' }}>
               Categories
               {showDropdown && (
-                <div className="dropdown-menu show">
+                <div className="dropdown-menu show" style={{ backgroundColor: '#001F3F' ,color:'#fff'}}>
                   {categories.map((category) => (
-                    <Link key={category.id} className="dropdown-item" to={`/category/${category.id}`}>
+                    <Link key={category.id} className="dropdown-item" to={`/category/${category.id}`} style={{color:'#fff'}}>  
                       {category.name}
                     </Link>
                   ))}
