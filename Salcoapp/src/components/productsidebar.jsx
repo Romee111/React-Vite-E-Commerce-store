@@ -3,11 +3,11 @@ import '../styling/productsidebar.css'
 import { useSubCategories } from '../hooks/subcategoryhooks'
 function porductsidebar() {
     const [sidebar, setSidebar] = useState([])
-    const { getsubCat } = useSubCategories()
+    const { ListCategories } = useSubCategories()
 
     useEffect(() => {
         const fetchSidebar = async () => {
-            const data = await getsubCat();
+            const data = await ListCategories();
             setSidebar(data || [])
             console.log(data);
         }

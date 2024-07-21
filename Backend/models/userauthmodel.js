@@ -38,10 +38,11 @@ const userSchema = new mongoose.Schema({
     type:String,
     required:true
     },
-    state:{
-    type:String,
-    required:true
-    },
+    state: {
+        type: String,
+        required: true
+    }
+    ,
     country:{
     type:String,
     required:true
@@ -56,15 +57,16 @@ const userSchema = new mongoose.Schema({
     
     },
     isAdmin:{
-    type:String,
+    type:Boolean,
     default:false
     },
     isShipper:{
-    type:String,
+    type:Boolean,
     default:false
-    },
+    }, 
     })
 
+    
     const users=new mongoose.model("User",userSchema)
 
     module.exports=users

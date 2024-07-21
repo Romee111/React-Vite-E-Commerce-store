@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styling/signup.css';
-import res from '../assets/res.jpg';
-import { useAuth } from '../hooks/userauthhooks'; // Import the register function from your API file
+import resImage from '../assets/res.jpg';
+import { useAuth } from '../hooks/userauthhooks';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
-    const {register}=useAuth()
+    const { register } = useAuth();
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -19,7 +21,7 @@ function Signup() {
         country: '',
         state: '',
         isAdmin: false,
-        isShipper: false,
+
         image: '',
         retypePassword: ''
     });
@@ -35,68 +37,66 @@ function Signup() {
     };
 
     const handleSignup = async (e) => {
+        debugger
         e.preventDefault();
-        setError('');
+        // setError('');
+        // const formData = {
+        //     firstName,
+        //     lastName,
+        //     email,
+        //     password,
+        //     retypePassword,
+        //     phone,
+        //     address1,
+        //     address2,
+        //     city,
+        //     pincode,
+        //     country,
+        //     state,
+        //     image,
+        //     isAdmin,
+        // }
 
-        const {
-            firstName,
-            lastName,
-            email,
-            password,
-            retypePassword,
-            phone,
-            address1,
-            address2,
-            city,
-            pincode,
-            country,
-            state,
-          
-            image
-        } = formData;
+        // const {
+        //     firstName,
+        //     lastName,
+        //     email,
+        //     password,
+        //     retypePassword,
+        //     phone,
+        //     address1,
+        //     address2,
+        //     city,
+        //     pincode,
+        //     country,
+        //     state,
+        //     image,
+        //     isAdmin,
+        // } = formData;
 
-        if (password !== retypePassword) {
-            setError('Passwords do not match');
-            return;
-        }
+        // if (password !== retypePassword) {
+        //     setError('Passwords do not match');
+        //     return;
+        // }
+        debugger
 
-        try {
-            const data = await register(
-                firstName,
-                lastName,
-                email,
-                password,
-                retypePassword,
-                phone,
-                address1,
-                address2,
-                city,
-                pincode,
-                country,
-                state,
-                image,
-
-            );
-            console.log('Signup successful:', data);
-            // handle successful signup, e.g., redirect or show success message
-        } catch (err) {
-            console.error('Signup failed:', err);
-            setError('Signup failed. Please try again.');
-        }
+        const res = await register(formData);
+        debugger
+        console.log(res)
     };
 
     return (
-        <section className="h-100 " style={{ backgroundColor: '#d3d3d3' }}> 
-            <div className="container py-5 h-100" >
-                <div className="row d-flex justify-content-center align-items-center h-100" >
+        <section className="h-100" style={{ backgroundColor: '#d3d3d3' }}>
+            <div className="container py-5 h-100">
+                <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-8">
-                        <div className="card card-registration my-4 "style={{ backgroundColor: '#001f3f,', }}>
+                        <div className="card card-registration my-4" style={{ backgroundColor: '#001f3f' }}>
                             <div className="row g-0">
                                 <div className="col-xl-6 d-none d-xl-block">
-                                    <img src={res} alt="Sample photo" className="img-fluid" style={{ height:"100%" }} />
+                                    <img src={resImage} alt="Sample photo" className="img-fluid" style={{ height: "100%" }} />
                                 </div>
                                 <div className="col-xl-6">
-                                    <div className="card-body p-md-5 " style={{Color:'#FFFFFF'}}>
+                                    <div className="card-body p-md-5" style={{ color: '#FFFFFF' }}>
                                         <h3 className="mb-5 text-uppercase">Sign UP Restorex</h3>
                                         <form onSubmit={handleSignup}>
                                             <div className="row">
@@ -123,7 +123,7 @@ function Signup() {
                                             </div>
                                             <div className="row">
                                                 <div className="col-md-6 mb-3">
-                                                    <select data-mdb-select-init className="form-control form-control-sm" name="state" value={formData.state} onChange={handleChange}>
+                                                    <select className="form-control form-control-sm" name="state" value={formData.state} onChange={handleChange}>
                                                         <option value="">State</option>
                                                         <option value="Option 1">Option 1</option>
                                                         <option value="Option 2">Option 2</option>
@@ -131,7 +131,7 @@ function Signup() {
                                                     </select>
                                                 </div>
                                                 <div className="col-md-6 mb-3">
-                                                    <select data-mdb-select-init className="form-control form-control-sm" name="city" value={formData.city} onChange={handleChange}>
+                                                    <select className="form-control form-control-sm" name="city" value={formData.city} onChange={handleChange}>
                                                         <option value="">City</option>
                                                         <option value="Option 1">Option 1</option>
                                                         <option value="Option 2">Option 2</option>
@@ -144,16 +144,15 @@ function Signup() {
                                                 <label className="form-label" htmlFor="form3Example98">Country</label>
                                             </div>
                                             <div className="form-outline mb-3">
-                                   <label htmlFor="uploadImage" className="form-label">Upload Image</label>
-                                   <input
-                                                       type="file"
-                                                       className="form-control form-control-sm"
-                                                       id="uploadImage"
-                                                       accept="image/*"
-                                                       onChange={handleChange} // Assuming you have a function to handle image upload
-                                                   />
-                                               </div>
-                                               
+                                                <input
+                                                    type="file"
+                                                    className="form-control form-control-sm"
+                                                    id="uploadImage"
+                                                    accept="image/*"
+                                                    onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
+                                                />
+                                                <label className="form-label" htmlFor="uploadImage">Upload Image</label>
+                                            </div>
                                             <div className="form-outline mb-3">
                                                 <input type="text" id="form3Example9" name="pincode" className="form-control form-control-sm" value={formData.pincode} onChange={handleChange} />
                                                 <label className="form-label" htmlFor="form3Example9">Pincode</label>
@@ -167,35 +166,22 @@ function Signup() {
                                                 <label className="form-label" htmlFor="form3Example98">Password</label>
                                             </div>
                                             <div className="form-outline mb-3">
-                                                <input type="password" id="form3Example98" name="retypePassword" className="form-control form-control-sm" value={formData.retypePassword} onChange={handleChange} />
-                                                <label className="form-label" htmlFor="form3Example98">Retype Password</label>
+                                                <input type="password" id="form3Example99" name="retypePassword" className="form-control form-control-sm" value={formData.retypePassword} onChange={handleChange} />
+                                                <label className="form-label" htmlFor="form3Example99">Retype Password</label>
                                             </div>
                                             <div className="form-outline mb-3">
-                                                <input type="text" id="form3Example98" name="phone" className="form-control form-control-sm" value={formData.phone} onChange={handleChange} />
-                                                <label className="form-label" htmlFor="form3Example98">Phone</label>
+                                                <input type="text" id="form3Example100" name="phone" className="form-control form-control-sm" value={formData.phone} onChange={handleChange} />
+                                                <label className="form-label" htmlFor="form3Example100">Phone</label>
                                             </div>
-                                           
-                                          
-                                            <div className="form-check mb-3">
-                                                <input
-                                                             className="form-check-input"
-                                                             type="checkbox"
-                                                             id="termsAgreement"
-                                                             name="termsAgreement"
-                                                             checked={formData.termsAgreement}
-                                                             onChange={handleChange}
-                                                         />
-                                                         <label className="form-check-label" htmlFor="termsAgreement">
-                                                             I agree to the <a href="/terms" target="_blank">Terms and Conditions</a>
-                                                         </label>
-                                                     </div>
 
-                                         
-                                            {error && <p className="text-danger">{error}</p>}
-                                            <div className="d-flex justify-content-end pt-3">
-                                            <button type="submit" className="btn-sm ms-2" style={{ backgroundColor: '#001F3F',color:"#FFFFFf",border:'none',borderRadius: '10px',fontWeight:"bold" }}>SignUp</button>
+                                            <div className="form-check form-switch mb-3">
+                                                <input className="form-check-input" type="checkbox" id="isAdmin" name="isAdmin" checked={formData.isAdmin} onChange={handleChange} />
+                                                <label className="form-check-label" htmlFor="isAdmin">Admin</label>
                                             </div>
+
+                                            <button type="submit" className="btn btn-primary">Register</button>
                                         </form>
+                                        {error && <p style={{ color: 'red' }}>{error}</p>}
                                     </div>
                                 </div>
                             </div>

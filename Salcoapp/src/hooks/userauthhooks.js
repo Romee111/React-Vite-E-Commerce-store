@@ -2,63 +2,83 @@ import axios from "axios";
 
 
 export function useAuth() {
-    const login = async (email, password) => {
+
+    const loginApi = async (email, password, isAdmin, isShipper) => {
         try {
-            const response = await axios.post("http://localhost:2900/userauth/login", { email, password });
-            console.log(response.data);
+            debugger
+            console.log("login damaged", email, password, isAdmin, isShipper);
+            // const isAdmin = true;
+            const body = { email, password }
+
+            const response = await axios.post("http://localhost:2900/userauth/login", body);
+            console.log("login damaged", response.data);
             const data = response.data;
             localStorage.setItem('user', JSON.stringify(data));
             console.log(data);
             return data;
         } catch (err) {
-            console.log(err);   
-
+            console.log(err);
+            return err
         }
-        };
+    };
 
-        const forgetPassoword=async(email)=>{
-            try{
-                const response=await axios.post("http://localhost:2900/userauth/forgotPassword",{email})
-                console.log(response.data)
-                const data=response.data
-                return data
-            }
-            catch(err){
-                console.log(err)
-        }
-     };
-
-        const register=async(firstName,lastName,email,password,phone,isAdmin,address1,address2,city,pincode,country,state,isShipper,image,retypePassword)=>{   
-            try{
-                  const response=await axios.post("http://localhost:2900/userauth/register",{firstName,retypePassword,lastName,email,password,phone,isAdmin,address1,address2,city,pincode,country,state,isShipper,image})
-                  console.log(response.data.data);
-                  
-                  const data=response.data;
-                  localStorage.setItem('user', JSON.stringify(response.data));
-                  console.log(data);
-                  return data
-              }
-              catch(err){
-                  console.log(err)
-          } 
-        };
-
-        const logout =async()=>{
-            const response=await axios.get("http://localhost:2900/userauth/logout")
+    const forgetPassword = async (email) => {
+        try {
+            const response = await axios.post("http://localhost:2900/userauth/forgotPassword", { email })
             console.log(response.data)
-            const data=response.data
+            const data = response.data
             return data
-        };  
-        const resetPassword=async(token,password)=>{
-            try {
-                const response=await axios.post("http://localhost:2900/userauth/resetPassword",{token,password})
-                console.log(response.data)
-                const data=response.data
-                return data
-            } catch (err) {
-                console.log(err)
-            }
-        };
-    return { login, forgetPassoword,register,logout,resetPassword };
+        }
+        catch (err) {
+            console.log(err)
+        }
+    };
+    const register = async (data) => {
+        try {
+            debugger
+            data.image = "1.png"
+            const response = await axios.post(`http://localhost:2900/userauth/register`, data);
+            console.log(response.data);
+
+            //   const data=response.data;
+            localStorage.setItem('user', JSON.stringify(response.data));
+            console.log(data);
+            return data
+        }
+        catch (err) {
+            console.log(err)
+        }
+    };
+
+    const logout = async () => {
+        const response = await axios.get("http://localhost:2900/userauth/logout")
+        console.log(response.data)
+        const data = response.data
+        return data
+    };
+    const resetPassword = async (token, password) => {
+        try {
+            const response = await axios.post("http://localhost:2900/userauth/resetPassword", { token, password })
+            console.log(response.data)
+            const data = response.data
+            return data
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
+    const userbyId = async (id) => {
+        try {
+            const response = await axios.get(`http://localhost:2900/userauth/getUser/${id}`)
+            console.log(response.data)
+            const data = response.data
+            return data
+        }
+        catch (err) {
+            console.log(err)
+        }
+    };
+    return { loginApi, forgetPassword, register, logout, resetPassword, userbyId };
 
 }
+

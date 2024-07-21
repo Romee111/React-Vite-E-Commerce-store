@@ -81,6 +81,7 @@
   .bi-person-circle:hover {
     color: #ccc;
   }
+
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
@@ -91,4 +92,5 @@
 
     }
   }
+  
   

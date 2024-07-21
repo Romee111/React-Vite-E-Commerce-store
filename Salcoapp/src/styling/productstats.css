@@ -1,0 +1,49 @@
+.star-rating {
+    display: flex;
+    direction: row;
+}
+
+.star {
+    font-size: 2rem;
+    color: #d3d3d3;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star.filled {
+    color: #ffc107;
+}
+
+/* Add specific classes for full, half, and empty stars if needed */
+.fa-star {
+    color: #ffc107;
+}
+
+.fa-star-half-o {
+    color: #ffc107;
+}
+
+.fa-star-o {
+    color: #d3d3d3;
+}
+
+.review{
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: -5%;
+}
+.review-btn{
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+   font-size: smaller;
+   
+}

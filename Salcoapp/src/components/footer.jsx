@@ -53,7 +53,7 @@ function footer (){
               <h6 className="text-uppercase fw-bold">Know US</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
               <p><Link to="about" className="text-white">About us</Link></p>
-              <p><Link to="#!" className="text-white">Term & Condtions</Link></p>
+              <p><Link to="/termconditions" className="text-white">Term & Condtions</Link></p>
               <p><Link to="#!" className="text-white">Services & Polices</Link></p>
               <p><Link to="#!" className="text-white">Help & Support</Link></p>
             </div>

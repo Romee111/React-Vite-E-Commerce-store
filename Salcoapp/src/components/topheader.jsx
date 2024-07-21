@@ -101,6 +101,7 @@ function TopHeader() {
           <Nav className="ms-auto">
             <Nav.Link href="#home">
               <i className="bi bi-cart"></i>
+             
             </Nav.Link>
             <Nav.Link href="#features">
               <i className="bi bi-person-circle" onClick={handleShow}></i> {/* Open Login component */}

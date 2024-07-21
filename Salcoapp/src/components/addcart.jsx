@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Admin() {
+function addcart() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function Admin() {
   )
 }
 
-export default Admin
+export default addcart

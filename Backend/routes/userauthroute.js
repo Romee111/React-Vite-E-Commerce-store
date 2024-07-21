@@ -32,6 +32,9 @@ router
  .route('/getAllUser')
  .get(userauthcontroller.getAllUser)
 
+ router
+ .route('/getUser/:id')
+ .get(userauthcontroller.getUser)
 router
 .route('/googleLogin')
 .post(userauthcontroller.googleLogin)
