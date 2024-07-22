@@ -21,7 +21,7 @@ const Arrivals = () => {
                    setVisibleProducts(6);
                }
                else{
-                   setVisibleProducts(10);
+                   setVisibleProducts(16);
             }
     };
 

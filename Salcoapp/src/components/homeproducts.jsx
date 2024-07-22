@@ -26,7 +26,7 @@ const HomeProducts = () => {
             if (width <= 768) {
                 setVisibleProducts(4); // Mobile view: show 4 products
             } else {
-                setVisibleProducts(10); // Laptop view: show 10 products
+                setVisibleProducts(20); // Laptop view: show 10 products
             }
         };
 
