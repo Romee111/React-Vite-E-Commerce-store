@@ -1,13 +1,15 @@
 import React, { useEffect,useState } from 'react'
 import '../styling/productsidebar.css'
 import { useSubCategories } from '../hooks/subcategoryhooks'
+import {useCategories} from '../hooks/categoryhooks'
 function porductsidebar() {
     const [sidebar, setSidebar] = useState([])
     const { ListCategories } = useSubCategories()
+    const { getallCategory } = useCategories()
 
     useEffect(() => {
         const fetchSidebar = async () => {
-            const data = await ListCategories();
+            const data = await getallCategory();
             setSidebar(data || [])
             console.log(data);
         }
@@ -15,11 +17,11 @@ function porductsidebar() {
     }, [])
   return (
     <div>
-          
+           <h5 style={{color:'#001F3F',marginLeft:'30px',marginTop:'10px',fontWeight:'bolder',fontSize:'25px'}}> Category</h5>
         <div className="sidebar">
      
             <div className="filter-type">
-            <h5>Category</h5>
+           
                 <input
                     id="filter-cat"
                     type="checkbox"

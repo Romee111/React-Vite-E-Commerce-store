@@ -37,7 +37,9 @@ function listsproduct() {
                                         <img src={data.image} className="product-card-img-top" alt="Product" />
                                         <h5 className="product-card-title">
                                             {data.name.length > 20 ? data.name.slice(0, 20) + "..." : data.name}
+                                            
                                         </h5>
+                                        <p>{data.description.slice(0, 30)}{data.description.length > 30 ? "..." : ""}</p>
                                         <p className="product-card-text">
                                          
                                         </p>

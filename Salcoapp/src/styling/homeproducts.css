@@ -52,8 +52,8 @@
    display: grid;
    grid-template-columns: repeat(10, 1fr);
    height: 130%;
-    column-gap:15px;
-    row-gap:15px;
+    column-gap:10px;
+    row-gap:10px;
    width: 100%;
    padding: 1%;
    place-items: center;
@@ -64,14 +64,15 @@
 
  .home-card{
    width: 100%;
-   background-color:#001f3f;
+   background-color:#ffffff;
+   color: #001F3F;
    height: 100%;
    justify-content: center;
    justify-items: space-between;
    margin-top: -2%;
    border-radius: 5%;
    filter: drop-shadow(0 0 10px #001F3F);
-   border: #001F3F 2px solid;
+   border: #ffffff 2px solid;
   
  }
 
@@ -79,12 +80,13 @@
    width: 100%;
   aspect-ratio: 1/1;
   object-fit: 100% ;
+  border-radius: 5%;
  }
 
  .home-card-body{
    padding: 10px;
    text-align: center;
-   color: white;
+   color: #001F3F;
  }
 
  .home-card-body h5{

@@ -92,5 +92,9 @@
 
     }
   }
+  @media screen and (max-width: 400px) {
+    .navbar-brand {
+    display: none;
+  }
   
   

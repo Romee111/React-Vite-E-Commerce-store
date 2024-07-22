@@ -1,6 +1,6 @@
 .newArrivals {
     margin-top: 50px;
-    margin-left: 40px;
+    
 }
 <!--cards-griding--
 
@@ -16,36 +16,32 @@
 .arrival-card-1{
     display: grid;
     grid-template-columns: repeat(8,1fr);
-    column-gap:15px;
-    row-gap:15px;
+    column-gap:5px;
+    row-gap:10px;
     
     
 }
   
   .arrival-cards {
    
-    background-color: #001f3f;
+    background-color: #ffffff;  
        text-align: center; ;
        height: 100%;
        width: 100%;
        place-items: center;
       align-items: center;    
       border-radius: 5%;
-      border: 3px solid #001f3f;
+      border: 3px solid #ffffff;
   filter: drop-shadow(0 0 10px #001f3f);
-  color:#FFFFFF;
+  color:#001f3f;
       cursor: pointer;
+}
 
-    
-    
-
-  }
   .arrival-cards:hover {
-    box-shadow:  0 0 10px 0 #001f3f;
+    box-shadow:  0 0 10px 0 #ffffff;
          border-radius: 5px;
-         background-color: #001f3f;
- 
-     transition: all 0.3s ease;
+         background-color: #ffffff;
+        transition: all 0.3s ease;
      transform: scale(1.01);
    
    }
@@ -65,18 +61,18 @@
 }
 .arrival-cards-body h5{
     text-align: center;
-    color: #FFFFFF;
+    color: #001f3f;
     font-weight: 500;
     font-size: 14px;
 }
 .arrival-cards-body p{
     text-align: left;
-    color: #FFFFFF;
+    color: #001f3f;
     font-size: 10px;
 }
 
 .arrival-cards-price{
-  color:#FFFFFF;
+  color:red;
   font-size: 16px;
   margin-top: -20%;
 }

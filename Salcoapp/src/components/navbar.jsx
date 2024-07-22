@@ -32,9 +32,9 @@ function CustomNavbar() {
           <Nav className="me-auto " style={{ width: '100%', justifyContent: 'space-around' }}>
             <Nav.Link as={Link} className='nav-links '  to="/" style={{ color: 'white' }}>Home</Nav.Link>
 
-            <Nav.Link as={Link} to="/brands" className='nav-links ' style={{ color: 'white' }}>Brands</Nav.Link>
-            <NavDropdown 
-              className="dropdown"
+            <Nav.Link as={Link} to="/brands"  style={{ color: 'white' }}>Brands</Nav.Link>
+            <NavDropdown
+              className=" nav-link"
               title="Categories" 
               id="basic-nav-dropdown" 
               style={{ color: '#ffffff' }} 

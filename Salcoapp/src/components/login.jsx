@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
 import { useAuth } from '../hooks/userauthhooks';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../styling/login.css';
 
 
@@ -12,7 +12,7 @@ function Login({ show, handleClose }) {
     const [isShipper, setIsShipper] = useState(false);
     const [error, setError] = useState('');
     const { loginApi } = useAuth();
-    const navigate = useNavigate();
+    const {navigate, location} = useNavigate();
 
     const handleSignup = () => {
         navigate('/signup');
@@ -38,15 +38,15 @@ function Login({ show, handleClose }) {
             const user = await loginApi(email, password, isAdmin, isShipper);
             if (user.isAdmin == true) {
                 debugger
-                navigate('/admin');
+             window.location.href='http://localhost:5173/admin'
             } else {
                 debugger
                 navigate('/');
             }
             handleClose();
         } catch (err) {
-            debugger
-            navigate("/forgotpassword")
+            setError(err.message);
+       
         }
     };
 

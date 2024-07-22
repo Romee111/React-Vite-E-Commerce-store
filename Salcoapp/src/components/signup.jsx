@@ -174,10 +174,7 @@ function Signup() {
                                                 <label className="form-label" htmlFor="form3Example100">Phone</label>
                                             </div>
 
-                                            <div className="form-check form-switch mb-3">
-                                                <input className="form-check-input" type="checkbox" id="isAdmin" name="isAdmin" checked={formData.isAdmin} onChange={handleChange} />
-                                                <label className="form-check-label" htmlFor="isAdmin">Admin</label>
-                                            </div>
+                                           
 
                                             <button type="submit" className="btn btn-primary">Register</button>
                                         </form>

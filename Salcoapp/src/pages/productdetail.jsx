@@ -62,8 +62,8 @@ const ProductDetail = () => {
                     <hr />
                     <h5 className="prd-price">${product.price.toFixed(2)}</h5>
                     <div className="pprd-btn d-flex mt-2">
-                        <button className="btn btn-primary" onClick={()=>{handleAddCart(product_id)}}>Add to Cart</button>
-                        <button className="btn btn-success">Buy Now</button>
+                        <button className="btn " onClick={()=>{handleAddCart(product_id)}}>Add to Cart</button>
+                        <button className="btn">Buy Now</button>
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-3 prd-similar">
