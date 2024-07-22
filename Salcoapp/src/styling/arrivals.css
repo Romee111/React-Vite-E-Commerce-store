@@ -174,3 +174,24 @@ ul li p:hover::after{
 
 
           }
+
+          @media screen and (max-width: 768px) and (min-width: 600px) {
+            .arrival-card-1 {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                height: 80%;  
+               place-items: center;
+               align-items: center;
+            }
+            
+          }
+
+          @media screen and (max-width: 992px)  and (min-width: 768px) {
+            .arrival-card-1 {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+            
+
+          }
+
+          }

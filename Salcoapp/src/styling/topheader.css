@@ -11,7 +11,7 @@
   .searchbar {
     border: none;
     font-size: 16px;
-    border-radius: 50px;
+
     padding: 10px 20px;
     outline: none;
     transition: box-shadow 0.3s;
@@ -36,11 +36,12 @@
     border: none;
     font-size: 16px;
     padding: 10px;
-    border-radius: 50px;
+
     cursor: pointer;
     transition: background-color 0.3s;
     position: absolute;
-    margin-left: 66%;
+    margin-left: 62%;
+    width: 7%;
   }
   
   .search-results {
@@ -49,7 +50,7 @@
     width: 70%;
     background-color: white;
     border: 1px solid #ccc;
-    border-radius: 10px;
+   
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
   }
@@ -86,15 +87,51 @@
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .search-btn {
-      margin-left: 50%;
-     /* Adjust as needed */
+      margin-left: 53%;
+     width: 12%;
       position: absolute;
 
     }
+  }
+  @media screen and (max-width: 600px) {
+    .navbar-brand {
+      font-size: 20px;
+    }
+
+    .searchbar {
+      font-size: 14px;
+    }
+    .search-btn {
+      margin-left: 40%;
+      width: 12%;
+    }
+    
   }
   @media screen and (max-width: 400px) {
     .navbar-brand {
     display: none;
   }
+  .searchbar {
+    
+
+ }
+ .search-btn {
+   margin-left: 42%;
+   width: 20%;
+
+ }
+
   
-  
+}
+
+@media screen and (max-width: 360px) {
+ 
+  .searchbar {
+    width:70%;
+    margin-right: 40%;
+}
+.search-btn{
+    
+    
+}
+}

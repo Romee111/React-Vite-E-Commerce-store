@@ -86,7 +86,7 @@ function TopHeader() {
                 borderRadius: '50px'
               }}
             >
-              <i className="bi bi-search"></i>
+               search
             </Button>
             {showResults && (
               <div className="search-results">

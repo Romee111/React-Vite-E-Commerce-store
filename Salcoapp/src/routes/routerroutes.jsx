@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home";
 import Addcart from "../components/addcart";
-import Admin from "../pages/Admin";
 import Signup from "../components/signup";
 import ForgetPassword from "../components/forgetpassword";
 import Seller from "../pages/seller";
@@ -17,7 +16,7 @@ const RouterRoutes = () => {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/" element={<Home />} />
-            <Route path='/admin' element={<Admin />} />
+    
             <Route path="/signup" element={<Signup />} />
             <Route  path='/forgotpassword' element={<ForgetPassword />} />
             <Route path="/seller" element={<Seller />} />
