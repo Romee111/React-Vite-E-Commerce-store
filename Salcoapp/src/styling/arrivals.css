@@ -161,8 +161,8 @@ ul li p:hover::after{
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
             }
-            
-          }
+            .ul li{
+           }
           @media screen and (max-width: 600px) and (min-width: 400px) {
                     .arrival-card-1 {
                         display: grid;

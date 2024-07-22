@@ -4,7 +4,8 @@ import { useArrivals } from '../hooks/arrivals';
 import { useNavigate } from 'react-router-dom';
 const Arrivals = () => {
     const [newArrival, setArrival] = useState([]);
-    const [filterProduct, setfilterProduct] = useState([])
+    const [filterProduct, setfilterProduct] = useState([]);
+    const [visibleProducts, setVisibleProducts] = useState(10);
     const { getArrivals } = useArrivals();
     const navigate = useNavigate();
 
@@ -13,6 +14,22 @@ const Arrivals = () => {
 
         fetchProducts();
     }, []);
+
+    useEffect(() => {
+            const updateVisibleProducts = () => {
+               if(window.innerWidth <= 768){
+                   setVisibleProducts(6);
+               }
+               else{
+                   setVisibleProducts(10);
+            }
+    };
+
+    updateVisibleProducts();
+    window.addEventListener('resize', updateVisibleProducts);
+    return () => window.removeEventListener('resize', updateVisibleProducts);
+}
+)
     const fetchProducts = async () => {
         const data = await getArrivals();
         setArrival(data);
@@ -76,7 +93,7 @@ const Arrivals = () => {
                     <div className="container ">
                         <div className="arrival-card-1">
 
-                            {newArrival.map((data) => (
+                            {newArrival.slice(0, visibleProducts).map((data) => (
                                 <div key={data._id} className="arrival-cards"  onClick={()=>handleArrivalDetailClick(data._id)}>
                                     <img
                                         src={data.image}

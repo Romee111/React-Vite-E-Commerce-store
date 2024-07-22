@@ -7,6 +7,7 @@ import {useProducts } from '../hooks/producthooks';
 import { useNavigate } from 'react-router-dom';
 function categories() {
 const [categories,setCatgory] = useState([]);
+const [visibleProducts, setVisibleProducts] = useState(10); // State for number of visible products
 const {getCat} = useCategories();
 const navigate = useNavigate();
 const [subCategories,setSubCatgory] = useState([]);
@@ -19,6 +20,7 @@ useEffect(() => {
         setCatgory(data);
         console.log(data);
     }
+    
 
     const fetchsubCatgory=async()=>{
         const data=await getsubCat();
