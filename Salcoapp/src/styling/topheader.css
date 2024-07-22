@@ -85,7 +85,7 @@
 
   
   /* Responsive adjustments */
-  @media (max-width: 768px) {
+  @media (max-width: 768px) and (min-width: 600px) {
     .search-btn {
       margin-left: 53%;
      width: 12%;
@@ -93,7 +93,7 @@
 
     }
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 600px) and (min-width: 400px) {
     .navbar-brand {
       font-size: 20px;
     }
@@ -107,7 +107,7 @@
     }
     
   }
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 400px) and (min-width: 360px) {
     .navbar-brand {
     display: none;
   }
@@ -130,8 +130,5 @@
     width:70%;
     margin-right: 40%;
 }
-.search-btn{
-    
-    
-}
+
 }
