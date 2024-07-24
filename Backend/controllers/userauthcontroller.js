@@ -89,6 +89,14 @@ exports.login = async (req, res) => {
             lastName: user.lastName,
             email: user.email,
             phone: user.phone,
+            address1: user.address1,
+            address2: user.address2,
+            city: user.city,
+            pincode: user.pincode,
+            country: user.country,
+            state: user.state,
+            image: user.image,
+            isShipper: user.isShipper,
             token,
         })
     }

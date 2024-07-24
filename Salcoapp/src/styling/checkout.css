@@ -1,0 +1,152 @@
+.checkout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: auto;
+}
+
+.order-summary,
+.payment-details,
+.personal-details {
+    flex: 1;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.order-summary h2,
+.payment-details h2,
+.personal-details h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.item-details p {
+    margin: 5px 0;
+}
+
+.delivery,
+.voucher,
+.order-total {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.order-total p {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.voucher .btn {
+    background-color: #ff6700;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.voucher .btn:hover {
+    background-color: #e55d00;
+}
+
+.checkout-form .form-group,
+.personal-form .form-group {
+    margin-bottom: 15px;
+}
+
+.checkout-form .form-row,
+.personal-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkout-form .form-group.col-md-6,
+.checkout-form .form-group.col-md-4,
+.checkout-form .form-group.col-md-2,
+.personal-form .form-group.col-md-6,
+.personal-form .form-group.col-md-4,
+.personal-form .form-group.col-md-2 {
+    flex: 1;
+}
+
+.checkout-form .form-group.col-md-6,
+.personal-form .form-group.col-md-6 {
+    max-width: calc(50% - 10px);
+}
+
+.checkout-form .form-group.col-md-4,
+.personal-form .form-group.col-md-4 {
+    max-width: calc(33.333% - 10px);
+}
+
+.checkout-form .form-group.col-md-2,
+.personal-form .form-group.col-md-2 {
+    max-width: calc(16.667% - 10px);
+}
+
+.btn-primary {
+   
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+@media (min-width: 768px) {
+    .checkout-container {
+        flex-direction: row;
+    }
+
+    .order-summary {
+        margin-right: 20px;
+    }
+
+    .payment-details,
+    .personal-details {
+        margin-left: 20px;
+    }
+}

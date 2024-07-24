@@ -9,14 +9,13 @@ import About from "../pages/about";
 import TermConditions from "../pages/termconditions";
 import ProductInventory from "../pages/productinventory";
 import ProductDetail from "../pages/productdetail";
+import Checkout from "../pages/checkout";
 
 const RouterRoutes = () => {
     return (
 
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/" element={<Home />} />
-    
             <Route path="/signup" element={<Signup />} />
             <Route  path='/forgotpassword' element={<ForgetPassword />} />
             <Route path="/seller" element={<Seller />} />
@@ -25,6 +24,7 @@ const RouterRoutes = () => {
             <Route path="/productinventory" element={<ProductInventory />} />
             <Route path='/productdetail/:Id' element={<ProductDetail  />} />
             <Route path="/addtocart/:id" element={<Addcart />} />
+            <Route path="/checkout/:id" element={<Checkout />} />
         </Routes>
       
     );

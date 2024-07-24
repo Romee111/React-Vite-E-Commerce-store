@@ -99,5 +99,14 @@ exports.getlistOrder=async(req,res)=>{
     }catch(err){
         res.status(500).json(err);
     }
- }      
+ }
+exports.getOrderById=async(req,res)=>{
+    try{
+        const Order=await order.findById(req.params.id)
+        .populate(["user_id", "product_id"])
+        res.status(200).json(Order);
+    }catch(err){
+        res.status(500).json(err);
+    }
+}
  

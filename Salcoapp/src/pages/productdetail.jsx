@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/producthooks';
 import '../styling/productdetail.css';
 import ProductStats from '../components/productstats';
-import{useNavigate} from 'react-router-dom'
 
 const ProductDetail = () => {
-    const { Id, user_id, product_id } = useParams();
+    const { Id } = useParams(); // Assuming Id is the product ID.
     const [product, setProduct] = useState(null);
     const { getDetailProduct, getUserReview } = useProducts();
-    const [userreviews, setUserreviews] = useState([]);
-
+    const [userReviews, setUserReviews] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,8 +23,8 @@ const ProductDetail = () => {
 
         const fetchUserReviews = async () => {
             try {
-                const data = await getUserReview(user_id);
-                setUserreviews(data);
+                const data = await getUserReview(Id);
+                setUserReviews(data);
             } catch (error) {
                 console.error("Error fetching user reviews:", error);
             }
@@ -34,15 +32,19 @@ const ProductDetail = () => {
 
         fetchProduct();
         fetchUserReviews();
-    }, [Id, user_id]);
+    }, [Id, getDetailProduct, getUserReview]);
 
     if (!product) {
         return <div>Loading...</div>;
+    }
+
+    const handleAddToCart = (id) => {
+        navigate(`/addtocart/${id}`);
     };
-      const handleAddCart=(id)=>{
-         navigate(`/addtocart/${id}`)
-      }
-    
+
+    const handleBuyNow = (id) => {
+        navigate(`/checkout/${id}`);
+    };
 
     return (
         <div className="prd-container py-4 my-4">
@@ -61,19 +63,19 @@ const ProductDetail = () => {
                     <p>Brand: {product.brand}</p>
                     <hr />
                     <h5 className="prd-price">${product.price.toFixed(2)}</h5>
-                    <div className="pprd-btn d-flex mt-2">
-                        <button className="btn " onClick={()=>{handleAddCart(product_id)}}>Add to Cart</button>
-                        <button className="btn">Buy Now</button>
+                    <div className="prd-btn d-flex mt-2">
+                        <button className="btn" onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
+                        <button className="btn" onClick={() => handleBuyNow(product._id)}>Buy Now</button>
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-3 prd-similar">
-                    <ProductStats product_id={Id} user_id={user_id} />
+                    <ProductStats product_id={Id} user_id={product.user_id} />
                     <div className="reviews-section">
                         <p style={{ fontWeight: "bold", fontSize: "14px", marginTop: "10px", marginBottom: "0%" }}>Reviews</p>
-                        {userreviews.length === 0 ? (
+                        {userReviews.length === 0 ? (
                             <p>No reviews yet. Be the first to review this product!</p>
                         ) : (
-                            userreviews.map((review) => (
+                            userReviews.map((review) => (
                                 <div key={review._id} className="review">
                                     <p><strong>{review.user_id}</strong></p>
                                     <p>Rating: {review.rating}</p>
@@ -89,4 +91,4 @@ const ProductDetail = () => {
     );
 };
 
-export default ProductDetail;
+export default ProductDetail

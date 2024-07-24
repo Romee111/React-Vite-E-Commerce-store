@@ -12,6 +12,10 @@ router
 .get(orderconroller.getlistOrder);
 
 router
+.route("/getOrderById/:id")
+.get(orderconroller.getOrderById);
+
+router
 .route("/updateOrder/:id")
 .put(orderconroller.updateOrder);
 
