@@ -25,6 +25,7 @@ exports.isForget=async(req,res,next)=>{
         if(!token){
             res.status(403).end("forbidden response")
         }
+    
            const validate= jwt.verify(token,process.env.JWT_SECRET)
          if(!validate){
              res.status(403).end("forbidden response")

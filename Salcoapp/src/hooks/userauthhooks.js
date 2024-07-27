@@ -18,19 +18,21 @@ export function useAuth() {
             return data;
         } catch (err) {
             console.log(err);
-            return err
         }
     };
 
     const forgetPassword = async (email) => {
         try {
-            const response = await axios.post("http://localhost:2900/userauth/forgotPassword", { email })
-            console.log(response.data)
+           debugger
+            const response = await axios.post("http://localhost:2900/userauth/forgetPassword" ,{ email })
+            debugger
+        
             const data = response.data
+            console.log(data)
             return data
         }
         catch (err) {
-            console.log(err)
+             throw new Error(err.response?.data?.message || 'Password reset failed');
         }
     };
     const register = async (data) => {

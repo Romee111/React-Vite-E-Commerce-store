@@ -17,8 +17,8 @@ router
 .post(userauthcontroller.login)
 
 router
- .route('/forgotPassword')
-.post(middleware.isForget,userauthcontroller.forgetPassword)
+ .route('/forgetPassword')
+.post(userauthcontroller.forgetPassword)
   router
  .route('/resetPassword')
  .post(middleware.isReset,userauthcontroller.resetPassword)

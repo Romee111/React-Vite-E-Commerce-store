@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useAuth } from '../hooks/userauthhooks';
+import { useAuth } from '../hooks/userauthhooks'; // Import the Axios hook
 
 function ForgetPassword() {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-    const { forgetPassword } = useAuth();
+    const { forgetPassword } = useAuth(); // Use the Axios hook
 
     const handleForgetPassword = async (e) => {
         e.preventDefault();
@@ -25,10 +25,6 @@ function ForgetPassword() {
             setError(err.message || 'Password reset failed');
         }
     };
-
-    useEffect(() => {
-        // Any necessary setup can be done here
-    }, []);
 
     const containerStyle = {
         display: 'flex',

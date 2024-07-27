@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/producthooks';
 import '../styling/productdetail.css';
+
 import ProductStats from '../components/productstats';
+import addcart from '../components/addcart';
 
 const ProductDetail = () => {
     const { Id } = useParams(); // Assuming Id is the product ID.
@@ -10,6 +12,7 @@ const ProductDetail = () => {
     const { getDetailProduct, getUserReview } = useProducts();
     const [userReviews, setUserReviews] = useState([]);
     const navigate = useNavigate();
+   
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -38,12 +41,13 @@ const ProductDetail = () => {
         return <div>Loading...</div>;
     }
 
-    const handleAddToCart = (id) => {
-        navigate(`/addtocart/${id}`);
+    const handleAddToCart = () => {
+        dispatch(addcart(product._id));
     };
 
-    const handleBuyNow = (id) => {
-        navigate(`/checkout/${id}`);
+    const handleBuyNow = ({ product}) => {
+        debugger
+        navigate(`/checkout`, { state: { product } });
     };
 
     return (
@@ -65,7 +69,7 @@ const ProductDetail = () => {
                     <h5 className="prd-price">${product.price.toFixed(2)}</h5>
                     <div className="prd-btn d-flex mt-2">
                         <button className="btn" onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
-                        <button className="btn" onClick={() => handleBuyNow(product._id)}>Buy Now</button>
+                        <button className="btn" onClick={() => handleBuyNow(product)}>Buy Now</button>
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-3 prd-similar">

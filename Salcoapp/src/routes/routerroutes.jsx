@@ -17,14 +17,14 @@ const RouterRoutes = () => {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
-            <Route  path='/forgotpassword' element={<ForgetPassword />} />
+            <Route  path='/forgetpassword' element={<ForgetPassword />} />
             <Route path="/seller" element={<Seller />} />
             <Route path="/about" element={<About />} />
             <Route path='/termconditions' element={<TermConditions />} />
             <Route path="/productinventory" element={<ProductInventory />} />
             <Route path='/productdetail/:Id' element={<ProductDetail  />} />
             <Route path="/addtocart/:id" element={<Addcart />} />
-            <Route path="/checkout/:id" element={<Checkout />} />
+            <Route path="/checkout" element={<Checkout />} />
         </Routes>
       
     );

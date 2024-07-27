@@ -9,7 +9,7 @@ function AdminSidebar() {
   };
 
   return (
-    <aside className="sidebar" aria-label="Sidebar">
+    <aside className="sidebar" aria-label="Sidebar" >
       <h1 style={{ color: 'white', textAlign: 'center',fontSize: '28px' }}>Admin Restorex</h1>
       <ul>
         <li>
@@ -36,10 +36,13 @@ function AdminSidebar() {
               <a href="#">Products</a>
             </li>
             <li>
-              <a href="#">Billing</a>
+              <a href="#">Orders</a>
             </li>
             <li>
-              <a href="#">Invoice</a>
+              <a href="#">Users</a>
+            </li>
+            <li>
+              <a href="#">Categories</a>
             </li>
           </ul>
         </li>
@@ -67,7 +70,7 @@ function AdminSidebar() {
             <svg className="icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M10.707 14.293a1 1 0 01-1.414 0l-3-3a1 1 0 011.414-1.414L9 11.586V3a1 1 0 112 0v8.586l1.293-1.293a1 1 0 111.414 1.414l-3 3z"></path>
             </svg>
-            <span>Products</span>
+            <span>Reports</span>
           </a>
         </li>
         <li>

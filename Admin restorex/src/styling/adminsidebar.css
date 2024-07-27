@@ -1,15 +1,10 @@
-* {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        
-    }
+
 .sidebar {
     width: 16rem;
     height: 100vh;
     background-color: #001F3F;
     overflow-y: auto;
-    padding: 1rem;
+     
     place-items: left;
     align-items: left;  
     color: #ffffff;

@@ -1,0 +1,31 @@
+.form-control{
+    background-color: #001F3F;
+    color: white;
+    border: 1px solid white;
+    border-radius: 0.25rem;
+    width: 700px;
+    margin-left: 10%; ;
+}
+.header-btn{
+    background-color: #ffffff;
+    color: #001F3F;
+    border: 1px solid white;
+    border-radius: 0.25rem;
+    width: 105px;
+    height: 37px;
+    position: absolute;
+    margin-left: 44%;
+}
+.bi-person-circle{
+    color: #ffffff;
+   
+    font-size: 26px;
+}
+.bi-chat-left-fill{
+    color: #ffffff;
+    font-size: 26px;
+    margin-right: 40px;
+}
+.navbar-nav{
+    margin-left: 30%;
+}

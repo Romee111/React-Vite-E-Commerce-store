@@ -12,7 +12,7 @@ function Login({ show, handleClose }) {
     const [isShipper, setIsShipper] = useState(false);
     const [error, setError] = useState('');
     const { loginApi } = useAuth();
-    const {navigate, location} = useNavigate();
+    const navigate = useNavigate();
 
     const handleSignup = () => {
         navigate('/signup');
@@ -51,7 +51,7 @@ function Login({ show, handleClose }) {
     };
 
     const handleForgotPassword = async () => {
-        navigate('/forgotpassword');
+        navigate('/forgetpassword');
 
     };
 

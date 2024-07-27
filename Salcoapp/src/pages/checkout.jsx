@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../styling/checkout.css';
-import  useOrder from '../hooks/orderhook';
-
+import useOrder from '../hooks/orderhook';
+import useProducts from '../hooks/producthooks';
 const Checkout = () => {
     const { getOrders, createOrder } = useOrder();
-    const {id} = useParams();
-    
+    const {getDetailProduct} = useProducts();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const { product } = location.state || {};
+
     const [formData, setFormData] = useState({
         name: '',
         address: '',
@@ -21,25 +24,23 @@ const Checkout = () => {
     });
 
     const [orderSummary, setOrderSummary] = useState(null);
-     
+
     useEffect(() => {
-     alert("my name is kajoo")   
-            const fetchOrderProduct = async () => {
-                try {
-                    debugger
-                    const data = await getOrders(id);
+        const fetchOrderProduct = async () => {
+            try {
+                debugger
+                if (product) {
+                    const data = await getDetailProduct({product_id:product._id});
+                    console.log(data);
                     debugger
                     setOrderSummary(data);
-                    console.log(data,"sohaib");
-
-                    // You can set form data here if needed, e.g., setFormData({...});
-                } catch (error) {
-                    console.error("Error fetching order summary", error);
                 }
-            };
-            fetchOrderProduct();
-        }
-    , [id, getOrders]);
+            } catch (error) {
+                console.error("Error fetching order summary", error);
+            }
+        };
+        fetchOrderProduct();
+    }, [product, getOrders]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -55,35 +56,43 @@ const Checkout = () => {
         navigate('/order-confirmation');
     };
 
+    if (!product) {
+        return <div>No product data available</div>;
+    }
+
     return (
         <div className="checkout-container">
             <div className="order-summary">
                 <h2>Order Summary</h2>
-                <div className="summary-details">
-                    {orderSummary.items.map((item, index) => (
-                        <div className="item" key={index}>
-                            <img src={item.image} alt="Product" />
-                            <div className="item-details">
-                                <h4>{item.productName}</h4>
-                                <p>{item.productDescription}</p>
-                                <p>Qty: {item.quantity}</p>
-                                <p>Rs. {item.itemTotal}</p>
+                {orderSummary ? (
+                    <div className="summary-details">
+                        {orderSummary.items.map((item, index) => (
+                            <div className="item" key={index}>
+                                <img src={item.image} alt="Product" />
+                                <div className="item-details">
+                                    <h4>{item.productName}</h4>
+                                    <p>{item.productDescription}</p>
+                                    <p>Qty: {item.quantity}</p>
+                                    <p>Rs. {item.itemTotal}</p>
+                                </div>
                             </div>
+                        ))}
+                        <div className="delivery">
+                            <p>{orderSummary.deliveryMethod} | Rs. {orderSummary.deliveryFee}</p>
+                            <p>Receive by {orderSummary.deliveryEstimate}</p>
                         </div>
-                    ))}
-                    <div className="delivery">
-                        <p>{orderSummary.deliveryMethod} | Rs. {orderSummary.deliveryFee}</p>
-                        <p>Receive by {orderSummary.deliveryEstimate}</p>
+                        <div className="voucher">
+                            <button className="btn">Get Voucher</button>
+                        </div>
+                        <div className="order-total">
+                            <p>Items Total: Rs. {orderSummary.itemTotal}</p>
+                            <p>Delivery Fee: Rs. {orderSummary.deliveryFee}</p>
+                            <p><strong>Total Payment: Rs. {orderSummary.totalPayment}</strong></p>
+                        </div>
                     </div>
-                    <div className="voucher">
-                        <button className="btn">Get Voucher</button>
-                    </div>
-                    <div className="order-total">
-                        <p>Items Total: Rs. {orderSummary.itemTotal}</p>
-                        <p>Delivery Fee: Rs. {orderSummary.deliveryFee}</p>
-                        <p><strong>Total Payment: Rs. {orderSummary.totalPayment}</strong></p>
-                    </div>
-                </div>
+                ) : (
+                    <p>Loading order summary...</p>
+                )}
             </div>
             <div className="personal-details">
                 <h2>Personal Information</h2>
@@ -188,9 +197,7 @@ const Checkout = () => {
                     <button type="submit" className="btn btn-primary">Place Order</button>
                 </form>
             </div>
-            </div>
-
-      
+        </div>
     );
 };
 

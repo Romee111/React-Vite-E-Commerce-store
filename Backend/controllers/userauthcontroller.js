@@ -1,7 +1,7 @@
 const users = require("../models/userauthmodel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const nodemailer = require("nodemailer");
 
 
 
@@ -216,9 +216,29 @@ exports.forgetPassword = async (req, res) => {
                 message: "no email found"
             })
         }
+        console.log(email);
+        console.log(process.env.JWT_SECRET)
         const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        const tranporter=nodemailer.createTransport({
+            service:"gmail",
+            auth:{
+                user:process.env.EMAIL,
+                pass:process.env.PASSWORD
+            }
+        })
+
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: user.email,
+            subject: "Forget Password",
+            html: `<h1>Forget Password</h1>
+            <p>click on this <a href="http://localhost:2900/userauth/resetPassword/${forgetToken}">link</a> to reset your password</p>`
+        };
+
+            await tranporter.sendMail(mailOptions);
         res.status(200).json({
             status: "success",
+            message:'Emaail has been sent',
             data: {
                 forgetToken
             }

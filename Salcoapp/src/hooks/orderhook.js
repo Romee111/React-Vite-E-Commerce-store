@@ -15,8 +15,8 @@ function useOrder() {
 const getOrders=async(id)=>{
   try{
     const response = await axios.get(`http://localhost:2900/order/getOrderById/${id}`);
-    console.log(response.data);
-    const data=response.data
+    console.log(response.data.data);
+    const data=response.data.data;
     console.log(data);
 
 
