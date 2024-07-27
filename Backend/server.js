@@ -17,7 +17,7 @@ const orderroute=require('./routes/orderroute');
 const addtocartroute=require('./routes/addtocartroute');
 const ratingroute=require('./routes/ratingroute');
 const reviewroute=require('./routes/reviewroute');
-mongoose.connect('mongodb://localhost:27017/FYP(backend)').then(()=>{
+mongoose.connect(process.env.DATABASEURL).then(()=>{
     console.log("database connected");
 })
 // dotenv.config();
