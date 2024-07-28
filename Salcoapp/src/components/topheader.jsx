@@ -63,10 +63,12 @@ function TopHeader() {
               placeholder="Search"
               className="me-2 searchbar"
               style={{
-                border: 'none',
+                border: '1px solid white',
                 fontSize: '16px',
-                borderRadius: '50px',
-                padding: '10px 20px'
+                borderRadius: '1px 0 0 5px solid #ffffff',
+                backgroundColor: '#001F3F',
+                color: 'white',
+                 padding: '10px 10px'
               }}
               aria-label="Search"
               value={searchTerm}
@@ -78,12 +80,13 @@ function TopHeader() {
               className="search-btn"
               onClick={handleSearch}
               style={{
-                color: 'white',
-                backgroundColor: 'black',
+                color: '#001F3F',
+                backgroundColor: 'white',
                 border: 'none',
                 fontSize: '16px',
-                padding: '10px',
-                borderRadius: '50px'
+                padding: '11px',
+                borderRadius: '10px',
+                marginLeft: '61.25%',
               }}
             >
                search
@@ -100,7 +103,7 @@ function TopHeader() {
           </Form>
           <Nav className="ms-auto">
             <Nav.Link href="#home">
-              <i className="bi bi-cart"></i>
+              <i className="bi bi-cart" style={{marginRight: '50px'}}></i>
              
             </Nav.Link>
             <Nav.Link href="#features">

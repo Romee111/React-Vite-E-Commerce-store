@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useAuth } from '../hooks/userauthhooks'; // Import the Axios hook
+import { useNavigate } from 'react-router-dom';
 
 function ForgetPassword() {
     const [email, setEmail] = useState('');
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const { forgetPassword } = useAuth(); // Use the Axios hook
+    const navigate = useNavigate();
 
     const handleForgetPassword = async (e) => {
         e.preventDefault();
@@ -19,8 +21,10 @@ function ForgetPassword() {
         }
 
         try {
+            debugger
             await forgetPassword(email);
             setSuccessMessage('Password reset email sent. Please check your email.');
+            navigate('/resetpassword');
         } catch (err) {
             setError(err.message || 'Password reset failed');
         }

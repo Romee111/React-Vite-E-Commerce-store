@@ -11,6 +11,11 @@
   .searchbar {
     border: none;
     font-size: 16px;
+    background-color: #001F3F;
+    color: white;
+    border-radius: 1px 0 0 5px solid #ffffff;
+    width: 60%;
+    
 
     padding: 10px 20px;
     outline: none;
@@ -23,7 +28,7 @@
 
   .searchbar ::placeholder {
     font-size: 16px;
-    color: #999;
+    color: #ffffff;
     font-style: italic;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
@@ -32,7 +37,8 @@
   
   .search-btn {
     color: white;
-    background-color: black;
+  
+    background-color:#ffffff;
     border: none;
     font-size: 16px;
     padding: 10px;
@@ -70,12 +76,13 @@
     background-color: #f1f1f1;
   }
   
+  
   .bi-cart,
   .bi-person-circle {
-    font-size: 24px;
+    font-size: 30px;
     color: white;
     cursor: pointer;
-    margin: 0 10px;
+   
   }
   
   .bi-cart:hover,
