@@ -1,12 +1,15 @@
 const  seller= require("../models/sellersmodel");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 exports.createSeller=async (req, res)=> {
     try {   
         const { name, email, password, phone, sellersAddress, image, ID_CardNumber,  ID_image1, ID_image2, Business_Name, Business_Address, Business_Type,  Business_registerationNumber,Tax_IDNumber, Bank_Name, Bank_AccountNumber,Bank_Branch,Account_HolderName,Branch_Code  } = req.body;
+        const   hashPassword = await bcrypt.hash(password, 10);
         const newSellers = new seller({
             name,
             email,
-            password,
+            password: hashPassword,
             phone,
             sellersAddress,
             image,
