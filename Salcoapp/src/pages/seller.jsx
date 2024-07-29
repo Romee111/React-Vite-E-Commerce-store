@@ -1,10 +1,14 @@
  import React from 'react'
 import '../styling/sellers.css';
-import { Link } from 'react-router-dom';
+import { Link,  useNavigate } from 'react-router-dom';
+
 import SellerDetail from '../components/sellersdetail';
 import res from '../assets/res.jpg'
 
+
+
  function Seller() {
+   
    return (
      <div>
         
@@ -26,7 +30,8 @@ import res from '../assets/res.jpg'
         <ul>
           <h2>Welcome to Restorex – Your Ultimate Selling Partner!
           </h2>
-          <p className='sellers'>Want to Sell with Restorex? <Link className='sellers-Link'>Sign Up Here!</Link></p>
+          <p className='sellers'>Want to Sell with Restorex? <Link className='sellers-Link' style={{ textDecoration: 'underline',color: '#001f3f' }}
+         to='/sellersSignup'>Sign Up Here!</Link></p>
 </ul>
         <SellerDetail />
       </div>

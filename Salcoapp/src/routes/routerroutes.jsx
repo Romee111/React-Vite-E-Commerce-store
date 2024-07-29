@@ -10,6 +10,7 @@ import TermConditions from "../pages/termconditions";
 import ProductInventory from "../pages/productinventory";
 import ProductDetail from "../pages/productdetail";
 import Checkout from "../pages/checkout";
+import SellersSignup from "../pages/sellersSignup";
 
 const RouterRoutes = () => {
     return (
@@ -25,6 +26,7 @@ const RouterRoutes = () => {
             <Route path='/productdetail/:Id' element={<ProductDetail  />} />
             <Route path="/addtocart/:id" element={<Addcart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/sellersSignup" element={<SellersSignup />} />
         </Routes>
       
     );

@@ -1,13 +1,13 @@
 
  
- .nav-link:hover{
+Nav.Link:hover{
     color: #FFFFFF;
    
    
     
 }
  
-.nav-link::after{
+Nav.Link::after{
     content: "";
     display: block;
     width: 0;
@@ -20,17 +20,23 @@
     
 }
 
-.nav-link:hover::after{
+Nav.Link:hover::after{
     color: aliceblue;
     width: 100%;
     transition:ease .3s;
+
 }
+Nav.Dropdown  ::title{
+    color: #FFFFFF;
+  
+}
+
 
 @media screen and (max-width: 968px) {
     .navi{
         align-items: start;
     }
-    .nav-link{
+    Nav.Link{
         align-items: start;
     }
     
@@ -40,7 +46,7 @@
     .navi{
         text-align: start;
     }
-    .nav-link{
+    Nav.Link{
         text-align: left;
     }
 }
@@ -49,7 +55,7 @@
     .navi{
         text-align: start;
     }
-    .nav-link{
+    Nav.Link{
         text-align: left;
     }
     
