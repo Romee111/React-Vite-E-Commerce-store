@@ -63,27 +63,7 @@ const Arrivals = () => {
 
         <div className="container-fluid newArrivals">
             <div className="row">
-                <div className="col-md-3">
-                    <div className="card mx-auto col-10 mt-5">
-                        <img
-                            className="mx-auto img-thumbnail"
-                            src="https://i.imgur.com/pjITBzX.jpg"
-                            alt="Yail wrist watch"
-                            width="auto"
-                            height="auto"
-                        />
-                        <div className="card-body text-center mx-auto">
-                            <div className="cvp">
-                                <h5 className="card-title font-weight-bold">Yail wrist watch</h5>
-                                <p className="card-text">$299</p>
-                                <button className="btn details">View details</button><br />
-                                <button className="btn cart">Add to cart</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-9">
-                    <ul className='d-flex  justify-content-center  featuring'>
+            <ul className='d-flex  justify-content-center  featuring'>
                         <li><p style={{ cursor: 'pointer' }} onClick={() => handleFilter('newArrivals')}>newArrivals</p></li>
                         <li><p style={{ cursor: 'pointer' }} onClick={() => handleFilter('Featured')}>Featured</p></li>
                         <li><p style={{ cursor: 'pointer' }} onClick={() => handleFilter('TopRated')}>Top Rated</p></li>
@@ -121,8 +101,7 @@ const Arrivals = () => {
 
 
                     </div>
-
-                </div>
+               
             </div>
         </div>
     );

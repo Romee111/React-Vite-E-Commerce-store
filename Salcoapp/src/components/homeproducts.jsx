@@ -57,9 +57,13 @@ const HomeProducts = () => {
                             <div className="home-card-body">
                                 <img src={data.image} className="home-card-img-top" alt="Product" />
                                 <h5 className="card-title">
-                                    {data.name.length > 20 ? data.name.slice(0, 20) + "..." : data.name}
+                                    {data.name.length > 10 ? data.name.slice(0, 10) + "..." : data.name}
+                                    
                                 </h5>
-                                <p className="card-text"></p>
+                                <p className="card-text">
+                                {data.description.length > 50 ? data.description.slice(0, 50) + "..." : data.description}
+                                </p>
+                                
                                 <div className="detaprice d-flex">
                                     <p className="card-price">${data.price.toFixed(2)}</p>
                                     <p className="card-text">{data.rating}</p>

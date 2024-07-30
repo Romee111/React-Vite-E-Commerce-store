@@ -155,31 +155,32 @@ exports.createProduct = async (req, res) => {
             }
         }   
 
-         exports.searchProduct= async (req, res) => {
-            try{
-                const {query}=req.params;
-                const products=await Product.find({name:query});
-                if(products!==null){
+        exports.searchProduct = async (req, res) => {
+            try {
+                const { query } = req.params;
+        
+                // Use regular expression for partial, case-insensitive match
+                const products = await Product.find({ name: { $regex: query, $options: 'i' } });
+        
+                if (products.length > 0) {
                     res.status(200).json({
-                        success:true,
-                        data:products
-                    })
-                }
-                else{
+                        success: true,
+                        data: products
+                    });
+                } else {
                     res.status(404).json({
-                        success:false,
-                        message:"No product found"
-                    })
+                        success: false,
+                        message: "No product found"
+                    });
                 }
-            }
-            catch(error){
+            } catch (error) {
                 res.status(500).json({
-                    success:false,
-                    message:error
-                })
+                    success: false,
+                    message: error.message
+                });
             }
-         }
-
+        };
+        
 
          exports.newArrivals= async (req, res) => {
             try{

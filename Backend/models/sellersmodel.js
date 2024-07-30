@@ -21,6 +21,10 @@ const sellerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    dateOfBirth: {
+        type: Date,
+        required: true  
+    },
     
     image: {
         type: String,

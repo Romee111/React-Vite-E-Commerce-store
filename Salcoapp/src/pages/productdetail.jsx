@@ -35,7 +35,7 @@ const ProductDetail = () => {
 
         fetchProduct();
         fetchUserReviews();
-    }, [Id, getDetailProduct, getUserReview]);
+    }, []);
 
     if (!product) {
         return <div>Loading...</div>;
@@ -45,7 +45,7 @@ const ProductDetail = () => {
         dispatch(addcart(product._id));
     };
 
-    const handleBuyNow = ({ product}) => {
+    const handleBuyNow = (product)=> {
         debugger
         navigate(`/checkout`, { state: { product } });
     };
@@ -67,9 +67,9 @@ const ProductDetail = () => {
                     <p>Brand: {product.brand}</p>
                     <hr />
                     <h5 className="prd-price">${product.price.toFixed(2)}</h5>
-                    <div className="prd-btn d-flex mt-2">
-                        <button className="btn" onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
-                        <button className="btn" onClick={() => handleBuyNow(product)}>Buy Now</button>
+                    <div className=" d-flex mt-2">
+                        <button className="btn product-detail-btn" style={{backgroundColor: "#001F3F",color:"white",borderRadius:"3px"}} onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
+                        <button className="btn" style={{backgroundColor: "#001F3F",color:"white",borderRadius:"3px",marginLeft:"20px"}}  onClick={() => handleBuyNow(product)}>Buy Now</button>
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-3 prd-similar">

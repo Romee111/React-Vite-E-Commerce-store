@@ -92,10 +92,10 @@ function TopHeader() {
                search
             </Button>
             {showResults && (
-              <div className="search-results">
-                <ul>
+              <div className="search-results" style={{width:'900px',backgroundColor:'white',position:'absolute',zIndex:'1',borderRadius:'10px'}}>
+                <ul >
                   {searchResults.map((result) => (
-                    <li key={result.id}>{result.name}</li>
+                    <li key={result.id} style={{textAlign: 'left'}}>{result.name}</li>
                   ))}
                 </ul>
               </div>

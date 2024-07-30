@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 exports.createSeller=async (req, res)=> {
     try {   
-        const { name, email, password, phone, sellersAddress, image, ID_CardNumber,  ID_image1, ID_image2, Business_Name, Business_Address, Business_Type,  Business_registerationNumber,Tax_IDNumber, Bank_Name, Bank_AccountNumber,Bank_Branch,Account_HolderName,Branch_Code  } = req.body;
+        const { name, email, password, phone, sellersAddress, image,dateOfBirth, ID_CardNumber,  ID_image1, ID_image2, Business_Name, Business_Address, Business_Type,  Business_registerationNumber,Tax_IDNumber, Bank_Name, Bank_AccountNumber,Bank_Branch,Account_HolderName,Branch_Code  } = req.body;
         const   hashPassword = await bcrypt.hash(password, 10);
         const newSellers = new seller({
             name,
@@ -12,6 +12,7 @@ exports.createSeller=async (req, res)=> {
             password: hashPassword,
             phone,
             sellersAddress,
+            dateOfBirth,
             image,
             ID_CardNumber,
             ID_image1,

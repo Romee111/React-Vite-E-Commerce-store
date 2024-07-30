@@ -38,8 +38,13 @@ function Login({ show, handleClose }) {
             const user = await loginApi(email, password, isAdmin, isShipper);
             if (user.isAdmin == true) {
                 debugger
-             window.location.href='http://localhost:5174/admin'
-            } else {
+             window.location.href='http://localhost:5173/admin'
+            }
+            // else if (user.isShipper == true) {
+            //     debugger
+            //  window.location.href='http://localhost:5172/shipper'
+            // }
+             else {
                 debugger
                 navigate('/');
             }

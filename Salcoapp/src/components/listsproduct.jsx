@@ -41,10 +41,12 @@ function listsproduct() {
                                         </h5>
                                         <p>{data.description.slice(0, 30)}{data.description.length > 30 ? "..." : ""}</p>
                                         <p className="product-card-text">
+                                        <p style={{fontWeight:"bold",textAlign:'left'}} > {data.instock > 0 && data.instock > 0 ? "In Stock" : "Out of Stock"  }</p>
                                          
                                         </p>
                                         <div className="product-detaprice d-flex">
                                             <p className="product-card-price">${data.price.toFixed(2)}</p>
+                                             
                                             <p className="product-card-text">{data.rating}</p>
                                         </div>
                                         

@@ -16,8 +16,7 @@
 .arrival-card-1{
     display: grid;
     grid-template-columns: repeat(8,1fr);
-    column-gap:5px;
-    row-gap:10px;
+    
     
     
 }
@@ -30,9 +29,9 @@
        width: 100%;
        place-items: center;
       align-items: center;    
-      border-radius: 5%;
+      border-radius: 1%;
       border: 3px solid #ffffff;
-  filter: drop-shadow(0 0 10px #001f3f);
+  filter: drop-shadow(0 0 1px #001f3f);
   color:#001f3f;
       cursor: pointer;
 }
@@ -43,6 +42,8 @@
          background-color: #ffffff;
         transition: all 0.3s ease;
      transform: scale(1.01);
+     z-index: 1;
+
    
    }
   .arrival-cards-img{
@@ -161,8 +162,7 @@ ul li p:hover::after{
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
             }
-            .ul li{
-           }
+           
           @media screen and (max-width: 600px) and (min-width: 400px) {
                     .arrival-card-1 {
                         display: grid;
@@ -195,3 +195,4 @@ ul li p:hover::after{
           }
 
           }
+        }
