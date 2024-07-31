@@ -50,7 +50,8 @@
 .samples li{
   line-height: 30px;
   color: #001F3F;
-  font-size: 20px;
+  font-size:10px;
+
   list-style: circle rgb(8, 8, 8);
   list-style-type: circle;
   
@@ -61,10 +62,21 @@
   list-style:circle ;
   
 }
+.cat-name a{
+  font-size: 14px;
+  font-weight: bolder;
+}
+.cat-name a:hover{  
+  background-color: #001F3F;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: bolder;
+}
 h4{
   font-size: 20px;
  font-weight: bolder;
- color: color: #001F3F;
+ color: #001F3F;
  }
 
  @media screen and (max-width: 400px) {

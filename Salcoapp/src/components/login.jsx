@@ -9,7 +9,7 @@ function Login({ show, handleClose }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
-    const [isShipper, setIsShipper] = useState(false);
+    const [isSeller, setIsShipper] = useState(false);
     const [error, setError] = useState('');
     const { loginApi } = useAuth();
     const navigate = useNavigate();
@@ -35,15 +35,15 @@ function Login({ show, handleClose }) {
 
         try {
 
-            const user = await loginApi(email, password, isAdmin, isShipper);
+            const user = await loginApi(email, password, isAdmin, isSeller);
             if (user.isAdmin == true) {
                 debugger
              window.location.href='http://localhost:5173/admin'
             }
-            // else if (user.isShipper == true) {
-            //     debugger
-            //  window.location.href='http://localhost:5172/shipper'
-            // }
+            else if (user.isSeller == true) {
+                debugger
+             window.location.href='http://localhost:5172/shipper'
+            }
              else {
                 debugger
                 navigate('/');

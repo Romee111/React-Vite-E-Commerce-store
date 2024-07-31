@@ -19,11 +19,12 @@ export function useSubCategories() {
         }
 
     };
-    const ListCategories=async(category_id )=>{
+    
+    const listSubCategories=async(category_id )=>{
         try{
             const response = await axios.get(`http://localhost:2900/subcategory/getallsubCategory/${category_id}`);
              debugger
-             const data=response.data.data;
+             const data=response.data;
              console.log(data);
              return data;
 
@@ -34,5 +35,5 @@ export function useSubCategories() {
 
         }
     }
-    return { getsubCat,ListCategories };
+    return { getsubCat,listSubCategories };
 }

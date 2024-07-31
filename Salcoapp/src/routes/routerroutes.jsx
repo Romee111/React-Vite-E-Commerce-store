@@ -11,6 +11,8 @@ import ProductInventory from "../pages/productinventory";
 import ProductDetail from "../pages/productdetail";
 import Checkout from "../pages/checkout";
 import SellersSignup from "../pages/sellersSignup";
+import ListProduct from "../components/listsproduct";
+
 
 const RouterRoutes = () => {
     return (
@@ -27,6 +29,7 @@ const RouterRoutes = () => {
             <Route path="/addtocart/:id" element={<Addcart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/sellersSignup" element={<SellersSignup />} />
+            <Route path="/listProduct" element={<ListProduct />} />
         </Routes>
       
     );

@@ -9,7 +9,7 @@ const nodemailer = require("nodemailer");
 
 exports.register = async (req, res) => {
     try {
-        var { firstName, lastName, email, password, phone, isAdmin, address1, address2, city, pincode, country, state, isShipper, image, retypePassword } = req.body;
+        var { firstName, lastName, email, password, phone, isAdmin,isSeller, address1, address2, city, pincode, country, state, isShipper, image, retypePassword } = req.body;
         const hashPassword = await bcrypt.hash(password, 10)
         state = JSON.stringify(state);
         const user = await users.create({
@@ -25,7 +25,7 @@ exports.register = async (req, res) => {
             country: country,
             state: state,
             isAdmin: Boolean(isAdmin),
-            isShipper: Boolean(isShipper),
+            isSeller: Boolean(isShipper),
             image: image || '../assests/reslogo.png',
             retypePassword: retypePassword
 
@@ -73,7 +73,7 @@ exports.login = async (req, res) => {
                 message: "invalid credentials"
             })
         }
-        const token = jwt.sign({ id: user._id, name: user.name, isAdmin: user.isAdmin, isShipper: user.isShipper }, process.env.JWT_SECRET, { expiresIn: "2 days" });
+        const token = jwt.sign({ id: user._id, name: user.name, isAdmin: user.isAdmin, isSeller: user.isSeller }, process.env.JWT_SECRET, { expiresIn: "2 days" });
         res.cookie('jwt', token, {
             httpOnly: true,
         }
@@ -84,6 +84,7 @@ exports.login = async (req, res) => {
         res.status(200).json({
             status: "success",
             isAdmin: user.isAdmin,
+            isSeller: user.isSeller,
             user_id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
@@ -96,7 +97,7 @@ exports.login = async (req, res) => {
             country: user.country,
             state: user.state,
             image: user.image,
-            isShipper: user.isShipper,
+            
             token,
         })
     }

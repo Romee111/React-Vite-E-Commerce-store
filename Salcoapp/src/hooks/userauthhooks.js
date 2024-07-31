@@ -3,10 +3,10 @@ import axios from "axios";
 
 export function useAuth() {
 
-    const loginApi = async (email, password, isAdmin, isShipper) => {
+    const loginApi = async (email, password, isAdmin, isSeller) => {
         try {
             debugger
-            console.log("login damaged", email, password, isAdmin, isShipper);
+            console.log("login damaged", email, password, isAdmin, isSeller);
             // const isAdmin = true;
             const body = { email, password }
 

@@ -9,6 +9,7 @@ import { useProducts } from '../hooks/producthooks';
 import { useAuth } from '../hooks/userauthhooks';
 import Login from '../components/login'; // Assuming your Login component is named Login and in lowercase
 import logo from '../assets/reslogo.png';
+import { useNavigate } from 'react-router-dom';
 function TopHeader() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -16,6 +17,7 @@ function TopHeader() {
   const [showModal, setShowModal] = useState(false); // State to control modal visibility
   const { getSearch } = useProducts();
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleShow = () => setShowModal(true); // Function to show modal
   const handleClose = () => setShowModal(false); // Function to hide modal
@@ -24,6 +26,7 @@ function TopHeader() {
     try {
       const results = await getSearch(searchTerm);
       setSearchResults(results.data);
+      navigate('/listProduct');
       setShowResults(true);
     } catch (error) {
       console.error('Error fetching search results:', error);
@@ -49,6 +52,7 @@ function TopHeader() {
       setShowResults(false);
     }, 200);
   };
+ 
 
   return (
     <div>
@@ -94,8 +98,8 @@ function TopHeader() {
             {showResults && (
               <div className="search-results" style={{width:'900px',backgroundColor:'white',position:'absolute',zIndex:'1',borderRadius:'10px'}}>
                 <ul >
-                  {searchResults.map((result) => (
-                    <li key={result.id} style={{textAlign: 'left'}}>{result.name}</li>
+                  {searchResults.slice (0, 10).map((result) => (
+                    <li key={result.id} style={{textAlign: 'left'}} onClick={() => handleSearchProduct( result._id)}>{result.name}</li>
                   ))}
                 </ul>
               </div>

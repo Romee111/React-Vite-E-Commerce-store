@@ -25,7 +25,8 @@ exports.createSeller=async (req, res)=> {
             Bank_Name,
             Bank_AccountNumber,
             Account_HolderName,
-            Branch_Code
+            Branch_Code,
+            isSeller: true
         });
 
         await newSellers.save();

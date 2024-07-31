@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import {  Button, Box, Stepper, Step, StepLabel, Typography } from '@mui/material';
-import {Form} from 'react-bootstrap';
+import { Button, Box, Stepper, Step, StepLabel, Typography } from '@mui/material';
+import '../styling/sellersSignup.css';
+import { Form } from 'react-bootstrap';
+import useSellers from '../hooks/sellershook';
+
 const steps = [
   'Personal Information',
   'Contact Information',
@@ -10,6 +13,7 @@ const steps = [
 ];
 
 const SellersSignup = () => {
+  const { createSeller } = useSellers();
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
@@ -31,21 +35,23 @@ const SellersSignup = () => {
     Bank_AccountNumber: '',
     Account_HolderName: '',
     Branch_Code: '',
+    isSeller: false,
     imageError: ''
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    const newValue = type === 'checkbox' ? checked : value;
+
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: newValue,
     });
   };
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     if (files[0]) {
-      // Check file size (500KB limit)
       if (files[0].size > 500 * 1024) {
         setFormData({ ...formData, imageError: 'File size must be less than 500KB' });
       } else {
@@ -63,15 +69,30 @@ const SellersSignup = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    if (!formData.isSeller) {
+      console.error('You must agree to the terms to proceed.');
+      return;
+    }
+
+    const formDataToSend = new FormData();
+    Object.keys(formData).forEach(key => {
+      formDataToSend.append(key, formData[key]);
+    });
+
+    try {
+      const res = await createSeller(formDataToSend);
+      console.log('Seller created:', res);
+    } catch (error) {
+      console.error('Error creating seller:', error);
+    }
   };
 
   return (
     <div className="container">
-      <div className="row" style={{ justifyContent: 'center', marginTop: '5%' }}>
-        <div className="col-4">
+      <div className="row">
+        <div className="col-4 signup-description">
           <p>Sign up to sell on Restorex and start selling today!</p>
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum, nemo dolor. Consequuntur culpa aliquam impedit assumenda corrupti eius in nemo maiores enim repellat ipsam optio debitis, veritatis qui reiciendis vero magni deserunt neque deleniti dicta quo. Sint minima eius consequuntur, in laboriosam pariatur maxime totam perferendis? Quidem quisquam iusto omnis, perferendis adipisci voluptatem, autem officiis sed id culpa quaerat velit ex. Illo rem veritatis nesciunt labore, iusto aut nobis eius quaerat aliquam vitae. Minus accusamus dolorum, perferendis vitae ex dolore!
@@ -91,47 +112,50 @@ const SellersSignup = () => {
                 <Typography sx={{ mt: 2, mb: 1 }}>
                   All steps completed - you're finished
                 </Typography>
-                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                <Box className="stepper-buttons">
                   <Box sx={{ flex: '1 1 auto' }} />
-                  <Button onClick={handleBack} sx={{ mr: 1 }}>
+                  <Button onClick={handleBack} className="stepper-button">
                     Back
                   </Button>
-                  <Button onClick={handleSubmit}>Submit</Button>
+                  <Button onClick={handleSubmit} className="stepper-button">
+                    Submit
+                  </Button>
                 </Box>
               </React.Fragment>
             ) : (
               <React.Fragment>
-                <Form onSubmit={handleSubmit} style={{ marginTop: '5%', width: '100%', margin: 'auto', justifyContent: 'center', borderRadius: '10px', border: '1px solid white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', padding: '20px' }}>
+                <Form onSubmit={handleSubmit} className="form-container">
+                  {/* Render form fields based on activeStep */}
                   {activeStep === 0 && (
                     <React.Fragment>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Name:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Name:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Name"
-                          style={{ width: '80%', margin: 'auto', justifyContent: 'center', borderRadius: '10px', border: '1px solid white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
+                          className="form-control"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Email:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Email:</Form.Label>
                         <Form.Control
                           type="email"
                           placeholder="Enter Email"
-                          style={{ width: '80%', margin: 'auto', justifyContent: 'center', borderRadius: '10px', border: '1px solid white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
+                          className="form-control"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Password:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Password:</Form.Label>
                         <Form.Control
                           type="password"
                           placeholder="Enter Password"
-                          style={{ width: '80%', margin: 'auto', justifyContent: 'center', borderRadius: '10px', border: '1px solid white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
+                          className="form-control"
                           name="password"
                           value={formData.password}
                           onChange={handleChange}
@@ -141,44 +165,43 @@ const SellersSignup = () => {
                   )}
                   {activeStep === 1 && (
                     <React.Fragment>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Phone:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Phone:</Form.Label>
                         <Form.Control
                           type="number"
                           placeholder="Enter Phone Number"
+                          className="form-control"
                           name="phone"
-                          style={{ width: '80%', margin: 'auto', justifyContent: 'center', borderRadius: '10px', border: '1px solid white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                           value={formData.phone}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Address:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Address:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Address"
+                          className="form-control"
                           name="sellersAddress"
                           value={formData.sellersAddress}
                           onChange={handleChange}
-                          style={{ width: '80%', margin: 'auto', justifyContent: 'center', borderRadius: '10px', border: '1px solid white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                         />
-                      </Form.Group >
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Date Of Birth:</Form.Label>
+                      </Form.Group>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Date Of Birth:</Form.Label>
                         <Form.Control
                           type="date"
-                          placeholder="Enter Date Of Birth"
+                          className="form-control"
                           name="dateOfBirth"
                           value={formData.dateOfBirth}
                           onChange={handleChange}
-                          style={{ width: '80%', margin: 'auto', justifyContent: 'center', borderRadius: '10px', border: '1px solid white', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}
                         />
                       </Form.Group>
                     </React.Fragment>
                   )}
                   {activeStep === 2 && (
                     <React.Fragment>
-                      <Form.Group>
+                      <Form.Group className="form-group">
                         <Form.Label>ID Card Number:</Form.Label>
                         <Form.Control
                           type="text"
@@ -188,7 +211,7 @@ const SellersSignup = () => {
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
+                      <Form.Group className="form-group">
                         <Form.Label>ID Image Front:</Form.Label>
                         <Form.Control
                           type="file"
@@ -197,11 +220,11 @@ const SellersSignup = () => {
                         />
                         {formData.ID_image1Preview && (
                           <div className="image-preview">
-                            <img src={formData.ID_image1Preview} alt="ID Image Front Preview" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                            <img src={formData.ID_image1Preview} alt="ID Image Front Preview" />
                           </div>
                         )}
                       </Form.Group>
-                      <Form.Group>
+                      <Form.Group className="form-group">
                         <Form.Label>ID Image Back:</Form.Label>
                         <Form.Control
                           type="file"
@@ -210,7 +233,7 @@ const SellersSignup = () => {
                         />
                         {formData.ID_image2Preview && (
                           <div className="image-preview">
-                            <img src={formData.ID_image2Preview} alt="ID Image Back Preview" style={{ maxWidth: '100px', maxHeight: '100px' }} />
+                            <img src={formData.ID_image2Preview} alt="ID Image Back Preview" />
                           </div>
                         )}
                       </Form.Group>
@@ -218,51 +241,56 @@ const SellersSignup = () => {
                   )}
                   {activeStep === 3 && (
                     <React.Fragment>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Business Name:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Business Name:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Business Name"
+                          className="form-control"
                           name="Business_Name"
                           value={formData.Business_Name}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Business Address:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Business Address:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Business Address"
+                          className="form-control"
                           name="Business_Address"
                           value={formData.Business_Address}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Business Type:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Business Type:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Business Type"
+                          className="form-control"
                           name="Business_Type"
                           value={formData.Business_Type}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label> style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}Business Registration Number:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Business Registration Number:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Business Registration Number"
+                          className="form-control"
                           name="Business_registerationNumber"
                           value={formData.Business_registerationNumber}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Tax ID Number:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Tax ID Number:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Tax ID Number"
+                          className="form-control"
                           name="Tax_IDNumber"
                           value={formData.Tax_IDNumber}
                           onChange={handleChange}
@@ -272,67 +300,67 @@ const SellersSignup = () => {
                   )}
                   {activeStep === 4 && (
                     <React.Fragment>
-                      <Form.Group>
-                        <Form.Label style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Bank Name:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Bank Name:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Bank Name"
+                          className="form-control"
                           name="Bank_Name"
                           value={formData.Bank_Name}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label>Bank Account Number:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Bank Account Number:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Bank Account Number"
+                          className="form-control"
                           name="Bank_AccountNumber"
                           value={formData.Bank_AccountNumber}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label>Account Holder Name:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Account Holder Name:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Account Holder Name"
+                          className="form-control"
                           name="Account_HolderName"
                           value={formData.Account_HolderName}
                           onChange={handleChange}
                         />
                       </Form.Group>
-                      <Form.Group>
-                        <Form.Label>Branch Code:</Form.Label>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">Branch Code:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter Branch Code"
+                          className="form-control"
                           name="Branch_Code"
                           value={formData.Branch_Code}
                           onChange={handleChange}
-                         
+                        />
+                      </Form.Group>
+                      <Form.Group className="form-group">
+                        <Form.Check
+                          type="checkbox"
+                          name="isSeller"
+                          label="I agree to the terms and policies"
+                          checked={formData.isSeller}
+                          onChange={handleChange}
                         />
                       </Form.Group>
                     </React.Fragment>
                   )}
-                  <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                    <Button
-                      color="inherit"
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      sx={{ mr: 1 }}
-                      style={{ color: '#FFFFFF',width: '100px', backgroundColor: '#001F3F', borderRadius: '10px', borderColor: '#FFFFFF', border: '1px solid white' }}
-                    >
-
+                  <Box className="stepper-buttons">
+                    <Button onClick={handleBack} className="stepper-button" style={{backgroundColor: '#001F3F',color:'white',borderRadius:'10px',borderColor:'white',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', }}>
                       Back
                     </Button>
-                    <Box sx={{ flex: '1 1 auto' }} />
-                    <Button
-                      onClick={handleNext}
-                      sx={{ mr: 1 }}
-                      style={{ color: '#FFFFFF',width: '100px', backgroundColor: '#001F3F', borderRadius: '10px', borderColor: '#FFFFFF', border: '1px solid white' }}
-                    >
-                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    <Button onClick={handleNext} className="stepper-button" style={{backgroundColor: '#001F3F',color:'white',borderRadius:'10px',borderColor:'white',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', }}>
+                      {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                     </Button>
                   </Box>
                 </Form>
