@@ -13,7 +13,7 @@ const steps = [
 ];
 
 const SellersSignup = () => {
-  const { createSeller } = useSellers();
+  const { AddSeller } = useSellers();
   const [activeStep, setActiveStep] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
@@ -66,8 +66,106 @@ const SellersSignup = () => {
   };
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (validateStep()) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
+
+  const validateStep = () => {
+    if(activeStep === 0) {
+      if (!formData.name) {
+        alert('Please enter your name');
+        return false;
+      }
+      if (!formData.email) {
+        alert('Please enter your email');
+        return false;
+      }
+      if (!formData.password) {
+        alert('Please enter your password');
+        return false;
+      }
+      
+   
+    }
+
+    if (activeStep === 1) {
+      if (!formData.phone) {
+        alert('Please enter your phone number');
+        return false;
+      }
+      if (!formData.sellersAddress) {
+        alert('Please enter your address');
+        return false;
+      }
+      if (!formData.dateOfBirth) {
+        alert('Please enter your date of birth');
+        return false;
+      }
+                
+    }
+
+    if (activeStep === 2) {
+      if (!formData.ID_CardNumber) {
+        alert('Please enter your ID Card number');
+        return false;
+      }
+      // if (!formData.image) {
+      //   alert('Please upload your image');
+      //   return false;
+      // }
+      if (!formData.ID_image1) {
+        alert('Please upload your ID image');
+        return false;
+      }
+      if (!formData.ID_image2) {
+        alert('Please upload your ID image');
+        return false;
+      }
+    }
+      if (activeStep === 3) {
+        if (!formData.Business_Name) {
+          alert('Please enter your business name');
+          return false;
+    }
+    if (!formData.Business_Address) {
+      alert('Please enter your business address');
+      return false;
+    }
+    if (!formData.Business_Type) {
+      alert('Please enter your business type');
+      return false;
+    }
+    if (!formData.Business_registerationNumber) {
+      alert('Please enter your business registration number');
+
+  };}
+  if (activeStep === 4) {
+    if (!formData.Bank_Name) {
+      alert('Please enter your bank name');
+      return false;
+    }
+    if (!formData.Bank_AccountNumber) {
+      alert('Please enter your bank account number');
+      return false;
+    }
+    if (!formData.Account_HolderName) {
+      alert('Please enter your account holder name');
+      return false;
+    }
+    if (!formData.Branch_Code) {
+      alert('Please enter your branch code');
+      return false;
+    }
+    if(!formData.isSeller)
+    {
+      alert('Please agree to the terms');
+      return false;
+    }
+  }
+
+    return true;
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,7 +180,7 @@ const SellersSignup = () => {
     });
 
     try {
-      const res = await createSeller(formDataToSend);
+      const res = await AddSeller(formDataToSend);
       console.log('Seller created:', res);
     } catch (error) {
       console.error('Error creating seller:', error);

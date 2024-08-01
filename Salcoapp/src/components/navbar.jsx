@@ -46,7 +46,7 @@ function CustomNavbar() {
                 <NavDropdown.Item 
                   key={category.id} 
                   as={Link} 
-                  to={`/category/${category.id}`} 
+                  to={"/productinventory"} 
                   style={{ color: '#001F3F' }}
                 >
                   {category.name}

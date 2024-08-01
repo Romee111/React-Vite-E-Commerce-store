@@ -3,8 +3,8 @@ import  '../styling/termconditions.css';
 
  function TermConditions ()   {
   return (
-    <div>
-      <h1 style={{textAlign:"center"}}>Terms and Conditions</h1>
+    <div className="terms">
+      <h1 style={{textAlign:"center",marginTop:"2%"}}>Terms and Conditions</h1>
 
      
         <h2>1. Introduction</h2>
@@ -31,28 +31,28 @@ import  '../styling/termconditions.css';
          You agree, understand, and acknowledge that Restorex is an online platform that enables you to purchase products listed at indicated prices from any location, using a payment method of your choice. We act solely as a facilitator and do not participate in or control any transactions on the site or through payment gateways provided by independent service providers.
        The sale of products on Restorex constitutes a strictly bipartite contract between you and the sellers on our platform. Payment    processing, including prepayments with electronic cards, involves a bipartite contract between you and the service providers listed on our site, which may include Klarna.
          </p>    
-           <h2> J. Trademarks and Copyrights</h2>      
+           <h2> 4. Trademarks and Copyrights</h2>      
            <p>
            Restorex, the Restorex logo, and other marks displayed on our platform are trademarks or registered trademarks in relevant jurisdictions. Our graphics, logos, page headers, button icons, scripts, and service names are trade dress and may not be used in connection with any product or service not belonging to us, or in any manner likely to cause confusion among customers, or in any way that disparages or discredits us.
            All other trademarks appearing on Restorex are the property of their respective owners, who may or may not be affiliated with us.
           All intellectual property rights, whether registered or unregistered, in Restorex, the information content on the platform, and the website design—including text, graphics, software, photos, video, music, sound, and their selection and arrangement—are our property. The entire contents of Restorex are protected by copyright as a collective work under applicable laws and international conventions. All rights reserved.
                       </p>
             
-          <h2>M. Third-Party Businesses</h2>
+          <h2>5. Third-Party Businesses</h2>
                  <p>
                  Parties other than Restorex and its affiliates may operate stores, provide services, or sell product lines on our platform. For example, businesses and individuals may offer products via our Marketplace. Additionally, we may provide links to websites of affiliated companies and other businesses. We do not actively examine or evaluate these businesses or individuals, nor do we warrant or endorse their offerings or the content of their websites.
                  Restorex does not assume any responsibility or liability for the actions, products, or content of any third-party businesses. Transactions involving third parties will be identifiable, and we may share customer information related to these transactions with the involved third party. We recommend carefully reviewing the privacy statements and terms and conditions of these third parties.
      
                  </p>
              
-              <h2>N. Communicating with Us</h2>
+              <h2>6. Communicating with Us</h2>
                    <p>
                    When you visit Restorex or send emails to us, you are communicating with us electronically. You may be required to provide a valid phone number when placing an order. We may communicate with you via email, SMS, phone call, or by posting notices on the platform, or using any other mode of communication we deem appropriate. By using Restorex, you consent to receive communications (including transactional, promotional, and/or commercial messages) from us related to your use of the platform or your orders. All modes of communication are treated with equal importance.
 
                    Restorex's Buyer-Seller Interaction Policy outlines the standards of behavior sellers must adhere to when interacting with customers, including through the Question & Answer section, Instant Messenger, and Product Review platform. Restorex monitors all buyer-seller communications and reserves the right to take action in case of violations.
                    </p>
                  
-                    <h2>E. Reselling Restorex Products</h2>
+                    <h2>7. Reselling Restorex Products</h2>
 
                     <p>Reselling Restorex products for business purposes is strictly prohibited. Unauthorized reselling may result in legal action being taken.</p>
                      <h2>Taxes</h2>

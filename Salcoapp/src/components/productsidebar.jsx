@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import '../styling/productsidebar.css';
 import { useCategories } from '../hooks/categoryhooks';
 import { useSubCategories } from '../hooks/subcategoryhooks';
-
+import { useNavigate } from 'react-router-dom';
 function ProductSidebar() {
     const [sidebar, setSidebar] = useState([]);
     const [expandedCategory, setExpandedCategory] = useState(null);
     const { getallCategory } = useCategories();
     const { listSubCategories } = useSubCategories();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchSidebar = async () => {
@@ -41,15 +43,18 @@ function ProductSidebar() {
         fetchSidebar();
     }, []);
 
-    const handleCategoryClick = (categoryId) => {
-        setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
+    const handleCategoryClick = (id) => {
+        // setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
+        navigate('/listProduct',{state:{sidebar:sidebar.filter( product => product._id === id)}});
     };
 
     return (
         <div>
-            <h5 style={{ color: '#001F3F', marginLeft: '30px', marginTop: '10px', fontWeight: 'bolder', fontSize: '25px' }}>Category</h5>
+            <div className="cat-head">
+            <h5 style={{ textAlign: 'center',  fontWeight: 'bolder', fontSize: '25px',position:'static', }}>Category</h5>
+            </div>
             <div className="sidebar">
-                <div className="filter-type">
+                <div className="filter-type" style={{ marginTop: '30px' }}>
                     <input id="filter-cat" type="checkbox" name="filter-type" defaultChecked />
                     <ul className="samples">
                         {Array.isArray(sidebar) && sidebar.length > 0 ? (

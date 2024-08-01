@@ -2,7 +2,7 @@ import React from 'react'
 import rec from '../assets/reslogo.png'
 function about() {
   return (
-    <div>
+<div style={{justifyContent:"center",alignItems:"center"}}>
         <h3 style={{textAlign:"center",marginTop:"2%"}}>About Restorex</h3>
         <p style={{ textAlign:"left",marginLeft:"5%",marginRight:"5%"}}>
         Welcome to our Restorex Store, where shopping meets convenience and quality! If you're looking for an online shopping experience like no other, you've come to the right place. Dive into a world of endless possibilities with us as we introduce you to who we are, what we offer, and why we stand out in the digital marketplace. Get ready to discover a seamless shopping experience tailored just for you!

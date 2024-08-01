@@ -23,7 +23,7 @@ export function useSubCategories() {
     const listSubCategories=async(category_id )=>{
         try{
             const response = await axios.get(`http://localhost:2900/subcategory/getallsubCategory/${category_id}`);
-             debugger
+             
              const data=response.data;
              console.log(data);
              return data;
