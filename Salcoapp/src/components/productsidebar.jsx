@@ -1,87 +1,169 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../styling/productsidebar.css';
-import { useCategories } from '../hooks/categoryhooks';
-import { useSubCategories } from '../hooks/subcategoryhooks';
 import { useNavigate } from 'react-router-dom';
-function ProductSidebar() {
-    const [sidebar, setSidebar] = useState([]);
-    const [expandedCategory, setExpandedCategory] = useState(null);
-    const { getallCategory } = useCategories();
-    const { listSubCategories } = useSubCategories();
 
+function ProductSidebar() {
+    const [expandedCategory, setExpandedCategory] = useState(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchSidebar = async () => {
-            try {
-                // Fetch all categories
-                const categories = await getallCategory();
-                console.log('Fetched categories:', categories);
-                
-                if (Array.isArray(categories)) {
-                    // Fetch subcategories for each category
-                    const categoriesWithSubcategories = await Promise.all(categories.map(async (category) => {
-                        try {
-                            const subcategories = await listSubCategories(category._id);
-                            return { ...category, subcategories };
-                        } catch (subcatError) {
-                            console.error(`Error fetching subcategories for category ${category._id}:`, subcatError);
-                            return { ...category, subcategories: [] };
-                        }
-                    }));
-
-                    console.log('Categories with subcategories:', categoriesWithSubcategories);
-                    setSidebar(categoriesWithSubcategories);
-                } else {
-                    console.error('Categories data is not in expected format:', categories);
-                }
-            } catch (error) {
-                console.error('Error fetching sidebar data:', error);
+    const productParents = [
+        {
+            category: {
+                name: "Electronics",
+                subcategories: [{
+                  name:"Laptops",
+                    name:"Mobiles",
+                     name:"TVs",
+                     name:"Watches",
+                     name:"Headphones",
+                    name:"Cameras",
+                    name:"Earphones",
+                    name:"Accessories",
+                    name:"Tablets"
+            }]
             }
-        };
+        },
+        {
+            category: {
+                name: "Clothing",
+                subcategories: [
+                    "Men's Wear",
+                    "Women's Wear",
+                    "Kids' Wear",
+                    "Footwear",
+                    "Accessories"
+                ]
+            }
+        },
+        {
+            category: {
+                name: "Men's Wear",
+                subcategories: [
+                    "Shirts",
+                    "Trousers",
+                    "Suits",
+                    "Casual Wear",
+                    "Sportswear"
+                ]
+            }
+        },
+        {
+            category: {
+                name: "Women's Wear",
+                subcategories: [
+                    "Dresses",
+                    "Tops",
+                    "Skirts",
+                    "Formal Wear",
+                    "Sportswear"
+                ]
+            }
+        },
+        {
+            category: {
+                name: "Automotive",
+                subcategories: [
+                    "Car Accessories",
+                    "Motorbike Accessories",
+                    "Car Electronics",
+                    "Tools & Equipment",
+                    "Car Care"
+                ]
+            }
+        },
+        {
+            category: {
+                name: "Medicare",
+                subcategories: [
+                    "Medical Devices",
+                    "Health Supplements",
+                    "Personal Care",
+                    "Home Healthcare",
+                    "Wellness"
+                ]
+            }
+        },
+        {
+            category: {
+                name: "Home & Kitchen",
+                subcategories: [
+                    "Furniture",
+                    "Kitchen Appliances",
+                    "Home Decor",
+                    "Bedding",
+                    "Storage & Organization"
+                ]
+            }
+        },
+        {
+            category: {
+                name: "Books",
+                subcategories: [
+                    "Fiction",
+                    "Non-Fiction",
+                    "Children's Books",
+                    "Textbooks",
+                    "Educational"
+                ]
+            }
+        },
+        {
+            category: {
+                name: "Sports & Outdoors",
+                subcategories: [
+                    "Fitness Equipment",
+                    "Outdoor Gear",
+                    "Sports Apparel",
+                    "Cycling",
+                    "Camping"
+                ]
+            }
+        }
+    ];
 
-        fetchSidebar();
-    }, []);
+    const handleCategoryClick = (category) => {
+        setExpandedCategory(category.name === expandedCategory ? null : category.name);
+    };
 
-    const handleCategoryClick = (id) => {
-        // setExpandedCategory(expandedCategory === categoryId ? null : categoryId);
-        navigate('/listProduct',{state:{sidebar:sidebar.filter( product => product._id === id)}});
+    const handleSubcategoryClick = (subcategory) => {
+        navigate('/listProduct', { state: { subcategory } });
     };
 
     return (
         <div>
             <div className="cat-head">
-            <h5 style={{ textAlign: 'center',  fontWeight: 'bolder', fontSize: '25px',position:'static', }}>Category</h5>
+                <h5 style={{ textAlign: 'center', fontWeight: 'bolder', fontSize: '25px', position: 'static' }}>Category</h5>
             </div>
             <div className="sidebar">
                 <div className="filter-type" style={{ marginTop: '30px' }}>
                     <input id="filter-cat" type="checkbox" name="filter-type" defaultChecked />
                     <ul className="samples">
-                        {Array.isArray(sidebar) && sidebar.length > 0 ? (
-                            sidebar.map((category) => (
-                                <div key={category._id} className="cat-name">
-                                    <a
-                                        href="#"
-                                        onClick={() => handleCategoryClick(category._id)}
-                                    >
-                                        {category.name}
-                                    </a>
-                                    {expandedCategory === category._id && (
-                                        <ul>
-                                            {Array.isArray(category.subcategories) && category.subcategories.length > 0 ? (
-                                                category.subcategories.map((subcategory) => (
-                                                    <li key={subcategory._id} className='subcat'>{subcategory.name}</li>
-                                                ))
-                                            ) : (
-                                                <li>No subcategories available</li>
-                                            )}
-                                        </ul>
-                                    )}
-                                </div>
-                            ))
-                        ) : (
-                            <li>No categories available</li>
-                        )}
+                        {productParents.map((parent, index) => (
+                            <div key={index} className="cat-name">
+                                <a
+                                    href="#"
+                                    onClick={() => handleCategoryClick(parent.category)}
+                                    style={{ fontWeight: 'bold', color: '#000' }}
+                                >
+                                    {parent.category.name}
+                                </a>
+                                {expandedCategory === parent.category.name && (
+                                    <ul>
+                                        {parent.category.subcategories.map((subcategory, subIndex) => (
+                                            <li key={subIndex} className='subcat'>
+                                                <a
+                                                    href="#"
+                                                    onClick={() => handleSubcategoryClick(subcategory)}
+                                                    style={{ marginLeft: '20px', color: '#555' }}
+                                                >
+                                                    {subcategory}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        ))}
                     </ul>
                 </div>
                 <div className="filter-type">
