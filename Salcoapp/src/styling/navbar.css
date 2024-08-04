@@ -1,13 +1,12 @@
 
- 
-Nav.Link:hover{
+.nav-links:hover{
     color: #FFFFFF;
    
    
     
 }
  
-Nav.Link::after{
+.nav-links::after{
     content: "";
     display: block;
     width: 0;
@@ -19,8 +18,7 @@ Nav.Link::after{
     color:#FFFFFF;
     
 }
-
-Nav.Link:hover::after{
+.nav-links:hover::after{
     color: aliceblue;
     width: 100%;
     transition:ease .3s;
@@ -32,15 +30,7 @@ Nav.Dropdown  ::title{
 }
 
 
-@media screen and (max-width: 968px) {
-    .navi{
-        align-items: start;
-    }
-    Nav.Link{
-        align-items: start;
-    }
-    
-}
+
 
 @media screen and (max-width: 400px) {
     .navi{

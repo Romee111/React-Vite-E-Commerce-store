@@ -1,186 +1,67 @@
-import React, { useState } from 'react';
-import '../styling/productsidebar.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { Link } from 'react-router-dom';
+import '../styling/productsidebar.css'; // Ensure your CSS file is correctly imported
 
-function ProductSidebar() {
-    const [expandedCategory, setExpandedCategory] = useState(null);
-    const navigate = useNavigate();
+const ProductSidebar = () => {
+  // const {listSubCategories} = useSubCategories();
+  // const [ subCategories, setSubCategories ] = useState([]);
+  // useEffect(() => {
+  //   const fetchSubCategories = async () => {
+  //     const subCategories = await listSubCategories();
+  //     setSubCategories(subCategories);
+  //   };
+  //   fetchSubCategories();
+  // } , []);
 
-    const productParents = [
-        {
-            category: {
-                name: "Electronics",
-                subcategories: [{
-                  name:"Laptops",
-                    name:"Mobiles",
-                     name:"TVs",
-                     name:"Watches",
-                     name:"Headphones",
-                    name:"Cameras",
-                    name:"Earphones",
-                    name:"Accessories",
-                    name:"Tablets"
-            }]
-            }
-        },
-        {
-            category: {
-                name: "Clothing",
-                subcategories: [
-                    "Men's Wear",
-                    "Women's Wear",
-                    "Kids' Wear",
-                    "Footwear",
-                    "Accessories"
-                ]
-            }
-        },
-        {
-            category: {
-                name: "Men's Wear",
-                subcategories: [
-                    "Shirts",
-                    "Trousers",
-                    "Suits",
-                    "Casual Wear",
-                    "Sportswear"
-                ]
-            }
-        },
-        {
-            category: {
-                name: "Women's Wear",
-                subcategories: [
-                    "Dresses",
-                    "Tops",
-                    "Skirts",
-                    "Formal Wear",
-                    "Sportswear"
-                ]
-            }
-        },
-        {
-            category: {
-                name: "Automotive",
-                subcategories: [
-                    "Car Accessories",
-                    "Motorbike Accessories",
-                    "Car Electronics",
-                    "Tools & Equipment",
-                    "Car Care"
-                ]
-            }
-        },
-        {
-            category: {
-                name: "Medicare",
-                subcategories: [
-                    "Medical Devices",
-                    "Health Supplements",
-                    "Personal Care",
-                    "Home Healthcare",
-                    "Wellness"
-                ]
-            }
-        },
-        {
-            category: {
-                name: "Home & Kitchen",
-                subcategories: [
-                    "Furniture",
-                    "Kitchen Appliances",
-                    "Home Decor",
-                    "Bedding",
-                    "Storage & Organization"
-                ]
-            }
-        },
-        {
-            category: {
-                name: "Books",
-                subcategories: [
-                    "Fiction",
-                    "Non-Fiction",
-                    "Children's Books",
-                    "Textbooks",
-                    "Educational"
-                ]
-            }
-        },
-        {
-            category: {
-                name: "Sports & Outdoors",
-                subcategories: [
-                    "Fitness Equipment",
-                    "Outdoor Gear",
-                    "Sports Apparel",
-                    "Cycling",
-                    "Camping"
-                ]
-            }
-        }
-    ];
+  return (
+         
 
-    const handleCategoryClick = (category) => {
-        setExpandedCategory(category.name === expandedCategory ? null : category.name);
-    };
+    <Sidebar>
+      <Menu
+        menuItemStyles={{
+          button: {
+            // the active class will be added automatically by react router
+            // so we can use it to style the active menu item
+            ['&.active']: {
+              backgroundColor: '#13395e',
+              color: '#b6c8d9',
+            },
+          },
+        }}
+      >
+        <SubMenu title="Categories">
+          <MenuItem component={<Link to="/category1" />}>Category 1</MenuItem>
+          <SubMenu title="Subcategory 1.1">
+            <MenuItem component={<Link to="/subcategory1-1-item1" />}>Item 1</MenuItem>
+            <MenuItem component={<Link to="/subcategory1-1-item2" />}>Item 2</MenuItem>
+          </SubMenu>
+          <MenuItem component={<Link to="/category2" />}>Category 2</MenuItem>
+          <SubMenu title="Subcategory 2.1">
+            <MenuItem component={<Link to="/subcategory2-1-item1" />}>Item 1</MenuItem>
+            <MenuItem component={<Link to="/subcategory2-1-item2" />}>Item 2</MenuItem>
+          </SubMenu>
+        </SubMenu>
+        <MenuItem component={<Link to="/documentation" />}>Documentation</MenuItem>
+        <MenuItem component={<Link to="/calendar" />}>Calendar</MenuItem>
+        <MenuItem component={<Link to="/e-commerce" />}>E-commerce</MenuItem>
 
-    const handleSubcategoryClick = (subcategory) => {
-        navigate('/listProduct', { state: { subcategory } });
-    };
-
-    return (
-        <div>
-            <div className="cat-head">
-                <h5 style={{ textAlign: 'center', fontWeight: 'bolder', fontSize: '25px', position: 'static' }}>Category</h5>
-            </div>
-            <div className="sidebar">
-                <div className="filter-type" style={{ marginTop: '30px' }}>
-                    <input id="filter-cat" type="checkbox" name="filter-type" defaultChecked />
-                    <ul className="samples">
-                        {productParents.map((parent, index) => (
-                            <div key={index} className="cat-name">
-                                <a
-                                    href="#"
-                                    onClick={() => handleCategoryClick(parent.category)}
-                                    style={{ fontWeight: 'bold', color: '#000' }}
-                                >
-                                    {parent.category.name}
-                                </a>
-                                {expandedCategory === parent.category.name && (
-                                    <ul>
-                                        {parent.category.subcategories.map((subcategory, subIndex) => (
-                                            <li key={subIndex} className='subcat'>
-                                                <a
-                                                    href="#"
-                                                    onClick={() => handleSubcategoryClick(subcategory)}
-                                                    style={{ marginLeft: '20px', color: '#555' }}
-                                                >
-                                                    {subcategory}
-                                                </a>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-                        ))}
-                    </ul>
-                </div>
-                <div className="filter-type">
-                    <input id="filter-sty" type="checkbox" name="filter-type" defaultChecked />
-                    <label htmlFor="filter-sty">
-                        <h4>Brands</h4>
-                    </label>
-                    <ul>
-                        <li>Redock Fragrances</li>
-                        <li>Redock Beauty</li>
-                        <li>Redock Watches</li>
-                        <li>Redock Special</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    );
+        {/* Categories with subcategories */}
+        <SubMenu title="Categories">
+          <MenuItem component={<Link to="/category1" />}>Category 1</MenuItem>
+          <SubMenu title="Subcategory 1.1">
+            <MenuItem component={<Link to="/subcategory1-1-item1" />}>Item 1</MenuItem>
+            <MenuItem component={<Link to="/subcategory1-1-item2" />}>Item 2</MenuItem>
+          </SubMenu>
+          <MenuItem component={<Link to="/category2" />}>Category 2</MenuItem>
+          <SubMenu title="Subcategory 2.1">
+            <MenuItem component={<Link to="/subcategory2-1-item1" />}>Item 1</MenuItem>
+            <MenuItem component={<Link to="/subcategory2-1-item2" />}>Item 2</MenuItem>
+          </SubMenu>
+        </SubMenu>
+      </Menu>
+    </Sidebar>
+  );
 }
 
 export default ProductSidebar;

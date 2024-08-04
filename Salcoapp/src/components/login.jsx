@@ -38,12 +38,9 @@ function Login({ show, handleClose }) {
             const user = await loginApi(email, password, isAdmin, isSeller);
             if (user.isAdmin == true) {
                 debugger
-             window.location.href='http://localhost:5173/admin'
+             window.location.href='http://localhost:5174/admin'
             }
-            else if (user.isSeller == true) {
-                debugger
-             window.location.href='http://localhost:5172/shipper'
-            }
+           
              else {
                 debugger
                 navigate('/');

@@ -26,8 +26,7 @@ function CustomNavbar() {
 
   return (
     <Navbar expand="lg" style={{ backgroundColor: '#001F3F' }}>
-      <Container>
-        <Navbar.Toggle aria-controls="basic-navbar-nav"  className='nav-toggle' />
+     <Navbar.Toggle aria-controls="basic-navbar-nav"  className='nav-toggle' />
         <Navbar.Collapse id="basic-navbar-nav">
           
           <Nav className="me-auto " style={{ width: '100%', justifyContent: 'space-around' }}>
@@ -55,13 +54,12 @@ function CustomNavbar() {
             </NavDropdown>
             <Nav.Link as={Link} className='nav-links '  to="/" style={{ color: 'white' }}>Home</Nav.Link>
 
-            <Nav.Link as={Link} to="/brands"  style={{ color: 'white' }}>Brands</Nav.Link>
+            <Nav.Link as={Link} to="/brands" className='nav-links '  style={{ color: 'white' }}>Brands</Nav.Link>
            
             <Nav.Link as={Link} to="/seller"  className='nav-links 'style={{ color: 'white' }}>Become a Seller</Nav.Link>
             <Nav.Link as={Link} to="/support" className='nav-links '  style={{ color: 'white' }}>Help & Support</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Container>
     </Navbar>
   );
 }

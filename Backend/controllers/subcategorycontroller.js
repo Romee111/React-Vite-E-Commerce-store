@@ -31,12 +31,24 @@ exports.getsubcategory = async (req, res) => {
 
 exports.getallsubCategory = async (req, res) => {
     try {
-        const {category_id} = req.params;
-        const subCategory = await subcategory.find({category_id:category_id}).populate('category_id');
+        const { category_id } = req.params;
+    
+        if (!category_id) {
+            return res.status(400).json({ message: 'Category ID is required' });
+        }
+    
+        const subCategory = await subcategory.find({ category_id }).populate('category_id');
+    
+        if (!subCategory) {
+            return res.status(404).json({ message: 'Subcategory not found' });
+        }
+    
         res.status(200).json(subCategory);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error('Error fetching subcategories:', error); // Log the error for debugging
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
+    
 
 }
  exports.getAllSub= async(req,res)=>{

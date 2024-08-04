@@ -12,7 +12,7 @@ function Admin() {
          
               <AdminSidebar />
               <div className="col-9">
-              {/* <ProductInfo/> */}
+              <ProductInfo/> 
               </div>
          
         
