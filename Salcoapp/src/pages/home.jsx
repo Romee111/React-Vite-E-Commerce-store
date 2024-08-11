@@ -1,9 +1,9 @@
 import React from 'react';
 import HomeProducts from '../components/homeproducts';
-import img1 from '../assets/Eiiffel.jpg';
-import img2 from '../assets/Jeddah.jpg';
-import img3 from '../assets/Siddeny.jpg';
-import vid1 from '../assets/salco.mp4';
+import fanta from '../assets/fanta.png';
+import two from '../assets/two.png';
+import shophere from '../assets/shophere.png';
+import vid2 from '../assets/vid2.mp4';
 import '../styling/home.css';
 import Arrivals from '../components/arrivals';
 import Categories from '../components/categories';
@@ -18,27 +18,20 @@ function Home() {
         </div>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <video src={vid1} className="d-block w-100 sliding" alt="Eiffel Tower" autoPlay loop muted style={{ objectFit: 'cover' }} ></video>
+            <video src={vid2} className="d-block w-100 sliding" alt="Eiffel Tower" autoPlay loop muted style={{ objectFit: 'cover' }} ></video>
           </div>
           <div className="carousel-item">
-            <img src='' className="d-block w-100 sliding" alt="Jeddah Cityscape" />
+            <img src={shophere} className="d-block w-100 sliding" alt="Jeddah Cityscape" />
           </div>
           <div className="carousel-item">
-            <img src='' className="d-block w-100 sliding" alt="Sydney Opera House" />
+            <img src= {two} className="d-block w-100 sliding" alt="Sydney Opera House" />
           </div>
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+       
       </div>
       <HomeProducts />
       <Arrivals />
-      <Categories />
+    <Categories />
 
     </div>
   );

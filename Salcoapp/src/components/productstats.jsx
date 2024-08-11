@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useProducts } from '../hooks/producthooks';
+ import '../styling/productstats.css';
 import {useParams}  from 'react-router-dom';
 function ProductStats({ product_id }) {
     const [rating, setRating] = useState(0);
@@ -46,7 +47,7 @@ function ProductStats({ product_id }) {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="review-form">
                 <label>
                     Rating:
                     <div>{renderStars()}</div>
@@ -57,7 +58,7 @@ function ProductStats({ product_id }) {
                     <textarea value={reviewText} onChange={handleReviewTextChange} required />
                 </label>
                 <br />
-                <button type="submit">Submit Review</button>
+                <button type="submit" className='review-btn' > Submit Review</button>
             </form>
             {newReview && (
                 <div className="review">

@@ -63,11 +63,10 @@ const Checkout = () => {
 
     return (
         <div className="checkout-container mt-5">
-            <div className="order-summary d-flex" style={{ justifyContent: 'center', marginTop: '20px' }}>
-                <div className="summary-details">
+             <div className="summary-details">
                     <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '20px', color: "#001F3F", textAlign: 'center' }}>Order Summary</h2>
                     <div className="item">
-                        <img src={product.image} alt="Product" />
+                        <img src={product.image} alt="Product"  />
                         <div className="item-details">
                             <h4>{product.name}</h4>
                             <p>{product.description}</p>
@@ -83,12 +82,12 @@ const Checkout = () => {
                         <p><strong>Total Payment: Rs. {product?.totalPayment}</strong></p>
                     </div>
                 </div>
-                <div className="container">
+                <div className="container" style={{ justifyContent: 'center',marginTop: '-5%' }}>
                     <div className="row" style={{ justifyContent: 'center', marginTop: '5%' }}>
                         <div className="col-12">
                             <div className="order-detail d-block">
                                 <div className="personal-details">
-                                    <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '20px', color: "#001F3F", textAlign: 'center' }}>Personal Information</h2>
+                                    <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '20px', color: "#001F3F", textAlign: 'center' }}>order details</h2>
                                     <Form onSubmit={handleSubmit} className="personal-form">
                                         <Form.Group>
                                             <Form.Label className='checkoutlabel' style={{ fontWeight: 'bold', color: "#001F3F", marginLeft: '10%', marginTop: '10px' }}>Full Name</Form.Label>
@@ -220,7 +219,6 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     );
 };

@@ -73,23 +73,24 @@ const ProductDetail = () => {
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-3 prd-similar">
-                    <ProductStats product_id={Id} user_id={product.user_id} />
-                    <div className="reviews-section">
-                        <p style={{ fontWeight: "bold", fontSize: "14px", marginTop: "10px", marginBottom: "0%" }}>Reviews</p>
-                        {userReviews.length === 0 ? (
-                            <p>No reviews yet. Be the first to review this product!</p>
-                        ) : (
-                            userReviews.map((review) => (
-                                <div key={review._id} className="review">
-                                    <p><strong>{review.user_id}</strong></p>
-                                    <p>Rating: {review.rating}</p>
-                                    <p>{review.review}</p>
-                                    <hr />
-                                </div>
-                            ))
-                        )}
-                    </div>
+    <ProductStats product_id={Id} user_id={product.user_id} />
+    <div className="reviews-section">
+        <p className="reviews-title">Reviews</p>
+        {userReviews.length === 0 ? (
+            <p>No reviews yet. Be the first to review this product!</p>
+        ) : (
+            userReviews.map((review) => (
+                <div key={review._id} className="review">
+                    <p><strong>{review.user_id}</strong></p>
+                    <p>Rating: {review.rating}</p>
+                    <p>{review.review}</p>
+                    <hr />
                 </div>
+            ))
+        )}
+    </div>
+</div>
+
             </div>
         </div>
     );

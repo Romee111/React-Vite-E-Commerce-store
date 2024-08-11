@@ -1,88 +1,80 @@
-import React, { useEffect, useState } from 'react'
-import '../styling/category.css'
+import React, { useEffect, useState } from 'react';
+import '../styling/category.css';
 import { NavLink } from 'react-bootstrap';
-import { useCategories,  } from '../hooks/categoryhooks';
+import { useCategories } from '../hooks/categoryhooks';
 import { useSubCategories } from '../hooks/subcategoryhooks';
-import {useProducts } from '../hooks/producthooks';
 import { useNavigate } from 'react-router-dom';
-function categories() {
-const [categories,setCatgory] = useState([]);
-const [visibleProducts, setVisibleProducts] = useState(10); // State for number of visible products
-const {getCat} = useCategories();
-const navigate = useNavigate();
-const [subCategories,setSubCatgory] = useState([]);
-const {getsubCat} = useSubCategories();
 
+function Categories() {
+  const [categories, setCatgory] = useState([]);
+  const [subCategories, setSubCatgory] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const { getCat } = useCategories();
+  const { getsubCat } = useSubCategories();
+  const navigate = useNavigate();
 
-useEffect(() => {
-    const fetchCatgory=async()=>{
-        const data=await getCat();
-        setCatgory(data);
-        console.log(data);
-    }
-    
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const data = await getCat();
+      setCatgory(data);
+      console.log(data);
+    };
 
-    const fetchsubCatgory=async()=>{
-        const data=await getsubCat();
-        setSubCatgory(data);
-        console.log(data);
-    }
-    fetchCatgory();
-    fetchsubCatgory();
-}    ,[])
+    const fetchSubCategory = async () => {
+      const data = await getsubCat();
+      setSubCatgory(data);
+      console.log(data);
+    };
 
+    fetchCategory();
+    fetchSubCategory();
+  }, []);
 
-const handlecategoryClick = () => {
-    console.log();
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const handleCategoryClick = () => {
     navigate(`/productinventory`);
-};
+  };
+
+  const visibleSubCategories = screenWidth < 768 ? subCategories.slice(0, 4) : subCategories;
 
   return (
     <div>
-         <div className="category">
-        <ul >
-            {categories.map((category, index) => (
-          <li className="list-group "  key={index}  >{category.name}</li>
+      <div className="category">
+        <ul>
+          {categories.map((category, index) => (
+            <li className="list-group" key={index}>{category.name}</li>
           ))}
-          <li className="list-group" onClick={() => handlecategoryClick()}>view all</li>
-
-      </ul>
-        </div>
-         <hr  className='w-100'/>
-       <div className="grid-container">
-        
+          <li className="list-group" onClick={handleCategoryClick}>view all</li>
+        </ul>
+      </div>
+      <hr className='w-100' />
+      <div className="grid-container">
         <div className="col-md-12">
-     
-          
-        <div className="cat-card-1 ">
-       <div className="cat-cards ">
-       {subCategories.map((data) => (
-                        <div key={data.id} className="cat-card"  onClick={() => handlecategoryClick()} >
-                            <div className="cat-card-body">
-                            
-                                <img src={data.image} className="cat-card-img-top" alt="Product" />
-                                <h5 className="cat-card-title">
-                                    { data.name}
-                                </h5>
-                               
-
-                            </div>
-                            <div className="vertical-line"></div>
-                            
-                        </div>
-                        
-                        
-                    ))}
-       </div>
-      
-            
+          <div className="cat-card-1">
+            <div className="cat-cards">
+              {visibleSubCategories.map((data) => (
+                <div key={data.id} className="cat-card" onClick={handleCategoryClick}>
+                  <div className="cat-card-body">
+                    <img src={data.image} className="cat-card-img-top" alt="Product" />
+                    <h5 className="cat-card-title">{data.name}</h5>
+                  </div>
+                  <div className="vertical-line"></div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        
-       </div>
-      
+      </div>
     </div>
-  )
+  );
 }
 
-export default categories
+export default Categories;

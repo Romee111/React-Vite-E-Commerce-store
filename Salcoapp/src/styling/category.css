@@ -84,6 +84,7 @@
 }
 .cat-card:hover{
    cursor: pointer;
+    color: #001f3f;
 
    border-radius: 10px;
    transition: all 0.3s ease ;

@@ -61,17 +61,17 @@ function TopHeader() {
           <Navbar.Brand href="#" className="navbar-brand">
             <img src={logo} alt="Logo" style={{ width: '100px', height: '50px' }} className="logo" />
           </Navbar.Brand>
-          <Form className="d-flex" style={{ width: '70%' }}>
+          <Form className="d-flex" style={{ width: '70%',color: 'white' }}>
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder="Search for products..."
               className="me-2 searchbar"
               style={{
                 border: '1px solid white',
                 fontSize: '16px',
                 borderRadius: '1px 0 0 5px solid #ffffff',
                 backgroundColor: '#001F3F',
-                color: 'white',
+               
                 padding: '10px 10px'
               }}
               aria-label="Search"

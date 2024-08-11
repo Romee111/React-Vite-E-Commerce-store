@@ -1,4 +1,5 @@
 import React from 'react'
+import '../styling/about.css'
 import rec from '../assets/reslogo.png'
 function about() {
   return (
@@ -16,13 +17,13 @@ function about() {
                Join us on this exciting shopping adventure where innovation meets convenience, and let's elevate your online shopping experience together!
          </p>
 
-         <h6 style={{textAlign:"right",marginTop:"4%",marginRight:"30%"}}> Who we are: </h6>
-          <div className="about-CEO d-flex">
-            <div className="about-img">
-                    <img src={rec} className="img-fluid h-75" style={{width:"1500px",height:"500%",marginLeft:"50%",marginTop:"35%"}} alt="" srcset="" />
+         <h6  className='about-who'> Who we are: </h6>
+          <div className="about-CEO d-flex row">
+            <div className="about-img col-md-4 " >
+                    <img src={rec} className="about-img" style={{marginTop:"5%"}} alt="" srcset="" />
             </div>
-            <div className="about-para">
-            <p style={{ textAlign:"",marginLeft:"10%",marginRight:"5%"}}>
+            <div className="about-para col-md-8">
+            <p style={{ textAlign:"",marginLeft:"10%",}}>
             Restorex is a dynamic e-commerce site founded by Sohaib Romee, an innovative entrepreneur with a passion for delivering top-notch products to our customers. Our team is dedicated to providing excellent customer service and ensuring that your online shopping experience with us is seamless and enjoyable. At Restorex, our mission is to offer a diverse range of high-quality products that cater to all your needs, with a focus on quality, convenience, and customer satisfaction. Restorex pride ourselves on our extensive selection of products, including fashion and beauty essentials, home decor, and electronics. Whether you're looking to stay stylish, transform your living space, or discover the latest gadgets, Restorex have something for everyone.
 
             At our core, Restorex value transparency, integrity, and trust. Restorex believe in building long-lasting relationships with our customers based on mutual respect and understanding. Clear and honest communication, upholding the highest standards in all our interactions, and ensuring that our customers can rely on us for quality and service are fundamental to our business. When you shop with us, you can trust that you are not just another transaction – you are part of the family. Restorex are committed to exceptional customer service, quality assurance, and convenient shopping. Our dedicated support team is here to assist you with any queries or concerns, and we ensure that every product listed on our site meets our high standards of quality. Easy navigation, secure payment options, and swift delivery make your shopping experience seamless.

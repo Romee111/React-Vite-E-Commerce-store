@@ -72,104 +72,47 @@ const SellersSignup = () => {
   };
 
   const validateStep = () => {
-    if(activeStep === 0) {
-      if (!formData.name) {
-        alert('Please enter your name');
-        return false;
-      }
-      if (!formData.email) {
-        alert('Please enter your email');
-        return false;
-      }
-      if (!formData.password) {
-        alert('Please enter your password');
-        return false;
-      }
-      
-   
+    let newErrors = {};
+    if (activeStep === 0) {
+      if (!formData.name) newErrors.name = 'Please enter your name';
+      if (!formData.email) newErrors.email = 'Please enter your email';
+      if (!formData.password) newErrors.password = 'Please enter your password';
     }
 
     if (activeStep === 1) {
-      if (!formData.phone) {
-        alert('Please enter your phone number');
-        return false;
-      }
-      if (!formData.sellersAddress) {
-        alert('Please enter your address');
-        return false;
-      }
-      if (!formData.dateOfBirth) {
-        alert('Please enter your date of birth');
-        return false;
-      }
-                
+      if (!formData.phone) newErrors.phone = 'Please enter your phone number';
+      if (!formData.sellersAddress) newErrors.sellersAddress = 'Please enter your address';
+      if (!formData.dateOfBirth) newErrors.dateOfBirth = 'Please enter your date of birth';
     }
 
     if (activeStep === 2) {
-      if (!formData.ID_CardNumber) {
-        alert('Please enter your ID Card number');
-        return false;
-      }
-      // if (!formData.image) {
-      //   alert('Please upload your image');
-      //   return false;
-      // }
-      if (!formData.ID_image1) {
-        alert('Please upload your ID image');
-        return false;
-      }
-      if (!formData.ID_image2) {
-        alert('Please upload your ID image');
-        return false;
-      }
+      if (!formData.ID_CardNumber) newErrors.ID_CardNumber = 'Please enter your ID Card number';
+      if (!formData.ID_image1) newErrors.ID_image1 = 'Please upload your ID image (Front)';
+      if (!formData.ID_image2) newErrors.ID_image2 = 'Please upload your ID image (Back)';
     }
-      if (activeStep === 3) {
-        if (!formData.Business_Name) {
-          alert('Please enter your business name');
-          return false;
-    }
-    if (!formData.Business_Address) {
-      alert('Please enter your business address');
-      return false;
-    }
-    if (!formData.Business_Type) {
-      alert('Please enter your business type');
-      return false;
-    }
-    if (!formData.Business_registerationNumber) {
-      alert('Please enter your business registration number');
 
-  };}
-  if (activeStep === 4) {
-    if (!formData.Bank_Name) {
-      alert('Please enter your bank name');
-      return false;
+    if (activeStep === 3) {
+      if (!formData.Business_Name) newErrors.Business_Name = 'Please enter your business name';
+      if (!formData.Business_Address) newErrors.Business_Address = 'Please enter your business address';
+      if (!formData.Business_Type) newErrors.Business_Type = 'Please enter your business type';
+      if (!formData.Business_registerationNumber)
+        newErrors.Business_registerationNumber = 'Please enter your business registration number';
     }
-    if (!formData.Bank_AccountNumber) {
-      alert('Please enter your bank account number');
-      return false;
-    }
-    if (!formData.Account_HolderName) {
-      alert('Please enter your account holder name');
-      return false;
-    }
-    if (!formData.Branch_Code) {
-      alert('Please enter your branch code');
-      return false;
-    }
-    if(!formData.isSeller)
-    {
-      alert('Please agree to the terms');
-      return false;
-    }
-  }
 
-    return true;
+    if (activeStep === 4) {
+      if (!formData.Bank_Name) newErrors.Bank_Name = 'Please enter your bank name';
+      if (!formData.Bank_AccountNumber) newErrors.Bank_AccountNumber = 'Please enter your bank account number';
+      if (!formData.Account_HolderName) newErrors.Account_HolderName = 'Please enter your account holder name';
+      if (!formData.Branch_Code) newErrors.Branch_Code = 'Please enter your branch code';
+      if (!formData.isSeller) newErrors.isSeller = 'You must agree to the terms to proceed';
+    }
+
+   
 }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.isSeller) {
+    if (!validateStep()) {
       console.error('You must agree to the terms to proceed.');
       return;
     }

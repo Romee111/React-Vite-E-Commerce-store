@@ -12,7 +12,7 @@
     border: none;
     font-size: 16px;
     background-color: #001F3F;
-    color: white;
+   
     border-radius: 1px 0 0 5px solid #ffffff;
     width: 60%;
     
@@ -109,8 +109,9 @@
       font-size: 14px;
     }
     .search-btn {
-      margin-left: 40%;
+      margin-left: 10%;
       width: 12%;
+      position: absolute; 
     }
     
   }
@@ -123,22 +124,24 @@
 
  }
  .search-btn {
-   margin-left: 42%;
+   margin-left: 12%;
    width: 20%;
+   position: absolute;
 
  }
 
   
 }
 
-@media screen and (max-width: 360px) {
+@media screen and (min-width: 360px) {
  
   .searchbar {
     width:70%;
     margin-right: 40%;
 }
 .search-btn{
-    
+  margin-left:500px; 
+  position: absolute;   
     
 }
 }

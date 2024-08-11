@@ -27,9 +27,9 @@ function CustomNavbar() {
   return (
     <Navbar expand="lg" style={{ backgroundColor: '#001F3F' }}>
      <Navbar.Toggle aria-controls="basic-navbar-nav"  className='nav-toggle' />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav"  >
           
-          <Nav className="me-auto " style={{ width: '100%', justifyContent: 'space-around' }}>
+          <Nav  style={{ width: '100%', justifyContent: 'space-around' ,marginRight:'50px' }}>
           <NavDropdown
               className=" nav-categories"
               title="Categories"

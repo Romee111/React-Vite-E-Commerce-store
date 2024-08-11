@@ -1,9 +1,10 @@
 import React from 'react'
 import '../styling/sellersdetail.css'
-import sell from '../assets/selle.jpg'
+import fanta from '../assets/fanta.png'
 export default function SellerDetail() {
   return (
     <div>
+        <div className="selling-page ">
         <p className='join-sellers'> 
       Join our thriving community of successful sellers and take your business to the next level with Restorex. Here's why selling on Restorex is the best decision for your business:
       </p>
@@ -37,9 +38,11 @@ export default function SellerDetail() {
               </li>
                </ul>
                       </div>
-        <div className="stepselling">
-          <h3>Way to Easy Selling</h3>
-            <div className="stepsell">
+        </div>
+        <h3 style={{marginLeft:'10%',fontWeight:'bold' }}>Way to Easy Selling</h3>
+        <div className="stepselling row  d-flex">
+       
+            <div className="stepsell  col-md-4">
             <ul>
             <h6>Create Your Account</h6>
             <li className='sellparagraph'>Sign up quickly and easily on Restorex.</li>
@@ -53,10 +56,11 @@ export default function SellerDetail() {
               
           </ul>
 
-           <div className="sell-img">
-             <img src={sell} alt="Sell here"  className='img-fluid'/>
-           </div>
+          
             </div>
+            <div className=" col-md-8 w-50" >
+             <img src={fanta} alt="Sell here" className='sell-img'/>
+           </div>
 
               
         </div>

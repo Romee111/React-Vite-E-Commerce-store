@@ -217,15 +217,18 @@ exports.forgetPassword = async (req, res) => {
                 message: "no email found"
             })
         }
-        console.log(email);
-        console.log(process.env.JWT_SECRET)
+        
         const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        console.log(process.env.EMAIL,process.env.PASSWORD)
         const tranporter=nodemailer.createTransport({
             service:"gmail",
             auth:{
                 user:process.env.EMAIL,
-                pass:process.env.PASSWORD
+                pass:process.env.PASSWORD,
+                
             }
+            
+            
         })
 
         const mailOptions = {

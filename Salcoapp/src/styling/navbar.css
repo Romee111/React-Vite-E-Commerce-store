@@ -1,4 +1,8 @@
-
+.nav-links{
+  margin-left:-30% ;
+color: blue;
+align-items: left;
+}
 .nav-links:hover{
     color: #FFFFFF;
    
@@ -38,6 +42,21 @@ Nav.Dropdown  ::title{
     }
     Nav.Link{
         text-align: left;
+    }
+    .nav-links{
+        margin-left:5% ;
+    }
+    .nav-links:hover::after{
+        content: "";
+        display: block;
+        width: 0;
+        height: 2px;
+        background: #FFFFFF;
+        transition:  ease-in .3s;
+        transform: center;
+        margin: 0 auto; 
+        color:#FFFFFF;
+        
     }
 }
 
