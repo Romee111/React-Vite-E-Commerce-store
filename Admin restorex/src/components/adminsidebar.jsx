@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styling/adminsidebar.css';
+import { Link } from 'react-router-dom';
 
 function AdminSidebar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -33,13 +34,13 @@ function AdminSidebar() {
           </button>
           <ul className={isDropdownOpen ? 'show' : ''}>
             <li>
-              <a href="#">Products</a>
+              <Link to="/product">Products</Link>
             </li>
             <li>
-              <a href="#">Orders</a>
+              <a href="">Orders</a>
             </li>
             <li>
-              <a href="#">Users</a>
+              <Link to="/Usersdetail">Users</Link>
             </li>
             <li>
               <a href="#">Categories</a>

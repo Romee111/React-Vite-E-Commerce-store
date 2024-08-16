@@ -1,7 +1,8 @@
 import React from 'react'
 import AdminSidebar from '../components/adminsidebar'
 import Headers from '../components/header'
-import ProductInfo from '../pages/productinfo'
+import CustomProduct from './CustomPaginationActionTable'
+
 function Admin() {
   return (
    <>
@@ -11,9 +12,9 @@ function Admin() {
       <div className="row d-flex" >
          
               <AdminSidebar />
-              <div className="col-9">
-              <ProductInfo/> 
-              </div>
+              <CustomProduct   />
+         
+            
          
         
       </div>

@@ -4,7 +4,7 @@ function useProduct  ()  {
     const listProduct = async () => {
         try {
             const response = await axios.get("http://localhost:2900/product/getAllProducts");
-            const  data=response.data;
+            const  data=response.data.data;
             console.log(data);
 
             return data;
@@ -34,13 +34,22 @@ function useProduct  ()  {
         catch (err) {
             console.log(err);
         }
-
-    return {
-        listProduct,
-        addProduct,
-        deleteProduct
-
     }
+    const updateProduct = async (id, productData) => {
+        try {
+            const response = await axios.put(`http://localhost:2900/product/updateProduct/${id}`, productData);
+            console.log(response.data);
+            console.log(response.data);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+return {
+    listProduct,
+    addProduct,
+    deleteProduct,
+    updateProduct
 
 }
   
