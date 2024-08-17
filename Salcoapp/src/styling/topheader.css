@@ -35,18 +35,19 @@
     text-align: center;
   }
   
-  .search-btn {
+  .find-btn {
     color: white;
   
-    background-color:#ffffff;
+    background-color:#001F3F;
     border: none;
     font-size: 16px;
     padding: 10px;
-
+      margin-left:61.15% ;
     cursor: pointer;
     transition: background-color 0.3s;
     position: absolute;
-    margin-left: 62%;
+    height:60% ;
+    
     width: 7%;
   }
   
@@ -93,14 +94,14 @@
   
   /* Responsive adjustments */
   @media (max-width: 768px) {
-    .search-btn {
-      margin-left: 55%;
+    .find-btn {
+      margin-left: 50;
      width: 12%;
       position: absolute;
 
     }
   }
-  @media screen and (max-width: 600px) {
+  @media  (max-width: 600px ) and (min-width: 400px) {
     .navbar-brand {
       font-size: 20px;
     }
@@ -108,8 +109,8 @@
     .searchbar {
       font-size: 14px;
     }
-    .search-btn {
-      margin-left: 10%;
+    .find-btn {
+      margin-left: 40%;
       width: 12%;
       position: absolute; 
     }
@@ -119,28 +120,31 @@
     .navbar-brand {
     display: none;
   }
-  .searchbar {
-    
-
- }
- .search-btn {
-   margin-left: 12%;
+ .find-btn {
+   margin-left: 40%;
    width: 20%;
    position: absolute;
 
+ }
+ .searchbar{
+   width: 120%;
+ }
+ .bi-cart{
+   font-size: 30px;
+    margin-left: 50%; 
  }
 
   
 }
 
-@media screen and (min-width: 360px) {
+@media screen and (max-width: 360px) {
  
   .searchbar {
     width:70%;
     margin-right: 40%;
 }
-.search-btn{
-  margin-left:500px; 
+.find-btn{
+  margin-left:20%; 
   position: absolute;   
     
 }

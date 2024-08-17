@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/producthooks';
 import '../styling/productdetail.css';
-
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/actions/cartaction'; // Import your action creator
 import ProductStats from '../components/productstats';
-import addcart from '../components/addcart';
+import AddCart from '../components/addcart'; // Component for cart modal
 
 const ProductDetail = () => {
     const { Id } = useParams(); // Assuming Id is the product ID.
@@ -12,7 +13,9 @@ const ProductDetail = () => {
     const { getDetailProduct, getUserReview } = useProducts();
     const [userReviews, setUserReviews] = useState([]);
     const navigate = useNavigate();
-   
+    const dispatch = useDispatch(); // Initialize dispatch for Redux
+
+    const [showCartModal, setShowCartModal] = useState(false);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -35,18 +38,18 @@ const ProductDetail = () => {
 
         fetchProduct();
         fetchUserReviews();
-    }, []);
+    }, [Id, getDetailProduct, getUserReview]);
 
     if (!product) {
         return <div>Loading...</div>;
     }
 
     const handleAddToCart = () => {
-        dispatch(addcart(product._id));
+        dispatch(addToCart(product)); // Dispatch action to add item to cart
+        setShowCartModal(true); // Show the cart modal
     };
 
-    const handleBuyNow = (product)=> {
-        debugger
+    const handleBuyNow = () => {
         navigate(`/checkout`, { state: { product } });
     };
 
@@ -68,32 +71,32 @@ const ProductDetail = () => {
                     <hr />
                     <h5 className="prd-price">${product.price.toFixed(2)}</h5>
                     <div className=" d-flex mt-2">
-                        <button className="btn product-detail-btn" style={{backgroundColor: "#001F3F",color:"white",borderRadius:"3px"}} onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
-                        <button className="btn" style={{backgroundColor: "#001F3F",color:"white",borderRadius:"3px",marginLeft:"20px"}}  onClick={() => handleBuyNow(product)}>Buy Now</button>
+                        <button className="btn product-detail-btn" style={{backgroundColor: "#001F3F",color:"white",borderRadius:"3px"}} onClick={handleAddToCart}>Add to Cart</button>
+                        <button className="btn" style={{backgroundColor: "#001F3F",color:"white",borderRadius:"3px",marginLeft:"20px"}} onClick={handleBuyNow}>Buy Now</button>
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-3 prd-similar">
-    <ProductStats product_id={Id} user_id={product.user_id} />
-    <div className="reviews-section">
-        <p className="reviews-title">Reviews</p>
-        {userReviews.length === 0 ? (
-            <p>No reviews yet. Be the first to review this product!</p>
-        ) : (
-            userReviews.map((review) => (
-                <div key={review._id} className="review">
-                    <p><strong>{review.user_id}</strong></p>
-                    <p>Rating: {review.rating}</p>
-                    <p>{review.review}</p>
-                    <hr />
+                    <ProductStats product_id={Id} user_id={product.user_id} />
+                    <div className="reviews-section">
+                        <p className="reviews-title">Reviews</p>
+                        {userReviews.length === 0 ? (
+                            <p>No reviews yet. Be the first to review this product!</p>
+                        ) : (
+                            userReviews.map((review) => (
+                                <div key={review._id} className="review">
+                                    <p><strong>{review.user_id}</strong></p>
+                                    <p>Rating: {review.rating}</p>
+                                    <p>{review.review}</p>
+                                    <hr />
+                                </div>
+                            ))
+                        )}
+                    </div>
                 </div>
-            ))
-        )}
-    </div>
-</div>
-
             </div>
+            <AddCart show={showCartModal} handleClose={() => setShowCartModal(false)} />
         </div>
     );
 };
 
-export default ProductDetail
+export default ProductDetail;

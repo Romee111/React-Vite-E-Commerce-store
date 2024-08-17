@@ -208,6 +208,46 @@ exports.deleteUser = async (req, res) => {
 }
 
 exports.forgetPassword = async (req, res) => {
+    // try {
+    //     const { email } = req.body
+    //     const user = await users.findOne({ email: email })
+    //     if (!user) {
+    //         return res.status(401).json({
+    //             status: "fail",
+    //             message: "no email found"
+    //         })
+    //     }
+        
+    //     const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    //     console.log(process.env.EMAIL,process.env.PASSWORD)
+    //     const tranporter=nodemailer.createTransport({
+    //         service:"gmail",
+    //         auth:{
+    //             user:process.env.EMAIL,
+    //             pass:process.env.PASSWORD,
+                
+    //         }
+            
+            
+    //     })
+
+    //     const mailOptions = {
+    //         from: process.env.EMAIL,
+    //         to: user.email,
+    //         subject: "Forget Password",
+    //         html: `<h1>Forget Password</h1>
+    //         <p>click on this <a href="http://localhost:2900/userauth/resetPassword/${forgetToken}">link</a> to reset your password</p>`
+    //     };
+
+    //         await tranporter.sendMail(mailOptions);
+    //     res.status(200).json({
+    //         status: "success",
+    //         message:'Emaail has been sent',
+    //         data: {
+    //             forgetToken
+    //         }
+    //     })
+    // }
     try {
         const { email } = req.body
         const user = await users.findOne({ email: email })
@@ -220,34 +260,36 @@ exports.forgetPassword = async (req, res) => {
         
         const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
         console.log(process.env.EMAIL,process.env.PASSWORD)
-        const tranporter=nodemailer.createTransport({
-            service:"gmail",
-            auth:{
-                user:process.env.EMAIL,
-                pass:process.env.PASSWORD,
-                
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'ceorestorex@gmail.com',
+              pass: 'pwje ylws zzma gmf'
             }
-            
-            
-        })
-
-        const mailOptions = {
-            from: process.env.EMAIL,
-            to: user.email,
-            subject: "Forget Password",
-            html: `<h1>Forget Password</h1>
-            <p>click on this <a href="http://localhost:2900/userauth/resetPassword/${forgetToken}">link</a> to reset your password</p>`
-        };
-
-            await tranporter.sendMail(mailOptions);
-        res.status(200).json({
-            status: "success",
-            message:'Emaail has been sent',
-            data: {
+          });
+          
+          var mailOptions = {
+            from: 'youremail@gmail.com',
+            to: 'myfriend@yahoo.com',
+            subject: 'Sending Email using Node.js',
+            text: 'That was easy!'
+          };
+          
+          transporter.sendMail(mailOptions, function(error, info){
+            data:{{
                 forgetToken
+
+            }}
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
             }
-        })
-    }
+          });
+          
+          
+        }
+        
     catch (err) {
         res.status(400).json({
             status: "fail",

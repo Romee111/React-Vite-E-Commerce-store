@@ -1,20 +1,21 @@
-import axios from "axios";
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/actions/cartaction';
 
-function useCart() {
-    const addCart = async () => {
-        try {
-            const response = await axios.get("http://localhost:2900/addtocart/createCart");
-            const data = response.data;
-            return data;
-        } catch (err) {
-            console.log(err);
-        }
-    };
+const useCart = () => {
+  const dispatch = useDispatch();
 
+  const addCart = async (item) => {
+    try {
+      const response = await axios.post('http://localhost:2900/addtocart/createCart', item);
+      const data = response.data;
+      dispatch(addToCart(data)); // Dispatch action to add item to cart
+    } catch (err) {
+      console.error('Error adding item to cart:', err);
+    }
+  };
 
-    return { addCart };
+  return { addCart };
+};
 
-
-}
-
-export default useCart
+export default useCart;
