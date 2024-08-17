@@ -1,0 +1,23 @@
+/* src/components/ImageLoader.css */
+.image-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust based on where you want the loader to appear */
+  }
+  
+  .loader-image {
+    width: 20%; /* Adjust size as needed */
+    height: 50%; /* Adjust size as needed */
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

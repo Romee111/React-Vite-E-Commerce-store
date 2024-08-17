@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/actions/cartaction'; // Import your action creator
 import ProductStats from '../components/productstats';
 import AddCart from '../components/addcart'; // Component for cart modal
-
+import ImageLoader from '../components/siteloader';
 const ProductDetail = () => {
     const { Id } = useParams(); // Assuming Id is the product ID.
     const [product, setProduct] = useState(null);
@@ -14,7 +14,7 @@ const ProductDetail = () => {
     const [userReviews, setUserReviews] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch(); // Initialize dispatch for Redux
-
+   const [Loading, setLoading] = useState(true);
     const [showCartModal, setShowCartModal] = useState(false);
 
     useEffect(() => {
@@ -31,6 +31,10 @@ const ProductDetail = () => {
             try {
                 const data = await getUserReview(Id);
                 setUserReviews(data);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
+
             } catch (error) {
                 console.error("Error fetching user reviews:", error);
             }
@@ -38,10 +42,10 @@ const ProductDetail = () => {
 
         fetchProduct();
         fetchUserReviews();
-    }, [Id, getDetailProduct, getUserReview]);
+    }, []);
 
     if (!product) {
-        return <div>Loading...</div>;
+        return <div><ImageLoader/></div>;
     }
 
     const handleAddToCart = () => {

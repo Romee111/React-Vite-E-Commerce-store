@@ -1,28 +1,38 @@
-import React, { useState } from 'react';
-import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Container, Form, Nav, Navbar, Badge } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useProducts } from '../hooks/producthooks';
-import { useAuth } from '../hooks/userauthhooks';
-import Login from '../components/login'; // Adjust if needed
-import AddCart from '../components/addcart'; // Import AddCart component
+import AddCart from '../components/addcart';
+import UserProfile from '../components/userprofile';
+import Login from '../components/login';
 import logo from '../assets/reslogo.png';
 import '../styling/topheader.css';
+import { useSelector } from 'react-redux'; // Import useSelector for accessing cart state
 
 function TopHeader() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [showCart, setShowCart] = useState(false); // State to manage cart modal visibility
+  const [showProfile, setShowProfile] = useState(false);
+  const [showCart, setShowCart] = useState(false);
   const { getSearch } = useProducts();
-  const { login } = useAuth();
   const navigate = useNavigate();
+
+  const cartItemsCount = useSelector((state) => state.cart.cartItems.length); // Get the count of cart items
 
   const handleShow = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
-  const handleCartShow = () => setShowCart(true); // Show the AddCart modal
-  const handleCartClose = () => setShowCart(false); // Close the AddCart modal
+  const handleCartShow = () => setShowCart(true);
+  const handleCartClose = () => setShowCart(false);
+
+  const handleuserProfileShow = () => setShowProfile(true);
+  const handleuserProfileShowClose = () => setShowProfile(false);
+
+  useEffect(() => {
+    handleShow();
+  }, []);
 
   const handleSearch = async () => {
     try {
@@ -66,18 +76,23 @@ function TopHeader() {
           </Form>
           <Nav className="ms-auto">
             <Nav.Link onClick={handleCartShow}>
-              <i className="bi bi-cart" style={{ marginRight: '50px' }}></i>
+              <i className="bi bi-cart" style={{ marginRight: '50px', position: 'relative' }}>
+                {cartItemsCount > 0 && (
+                  <Badge pill bg="light" style={{ position: 'absolute', top: '-2px', right: '-10px' ,backgroundColor: 'white', color: 'Navy',fontSize: '12px' }}>
+                    {cartItemsCount}
+                  </Badge>
+                )}
+              </i>
             </Nav.Link>
-            <Nav.Link onClick={handleShow}>
+            <Nav.Link onClick={handleuserProfileShow}>
               <i className="bi bi-person-circle"></i>
             </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-      <Login show={showModal} handleClose={handleClose} />
-      
-      {/* AddCart Modal */}
+      <UserProfile show={showProfile} handleClose={handleuserProfileShowClose} />
       <AddCart show={showCart} handleClose={handleCartClose} />
+      <Login show={showModal} handleClose={handleClose} />
     </div>
   );
 }

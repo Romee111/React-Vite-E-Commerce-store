@@ -9,13 +9,21 @@ const useCart = () => {
     try {
       const response = await axios.post('http://localhost:2900/addtocart/createCart', item);
       const data = response.data;
-      dispatch(addToCart(data)); // Dispatch action to add item to cart
+      dispatch(addToCart(data)); // Dispatch action to add item to cart in Redux
     } catch (err) {
       console.error('Error adding item to cart:', err);
     }
   };
 
-  return { addCart };
+  const removeCart = async (id) => {
+    try {
+      await axios.delete(`http://localhost:2900/addtocart/deleteCart/${id}`);
+    } catch (err) {
+      console.error('Error removing item from cart:', err);
+    }
+  };
+
+  return { addCart, removeCart };
 };
 
 export default useCart;

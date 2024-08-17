@@ -1,60 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Modal } from 'react-bootstrap';
 import { useAuth } from '../hooks/userauthhooks';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import UserProfile from '../components/userprofile'; // Import UserProfile component
 import '../styling/login.css';
-
 
 function Login({ show, handleClose }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isSeller, setIsShipper] = useState(false);
     const [error, setError] = useState('');
-    const { loginApi } = useAuth();
+    const { loginApi, setUser } = useAuth();
     const navigate = useNavigate();
-
-    const handleSignup = () => {
-        navigate('/signup');
-    }
+    const [showProfile, setShowProfile] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
 
-        if (!email) {
-            setError('Please enter your email');
+        if (!email || !password) {
+            setError('Please enter email and password');
             return;
         }
-
-        if (!password) {
-            setError('Please enter your password');
-            return;
-        }
-
 
         try {
+            const user = await loginApi(email, password);
+            setUser(user);
+            handleClose(); // Close login modal
 
-            const user = await loginApi(email, password, isAdmin, isSeller);
-            if (user.isAdmin == true) {
-                debugger
-             window.location.href='http://localhost:5174/admin'
-            }
-           
-             else {
-                debugger
+            // Navigate or do other actions based on user role
+            if (user.isAdmin) {
+                window.location.href = 'http://localhost:5174/admin';
+            } else {
                 navigate('/');
             }
-            handleClose();
+
+            // Show profile modal
+            setShowProfile(true);
         } catch (err) {
             setError(err.message);
-       
         }
-    };
-
-    const handleForgotPassword = async () => {
-        navigate('/forgetpassword');
-
     };
 
     useEffect(() => {
@@ -82,7 +67,6 @@ function Login({ show, handleClose }) {
                                 placeholder="Type your email here"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-
                             />
                         </Form.Group>
 
@@ -97,7 +81,7 @@ function Login({ show, handleClose }) {
                         </Form.Group>
 
                         {error && <p className="text-danger">{error}</p>}
-                        <Button variant="link nodecoration" onClick={handleForgotPassword} style={{ color: '#ffffff', textAlign: 'center' }}>
+                        <Button variant="link nodecoration" onClick={() => navigate('/forgetpassword')} style={{ color: '#ffffff', textAlign: 'center' }}>
                             Forgot Password?
                         </Button>
                         <p style={{ color: '#ffffff', textAlign: 'center' }}>
@@ -110,6 +94,8 @@ function Login({ show, handleClose }) {
                     </Form>
                 </Modal.Body>
             </Modal>
+            {/* Add UserProfile modal */}
+            <UserProfile show={showProfile} handleClose={() => setShowProfile(false)} />
         </div>
     );
 }

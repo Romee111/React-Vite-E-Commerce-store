@@ -94,3 +94,10 @@
     margin-left: auto;
   }
   
+
+  @media screen and (max-width: 400px) {
+    .sidebar{
+      display: none;
+    }
+    
+  }

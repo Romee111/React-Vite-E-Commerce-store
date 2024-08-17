@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styling/listsproduct.css';
+import Typography from '@mui/material/Typography';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import { useProducts } from "../hooks/producthooks";
 
 function ListsProduct() {
@@ -8,6 +11,10 @@ function ListsProduct() {
   const { listProduct } = useProducts();
   const navigate = useNavigate();
   const location = useLocation();
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
   const searchResults = location.state?.searchResults;
 
   useEffect(() => {
@@ -52,6 +59,39 @@ function ListsProduct() {
           ))}
         </div>
       </div>
+      <Stack spacing={2} >
+      {/* <Typography>Page: {page}</Typography> */}
+      <Pagination count={10} page={page} onChange={handleChange} 
+       sx={{
+        '& .MuiPaginationItem-root': {
+          color: '#001f3f', // Number color white
+          backgroundColor: '#ffffff', // Circle background color
+          '&:hover': {
+            backgroundColor: '#001f3f',
+            color: '#ffffff', // Darker shade on hover
+          },
+        },
+        '& .Mui-selected': {
+          backgroundColor: '#001f3f', // Selected item background color
+          color: '#ffffff', // Selected item number color white
+          '&:hover': {
+            backgroundColor: '#004080', // Darker shade on hover for selected item
+          },
+          },
+          '@media (max-width: 400px)': {
+            '& .MuiPaginationItem-root': {
+              fontSize: '12px', // Smaller font size for pagination numbers
+              padding: '6px', // Smaller padding to reduce circle size
+              margin: '2px', // Reduce margin to fit the circles better
+              marginTop: '500%',
+            },
+            '& .MuiPagination-ul': {
+              justifyContent: 'center', // Center pagination items
+            },
+          },
+        
+      }} />
+    </Stack>
     </div>
   );
 }

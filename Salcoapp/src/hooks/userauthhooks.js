@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useState } from "react";
 
 
 export function useAuth() {
+    const [user, setUser] = useState(null);
 
     const loginApi = async (email, password, isAdmin, isSeller) => {
         try {
@@ -80,7 +82,7 @@ export function useAuth() {
             console.log(err)
         }
     };
-    return { loginApi, forgetPassword, register, logout, resetPassword, userbyId };
+    return { loginApi, forgetPassword, register, logout, resetPassword, userbyId, user, setUser };
 
 }
 

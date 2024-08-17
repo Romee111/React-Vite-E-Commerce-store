@@ -1,23 +1,32 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, updateQuantity } from '../store/actions/cartaction';
+import { updateQuantity, removeFromCart } from '../store/actions/cartaction';
 import '../styling/addcart.css';
+import useCart from '../hooks/carthook';
 
 function AddCart({ show, handleClose }) {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
 
+  const { addCart, removeCart } = useCart();
+
   const handleRemoveFromCart = (id) => {
-    dispatch(removeFromCart(id));
+    removeCart(id) // Call the API to remove the item
+      .then(() => {
+        dispatch(removeFromCart(id)); // Update Redux state after successful removal
+      })
+      .catch((error) => console.error('Error removing item from cart:', error));
   };
 
   const handleIncrement = (id) => {
-    dispatch(updateQuantity(id, 1));
+    dispatch(updateQuantity(id, 1)); // Update quantity in the Redux store
+    // You might want to call an API here if you need to sync the quantity update with the backend
   };
 
   const handleDecrement = (id) => {
-    dispatch(updateQuantity(id, -1));
+    dispatch(updateQuantity(id, -1)); // Update quantity in the Redux store
+    // You might want to call an API here if you need to sync the quantity update with the backend
   };
 
   const handleCheckout = () => {
@@ -75,8 +84,7 @@ function AddCart({ show, handleClose }) {
         )}
       </Modal.Body>
       <Modal.Footer>
-        
-        <button   className='addcart-buy' onClick={handleCheckout}>
+        <button className="addcart-buy" onClick={handleCheckout}>
           Buy Now
         </button>
       </Modal.Footer>

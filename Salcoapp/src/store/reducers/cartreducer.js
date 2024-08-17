@@ -1,41 +1,33 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_QUANTITY } from "../actions/constant";
-
+// cartReducer.js
 const initialState = {
-    cartItems: []    
+    cartItems: []
 };
 
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_TO_CART:
-            const item = action.payload;
-            const existItem = state.cartItems.find((x) => x.id === item.id);
-
-            if (existItem) {
-                return {
-                    ...state,
-                    cartItems: state.cartItems.map((x) =>
-                        x.id === existItem.id ? { ...x, quantity: x.quantity + 1 } : x
-                    )
-                };
-            } else {
-                return {
-                    ...state,
-                    cartItems: [...state.cartItems, { ...item, quantity: 1 }]
-                };
+        case 'ADD_TO_CART':
+            // Ensure no duplication
+            const existingItemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
+            if (existingItemIndex > 0) {
+                // Update quantity if item already exists
+                const updatedItems = [...state.cartItems];
+                updatedItems[existingItemIndex].quantity += action.payload.quantity;
+                return { ...state, cartItems: updatedItems };
             }
+            return { ...state, cartItems: [...state.cartItems, action.payload] };
 
-        case REMOVE_FROM_CART:
+        case 'REMOVE_FROM_CART':
             return {
                 ...state,
-                cartItems: state.cartItems.filter((x) => x.id !== action.payload.id)
+                cartItems: state.cartItems.filter(item => item.id !== action.payload)
             };
 
-        case UPDATE_QUANTITY:
+        case 'UPDATE_QUANTITY':
             return {
                 ...state,
-                cartItems: state.cartItems.map((item) =>
+                cartItems: state.cartItems.map(item =>
                     item.id === action.payload.id
-                        ? { ...item, quantity: item.quantity + action.payload.quantityChange }
+                        ? { ...item, quantity: item.quantity + action.payload.quantity }
                         : item
                 )
             };
