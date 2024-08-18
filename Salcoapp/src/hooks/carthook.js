@@ -17,7 +17,10 @@ const useCart = () => {
 
   const removeCart = async (id) => {
     try {
-      await axios.delete(`http://localhost:2900/addtocart/deleteCart/${id}`);
+      const response=await axios.delete(`http://localhost:2900/addtocart/deleteCart/${id}`);
+      const  data=response.data;
+      console.log(data);
+      
     } catch (err) {
       console.error('Error removing item from cart:', err);
     }

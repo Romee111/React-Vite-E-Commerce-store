@@ -64,10 +64,12 @@ const HomeProducts = () => {
                                 {data.description.length > 50 ? data.description.slice(0, 50) + "..." : data.description}
                                 </p>
                                 
-                                <div className="detaprice d-flex">
+                                <div className="detaprice d-flex" style={{justifyContent: 'space-between'}}>
                                     <p className="card-price">${data.price.toFixed(2)}</p>
-                                    <p className="card-text">{data.rating}</p>
+                                    <p style={{color:"data.instock ? 'green' : 'red'"}}>instock:{data.instock ? 'instock' : 'out of stock'   }</p>
+                                    {/* <p className="card-text">{data.rating}</p> */}
                                 </div>
+                               
                             </div>
                         </div>
                     ))}

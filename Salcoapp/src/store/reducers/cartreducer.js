@@ -7,7 +7,7 @@ const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
             // Ensure no duplication
-            const existingItemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
+            const existingItemIndex = state.cartItems.findIndex(item => item._id === action.payload._id);
             if (existingItemIndex > 0) {
                 // Update quantity if item already exists
                 const updatedItems = [...state.cartItems];
@@ -17,17 +17,18 @@ const cartReducer = (state = initialState, action) => {
             return { ...state, cartItems: [...state.cartItems, action.payload] };
 
         case 'REMOVE_FROM_CART':
+            // debugger
             return {
                 ...state,
-                cartItems: state.cartItems.filter(item => item.id !== action.payload)
+                cartItems: state.cartItems.filter(item => item._id !== action.payload)
             };
 
         case 'UPDATE_QUANTITY':
             return {
                 ...state,
                 cartItems: state.cartItems.map(item =>
-                    item.id === action.payload.id
-                        ? { ...item, quantity: item.quantity + action.payload.quantity }
+                    item._id === action.payload.id
+                        ? { ...item, quantity: item.quantity + action.payload.quantityChange }
                         : item
                 )
             };
@@ -38,3 +39,12 @@ const cartReducer = (state = initialState, action) => {
 };
 
 export default cartReducer;
+
+
+//id==_id
+//action.[ayload ] = undefined
+
+
+// cart FE
+// Place Order 
+

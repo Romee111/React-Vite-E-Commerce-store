@@ -7,6 +7,7 @@ import { addToCart } from '../store/actions/cartaction'; // Import your action c
 import ProductStats from '../components/productstats';
 import AddCart from '../components/addcart'; // Component for cart modal
 import ImageLoader from '../components/siteloader';
+import useCart from '../hooks/carthook';
 const ProductDetail = () => {
     const { Id } = useParams(); // Assuming Id is the product ID.
     const [product, setProduct] = useState(null);
@@ -14,7 +15,8 @@ const ProductDetail = () => {
     const [userReviews, setUserReviews] = useState([]);
     const navigate = useNavigate();
     const dispatch = useDispatch(); // Initialize dispatch for Redux
-   const [Loading, setLoading] = useState(true);
+    const [Loading, setLoading] = useState(true);
+    const { addCart } = useCart();
     const [showCartModal, setShowCartModal] = useState(false);
 
     useEffect(() => {
@@ -45,12 +47,13 @@ const ProductDetail = () => {
     }, []);
 
     if (!product) {
-        return <div><ImageLoader/></div>;
+        return <div><ImageLoader /></div>;
     }
 
     const handleAddToCart = () => {
-        dispatch(addToCart(product)); // Dispatch action to add item to cart
-        setShowCartModal(true); // Show the cart modal
+        dispatch(addToCart(product));
+
+        setShowCartModal(true);
     };
 
     const handleBuyNow = () => {
@@ -75,8 +78,8 @@ const ProductDetail = () => {
                     <hr />
                     <h5 className="prd-price">${product.price.toFixed(2)}</h5>
                     <div className=" d-flex mt-2">
-                        <button className="btn product-detail-btn" style={{backgroundColor: "#001F3F",color:"white",borderRadius:"3px"}} onClick={handleAddToCart}>Add to Cart</button>
-                        <button className="btn" style={{backgroundColor: "#001F3F",color:"white",borderRadius:"3px",marginLeft:"20px"}} onClick={handleBuyNow}>Buy Now</button>
+                        <button className="btn product-detail-btn" style={{ backgroundColor: "#001F3F", color: "white", borderRadius: "3px" }} onClick={handleAddToCart}>Add to Cart</button>
+                        <button className="btn" style={{ backgroundColor: "#001F3F", color: "white", borderRadius: "3px", marginLeft: "20px" }} onClick={handleBuyNow}>Buy Now</button>
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-3 prd-similar">

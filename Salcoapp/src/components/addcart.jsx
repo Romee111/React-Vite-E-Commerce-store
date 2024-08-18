@@ -3,30 +3,21 @@ import { Button, Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateQuantity, removeFromCart } from '../store/actions/cartaction';
 import '../styling/addcart.css';
-import useCart from '../hooks/carthook';
 
 function AddCart({ show, handleClose }) {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
 
-  const { addCart, removeCart } = useCart();
-
-  const handleRemoveFromCart = (id) => {
-    removeCart(id) // Call the API to remove the item
-      .then(() => {
-        dispatch(removeFromCart(id)); // Update Redux state after successful removal
-      })
-      .catch((error) => console.error('Error removing item from cart:', error));
+  const handleRemoveFromCart = (_id) => {
+    dispatch(removeFromCart(_id)); // Directly update Redux state to remove item
   };
 
-  const handleIncrement = (id) => {
-    dispatch(updateQuantity(id, 1)); // Update quantity in the Redux store
-    // You might want to call an API here if you need to sync the quantity update with the backend
+  const handleIncrement = (_id) => {
+    dispatch(updateQuantity(_id, 1)); // Update quantity in the Redux store
   };
 
-  const handleDecrement = (id) => {
-    dispatch(updateQuantity(id, -1)); // Update quantity in the Redux store
-    // You might want to call an API here if you need to sync the quantity update with the backend
+  const handleDecrement = (_id) => {
+    dispatch(updateQuantity(_id, -1)); // Update quantity in the Redux store
   };
 
   const handleCheckout = () => {
@@ -37,7 +28,7 @@ function AddCart({ show, handleClose }) {
   return (
     <Modal show={show} onHide={handleClose} size="lg" className="custom-modal">
       <Modal.Header closeButton>
-        <Modal.Title></Modal.Title>
+        <Modal.Title>Your Cart</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {cartItems.length === 0 ? (
@@ -56,7 +47,7 @@ function AddCart({ show, handleClose }) {
                   <div className="cart-item-quantity">
                     <Button
                       variant="secondary"
-                      onClick={() => handleDecrement(item.id)}
+                      onClick={() => handleDecrement(item._id)}
                       disabled={item.quantity <= 1}
                     >
                       -
@@ -64,7 +55,7 @@ function AddCart({ show, handleClose }) {
                     {item.quantity}
                     <Button
                       variant="secondary"
-                      onClick={() => handleIncrement(item.id)}
+                      onClick={() => handleIncrement(item._id)}
                     >
                       +
                     </Button>
@@ -73,7 +64,7 @@ function AddCart({ show, handleClose }) {
                 </div>
                 <Button
                   variant="link"
-                  onClick={() => handleRemoveFromCart(item.id)}
+                  onClick={() => handleRemoveFromCart(item._id)}
                   className="delete-button"
                 >
                   <i className="bi-trash"></i> {/* Bootstrap Icons for trash */}
