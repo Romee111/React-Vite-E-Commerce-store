@@ -1,0 +1,10 @@
+  {
+    "version": "1.0.0",
+    "buid":[{ "src":"./index.js", "use": "@versel/node "}],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/"
+        }
+    ]
+  }
