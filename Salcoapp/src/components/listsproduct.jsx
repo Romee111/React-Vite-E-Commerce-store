@@ -12,22 +12,33 @@ function ListsProduct() {
   const navigate = useNavigate();
   const location = useLocation();
   const [page, setPage] = React.useState(1);
+  const [filter, setFilter] = useState({ category: '', subcategory: '' });
   const handleChange = (event, value) => {
     setPage(value);
   };
+
   const searchResults = location.state?.searchResults;
+  const filterParams = location.state?.filter;
 
   useEffect(() => {
-    if (!searchResults) {
-      const fetchProducts = async () => {
-        const data = await listProduct();
-        setProducts(data.data);
-      };
-      fetchProducts();
-    } else {
-      setProducts(searchResults);
+    if (filterParams) {
+      setFilter(filterParams);
     }
-  }, []);
+  }, [filterParams]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const data = await listProduct();
+      let filteredProducts = data.data;
+      if (filter.category && filter.subcategory) {
+        filteredProducts = filteredProducts.filter(product =>
+          product.category === filter.category && product.subcategory === filter.subcategory
+        );
+      }
+      setProducts(filteredProducts);
+    };
+    fetchProducts();
+  }, [filter]);
 
   const handleProductdetailClick = (id) => {
     navigate(`/productdetail/${id}`);
@@ -59,39 +70,24 @@ function ListsProduct() {
           ))}
         </div>
       </div>
-      <Stack spacing={2} >
-      {/* <Typography>Page: {page}</Typography> */}
-      <Pagination count={10} page={page} onChange={handleChange} 
-       sx={{
-        '& .MuiPaginationItem-root': {
-          color: '#001f3f', // Number color white
-          backgroundColor: '#ffffff', // Circle background color
-          '&:hover': {
-            backgroundColor: '#001f3f',
-            color: '#ffffff', // Darker shade on hover
-          },
-        },
-        '& .Mui-selected': {
-          backgroundColor: '#001f3f', // Selected item background color
-          color: '#ffffff', // Selected item number color white
-          '&:hover': {
-            backgroundColor: '#004080', // Darker shade on hover for selected item
-          },
-          },
-          '@media (max-width: 400px)': {
+      <Stack spacing={2}>
+        <Pagination
+          count={10}
+          page={page}
+          onChange={handleChange}
+          sx={{
             '& .MuiPaginationItem-root': {
-              fontSize: '12px', // Smaller font size for pagination numbers
-              padding: '6px', // Smaller padding to reduce circle size
-              margin: '2px', // Reduce margin to fit the circles better
-              marginTop: '500%',
+              color: '#001B2E',
+              borderRadius: 5,
+              border: '2px solid #001B2E',
             },
-            '& .MuiPagination-ul': {
-              justifyContent: 'center', // Center pagination items
-            },
-          },
-        
-      }} />
-    </Stack>
+            '& .Mui-selected': {
+              backgroundColor: '#001B2E !important',
+              color: 'white',
+            }
+          }}
+        />
+      </Stack>
     </div>
   );
 }
