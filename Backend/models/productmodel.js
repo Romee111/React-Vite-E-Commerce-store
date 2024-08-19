@@ -15,10 +15,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
+    images:[ {
         type: String,
         required: true,
-    },
+    }],
 
     rating: {
         type: Number,
@@ -54,6 +54,14 @@ const productSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
+    sizes:[{
+        type: String,
+        required: true
+    }],
+    colors:[ {
+        type: String,
+        required: true
+    }],
     //  countInStock:{
     //      type:Number,
     //      required:true,

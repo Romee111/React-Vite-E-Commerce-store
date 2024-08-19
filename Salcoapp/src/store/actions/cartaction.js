@@ -18,8 +18,10 @@ export const removeFromCart = (id) => {
 
 // Action to update the quantity of an item in the cart
 export const updateQuantity = (id, quantityChange) => {
+    const parsedQuantity = Number(quantityChange);
+    console.log(typeof parsedQuantity, parsedQuantity); // Check the type and value
     return {
         type: UPDATE_QUANTITY,
-        payload: { id, quantityChange }
+        payload: { id, quantityChange: parsedQuantity }
     };
-};
+    };

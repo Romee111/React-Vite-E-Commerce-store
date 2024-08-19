@@ -11,10 +11,14 @@ const cartReducer = (state = initialState, action) => {
             if (existingItemIndex > 0) {
                 // Update quantity if item already exists
                 const updatedItems = [...state.cartItems];
-                updatedItems[existingItemIndex].quantity += action.payload.quantity;
+                updatedItems[existingItemIndex].quantity += Number(action.payload.quantity);
                 return { ...state, cartItems: updatedItems };
             }
-            return { ...state, cartItems: [...state.cartItems, action.payload] };
+            const newItem = {
+                ...action.payload,
+                quantity: Number(action.payload.quantity) || 1, // Ensure quantity is a number
+            };
+            return { ...state, cartItems: [...state.cartItems,newItem]  };
 
         case 'REMOVE_FROM_CART':
             // debugger
@@ -26,9 +30,9 @@ const cartReducer = (state = initialState, action) => {
         case 'UPDATE_QUANTITY':
             return {
                 ...state,
-                cartItems: state.cartItems.map(item =>
+                cartItems: state.cartItems.map((item) =>
                     item._id === action.payload.id
-                        ? { ...item, quantity: item.quantity + action.payload.quantityChange }
+                        ? { ...item, quantity: item.quantity +  Number(action.payload.quantityChange) }
                         : item
                 )
             };

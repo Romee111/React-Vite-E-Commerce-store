@@ -3,10 +3,12 @@ import { Button, Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateQuantity, removeFromCart } from '../store/actions/cartaction';
 import '../styling/addcart.css';
-
+import { useNavigate } from 'react-router-dom';
 function AddCart({ show, handleClose }) {
   const cartItems = useSelector((state) => state.cart.cartItems);
   console.log(cartItems);
+
+  const navigate = useNavigate();
   
   const dispatch = useDispatch();
 
@@ -23,6 +25,7 @@ function AddCart({ show, handleClose }) {
   };
 
   const handleCheckout = () => {
+    navigate('/order')
     console.log('Proceeding to checkout...');
     handleClose(); // Close modal on checkout
   };

@@ -11,26 +11,29 @@ exports.createProduct = async (req, res) => {
             })
         }
 
-        const matchSubcategory=await subcategory.findById(req.body.subcategory_id);
-        if(!matchSubcategory){
-            return res.status(400).json({
-                success:false,
-                message:"subcategory not found"
-            })
-        }
+        // const matchSubcategory=await subcategory.findById(req.body.subcategory_id);
+        // if(!matchSubcategory){
+        //     return res.status(400).json({
+        //         success:false,
+        //         message:"subcategory not found"
+        //     })
+        // }
       
         const {
             name,
             description,
             price,  
-            image,
+            images,
             rating,
             instock,
             brand,
             numReviews,
             category_id,
             user_id,
-            subcategory_id,
+            colors,
+            sizes,
+         
+            
 
             
             
@@ -39,13 +42,16 @@ exports.createProduct = async (req, res) => {
             name,
             description,
             price,
-            image,
+            images,
             rating,
             instock,
             brand,
             numReviews,
             category_id,
             user_id,
+            colors,
+            sizes,
+            
        
             
         });

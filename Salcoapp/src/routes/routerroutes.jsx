@@ -12,6 +12,7 @@ import ProductDetail from "../pages/productdetail";
 import Checkout from "../pages/checkout";
 import SellersSignup from "../pages/sellersSignup";
 import ListProduct from "../components/listsproduct";
+import OrderPlace from "../pages/orderplace";
 
 
 const RouterRoutes = () => {
@@ -28,6 +29,7 @@ const RouterRoutes = () => {
             <Route path='/productdetail/:Id' element={<ProductDetail  />} />
             <Route path="/addtocart/:id" element={<Addcart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/order" element={<OrderPlace />} />
             <Route path="/sellersSignup" element={<SellersSignup />} />
             <Route path="/listProduct" element={<ListProduct />} />
         </Routes>

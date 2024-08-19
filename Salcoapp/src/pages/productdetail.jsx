@@ -8,14 +8,17 @@ import ProductStats from '../components/productstats';
 import AddCart from '../components/addcart'; // Component for cart modal
 import ImageLoader from '../components/siteloader';
 import useCart from '../hooks/carthook';
+
 const ProductDetail = () => {
     const { Id } = useParams(); // Assuming Id is the product ID.
     const [product, setProduct] = useState(null);
-    const { getDetailProduct, getUserReview } = useProducts();
     const [userReviews, setUserReviews] = useState([]);
+    const [selectedSize, setSelectedSize] = useState('');
+    const [selectedColor, setSelectedColor] = useState('');
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const dispatch = useDispatch(); // Initialize dispatch for Redux
-    const [Loading, setLoading] = useState(true);
+    const { getDetailProduct, getUserReview } = useProducts();
     const { addCart } = useCart();
     const [showCartModal, setShowCartModal] = useState(false);
 
@@ -24,6 +27,12 @@ const ProductDetail = () => {
             try {
                 const data = await getDetailProduct(Id);
                 setProduct(data);
+                if (data.sizes && data.sizes.length > 0) {
+                    setSelectedSize(data.sizes[0]); // Set default size if available
+                }
+                if (data.colors && data.colors.length > 0) {
+                    setSelectedColor(data.colors[0]); // Set default color if available
+                }
             } catch (error) {
                 console.error("Error fetching product:", error);
             }
@@ -33,10 +42,7 @@ const ProductDetail = () => {
             try {
                 const data = await getUserReview(Id);
                 setUserReviews(data);
-                setTimeout(() => {
-                    setLoading(false);
-                }, 1000);
-
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching user reviews:", error);
             }
@@ -44,20 +50,31 @@ const ProductDetail = () => {
 
         fetchProduct();
         fetchUserReviews();
-    }, []);
+    }, [Id, getDetailProduct, getUserReview]);
 
-    if (!product) {
+    if (loading) {
         return <div><ImageLoader /></div>;
     }
 
-    const handleAddToCart = () => {
-        dispatch(addToCart(product));
+    if (!product) {
+        return <div>No product data available</div>;
+    }
 
+    const handleAddToCart = () => {
+        dispatch(addToCart({ ...product, selectedSize, selectedColor }));
         setShowCartModal(true);
     };
 
     const handleBuyNow = () => {
-        navigate(`/checkout`, { state: { product } });
+        navigate('/order', {
+            state: {
+                product: {
+                    ...product,
+                    selectedSize,
+                    selectedColor
+                }
+            }
+        });
     };
 
     return (
@@ -65,7 +82,7 @@ const ProductDetail = () => {
             <div className="prd-row d-flex justify-content-center">
                 <div className="col-md-4 col-sm-3 d-flex align-items-center justify-content-center">
                     <img
-                        src={product.image}
+                        src={product.images[0]} // Updated to use the first image
                         alt={product.name}
                         className="img-fluid"
                     />
@@ -75,9 +92,55 @@ const ProductDetail = () => {
                     <p>{product.description}</p>
                     <p>Rating: {product.rating}</p>
                     <p>Brand: {product.brand}</p>
+                    
+                    {/* Size and Color Selection */}
+                    <div className="mb-3">
+                        {product.sizes && product.sizes.length > 0 && (
+                            <div className="d-flex align-items-center mb-3">
+                                <label htmlFor="size-select" className="form-label" style={{ marginRight: '10px' }}>Size:</label>
+                                <select
+                                    id="size-select"
+                                    className="form-select"
+                                    value={selectedSize}
+                                    onChange={(e) => setSelectedSize(e.target.value)}
+                                    style={{ width: '20%' }}
+                                >
+                                    {product.sizes.map((size) => (
+                                        <option key={size} value={size}>{size}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        {product.colors && product.colors.length > 0 && (
+                            <div className="mb-3">
+                                <p className="form-label" style={{ fontWeight: 'bold' }}>Color:</p>
+                                <div className="color-options">
+                                    {product.colors.map((color) => (
+                                        <div key={color} className="form-check form-check-inline">
+                                            <input
+                                                type="radio"
+                                                id={`color-${color}`}
+                                                name="color"
+                                                value={color}
+                                                checked={selectedColor === color} // Ensure this correctly reflects the selected color
+                                                onChange={(e) => setSelectedColor(e.target.value)} // Update state correctly
+                                                className="form-check-input"
+                                            />
+                                            <label htmlFor={`color-${color}`} className="form-check-label">
+                                                {color}
+                                            </label>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+
                     <hr />
                     <h5 className="prd-price">${product.price.toFixed(2)}</h5>
-                    <div className=" d-flex mt-2">
+
+                    <div className="d-flex mt-2">
                         <button className="btn product-detail-btn" style={{ backgroundColor: "#001F3F", color: "white", borderRadius: "3px" }} onClick={handleAddToCart}>Add to Cart</button>
                         <button className="btn" style={{ backgroundColor: "#001F3F", color: "white", borderRadius: "3px", marginLeft: "20px" }} onClick={handleBuyNow}>Buy Now</button>
                     </div>
