@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Box, Stepper, Step, StepLabel, Typography } from '@mui/material';
-import '../styling/sellersSignup.css';
 import { Form } from 'react-bootstrap';
 import useSellers from '../hooks/sellershook';
-
+import '../styling/sellersSignup.css';
 const steps = [
   'Personal Information',
   'Contact Information',
@@ -38,6 +37,7 @@ const SellersSignup = () => {
     isSeller: false,
     imageError: ''
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -68,11 +68,13 @@ const SellersSignup = () => {
   const handleNext = () => {
     if (validateStep()) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setErrors({});
     }
   };
 
   const validateStep = () => {
     let newErrors = {};
+
     if (activeStep === 0) {
       if (!formData.name) newErrors.name = 'Please enter your name';
       if (!formData.email) newErrors.email = 'Please enter your email';
@@ -95,8 +97,8 @@ const SellersSignup = () => {
       if (!formData.Business_Name) newErrors.Business_Name = 'Please enter your business name';
       if (!formData.Business_Address) newErrors.Business_Address = 'Please enter your business address';
       if (!formData.Business_Type) newErrors.Business_Type = 'Please enter your business type';
-      if (!formData.Business_registerationNumber)
-        newErrors.Business_registerationNumber = 'Please enter your business registration number';
+      if (!formData.Business_registerationNumber) newErrors.Business_registerationNumber = 'Please enter your business registration number';
+      if (!formData.Tax_IDNumber) newErrors.Tax_IDNumber = 'Please enter your Tax ID number';
     }
 
     if (activeStep === 4) {
@@ -107,26 +109,24 @@ const SellersSignup = () => {
       if (!formData.isSeller) newErrors.isSeller = 'You must agree to the terms to proceed';
     }
 
-   
-}
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateStep()) {
-      console.error('You must agree to the terms to proceed.');
-      return;
-    }
+    if (validateStep()) {
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach(key => {
+        formDataToSend.append(key, formData[key]);
+      });
 
-    const formDataToSend = new FormData();
-    Object.keys(formData).forEach(key => {
-      formDataToSend.append(key, formData[key]);
-    });
-
-    try {
-      const res = await AddSeller(formDataToSend);
-      console.log('Seller created:', res);
-    } catch (error) {
-      console.error('Error creating seller:', error);
+      try {
+        const res = await AddSeller(formDataToSend);
+        console.log('Seller created:', res);
+      } catch (error) {
+        console.error('Error creating seller:', error);
+      }
     }
   };
 
@@ -178,7 +178,11 @@ const SellersSignup = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
+                          isInvalid={!!errors.name}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.name}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Email:</Form.Label>
@@ -189,7 +193,11 @@ const SellersSignup = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
+                          isInvalid={!!errors.email}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.email}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Password:</Form.Label>
@@ -200,7 +208,11 @@ const SellersSignup = () => {
                           name="password"
                           value={formData.password}
                           onChange={handleChange}
+                          isInvalid={!!errors.password}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.password}
+                        </Form.Control.Feedback>
                       </Form.Group>
                     </React.Fragment>
                   )}
@@ -209,13 +221,17 @@ const SellersSignup = () => {
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Phone:</Form.Label>
                         <Form.Control
-                          type="number"
+                          type="text"
                           placeholder="Enter Phone Number"
                           className="form-control"
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
+                          isInvalid={!!errors.phone}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.phone}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Address:</Form.Label>
@@ -226,58 +242,73 @@ const SellersSignup = () => {
                           name="sellersAddress"
                           value={formData.sellersAddress}
                           onChange={handleChange}
+                          isInvalid={!!errors.sellersAddress}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.sellersAddress}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
-                        <Form.Label className="form-label">Date Of Birth:</Form.Label>
+                        <Form.Label className="form-label">Date of Birth:</Form.Label>
                         <Form.Control
                           type="date"
+                          placeholder="Enter Date of Birth"
                           className="form-control"
                           name="dateOfBirth"
                           value={formData.dateOfBirth}
                           onChange={handleChange}
+                          isInvalid={!!errors.dateOfBirth}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.dateOfBirth}
+                        </Form.Control.Feedback>
                       </Form.Group>
                     </React.Fragment>
                   )}
                   {activeStep === 2 && (
                     <React.Fragment>
                       <Form.Group className="form-group">
-                        <Form.Label>ID Card Number:</Form.Label>
+                        <Form.Label className="form-label">ID Card Number:</Form.Label>
                         <Form.Control
                           type="text"
                           placeholder="Enter ID Card Number"
+                          className="form-control"
                           name="ID_CardNumber"
                           value={formData.ID_CardNumber}
                           onChange={handleChange}
+                          isInvalid={!!errors.ID_CardNumber}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.ID_CardNumber}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
-                        <Form.Label>ID Image Front:</Form.Label>
+                        <Form.Label className="form-label">ID Image (Front):</Form.Label>
                         <Form.Control
                           type="file"
                           name="ID_image1"
                           onChange={handleFileChange}
+                          isInvalid={!!errors.ID_image1}
                         />
-                        {formData.ID_image1Preview && (
-                          <div className="image-preview">
-                            <img src={formData.ID_image1Preview} alt="ID Image Front Preview" />
-                          </div>
-                        )}
+                        <Form.Control.Feedback type="invalid">
+                          {errors.ID_image1}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
-                        <Form.Label>ID Image Back:</Form.Label>
+                        <Form.Label className="form-label">ID Image (Back):</Form.Label>
                         <Form.Control
                           type="file"
                           name="ID_image2"
                           onChange={handleFileChange}
+                          isInvalid={!!errors.ID_image2}
                         />
-                        {formData.ID_image2Preview && (
-                          <div className="image-preview">
-                            <img src={formData.ID_image2Preview} alt="ID Image Back Preview" />
-                          </div>
-                        )}
+                        <Form.Control.Feedback type="invalid">
+                          {errors.ID_image2}
+                        </Form.Control.Feedback>
                       </Form.Group>
+                      {formData.imageError && (
+                        <div className="text-danger">{formData.imageError}</div>
+                      )}
                     </React.Fragment>
                   )}
                   {activeStep === 3 && (
@@ -291,7 +322,11 @@ const SellersSignup = () => {
                           name="Business_Name"
                           value={formData.Business_Name}
                           onChange={handleChange}
+                          isInvalid={!!errors.Business_Name}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Business_Name}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Business Address:</Form.Label>
@@ -302,7 +337,11 @@ const SellersSignup = () => {
                           name="Business_Address"
                           value={formData.Business_Address}
                           onChange={handleChange}
+                          isInvalid={!!errors.Business_Address}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Business_Address}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Business Type:</Form.Label>
@@ -313,7 +352,11 @@ const SellersSignup = () => {
                           name="Business_Type"
                           value={formData.Business_Type}
                           onChange={handleChange}
+                          isInvalid={!!errors.Business_Type}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Business_Type}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Business Registration Number:</Form.Label>
@@ -324,7 +367,11 @@ const SellersSignup = () => {
                           name="Business_registerationNumber"
                           value={formData.Business_registerationNumber}
                           onChange={handleChange}
+                          isInvalid={!!errors.Business_registerationNumber}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Business_registerationNumber}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Tax ID Number:</Form.Label>
@@ -335,7 +382,11 @@ const SellersSignup = () => {
                           name="Tax_IDNumber"
                           value={formData.Tax_IDNumber}
                           onChange={handleChange}
+                          isInvalid={!!errors.Tax_IDNumber}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Tax_IDNumber}
+                        </Form.Control.Feedback>
                       </Form.Group>
                     </React.Fragment>
                   )}
@@ -350,7 +401,11 @@ const SellersSignup = () => {
                           name="Bank_Name"
                           value={formData.Bank_Name}
                           onChange={handleChange}
+                          isInvalid={!!errors.Bank_Name}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Bank_Name}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Bank Account Number:</Form.Label>
@@ -361,7 +416,11 @@ const SellersSignup = () => {
                           name="Bank_AccountNumber"
                           value={formData.Bank_AccountNumber}
                           onChange={handleChange}
+                          isInvalid={!!errors.Bank_AccountNumber}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Bank_AccountNumber}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Account Holder Name:</Form.Label>
@@ -372,7 +431,11 @@ const SellersSignup = () => {
                           name="Account_HolderName"
                           value={formData.Account_HolderName}
                           onChange={handleChange}
+                          isInvalid={!!errors.Account_HolderName}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Account_HolderName}
+                        </Form.Control.Feedback>
                       </Form.Group>
                       <Form.Group className="form-group">
                         <Form.Label className="form-label">Branch Code:</Form.Label>
@@ -383,24 +446,32 @@ const SellersSignup = () => {
                           name="Branch_Code"
                           value={formData.Branch_Code}
                           onChange={handleChange}
+                          isInvalid={!!errors.Branch_Code}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.Branch_Code}
+                        </Form.Control.Feedback>
                       </Form.Group>
-                      <Form.Group className="form-group">
+                      <Form.Group className="form-group form-check">
                         <Form.Check
                           type="checkbox"
+                          label="I agree to the terms and conditions"
                           name="isSeller"
-                          label="I agree to the terms and policies"
                           checked={formData.isSeller}
                           onChange={handleChange}
+                          isInvalid={!!errors.isSeller}
                         />
+                        <Form.Control.Feedback type="invalid">
+                          {errors.isSeller}
+                        </Form.Control.Feedback>
                       </Form.Group>
                     </React.Fragment>
                   )}
                   <Box className="stepper-buttons">
-                    <Button onClick={handleBack} className="stepper-button" style={{backgroundColor: '#001F3F',color:'white',borderRadius:'10px',borderColor:'white',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', }}>
+                    <Button onClick={handleBack} className="stepper-button" disabled={activeStep === 0} style={{ marginRight: '10px',backgroundColor:'#001F3F',color:'white', borderRadius: '0.25rem' }}>
                       Back
                     </Button>
-                    <Button onClick={handleNext} className="stepper-button" style={{backgroundColor: '#001F3F',color:'white',borderRadius:'10px',borderColor:'white',boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', }}>
+                    <Button onClick={handleNext} className="stepper-button" style={{ marginRight: '10px',backgroundColor:'#001F3F',color:'white', borderRadius: '0.25rem' }}>
                       {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                     </Button>
                   </Box>

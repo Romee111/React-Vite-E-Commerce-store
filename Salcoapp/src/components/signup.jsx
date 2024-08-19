@@ -4,7 +4,22 @@ import '../styling/signup.css';
 import resImage from '../assets/res.jpg';
 import { useAuth } from '../hooks/userauthhooks';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
+import { countries } from 'countries-list';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css'; // Import styles for phone input
 
+const countryOptions = Object.keys(countries).map((countryCode) => ({
+    value: countryCode,
+    label: countries[countryCode].name
+}));
+
+const cityOptions = [
+    { value: 'Lahore', label: 'Lahore' },
+    { value: 'Islamabad', label: 'Islamabad' },
+    { value: 'Karachi', label: 'Karachi' },
+    // Add more cities as needed
+];
 function Signup() {
     const { register } = useAuth();
     const navigate = useNavigate();
@@ -21,7 +36,6 @@ function Signup() {
         country: '',
         state: '',
         isAdmin: false,
-
         image: '',
         retypePassword: ''
     });
@@ -37,56 +51,23 @@ function Signup() {
     };
 
     const handleSignup = async (e) => {
-        debugger
         e.preventDefault();
-        // setError('');
-        // const formData = {
-        //     firstName,
-        //     lastName,
-        //     email,
-        //     password,
-        //     retypePassword,
-        //     phone,
-        //     address1,
-        //     address2,
-        //     city,
-        //     pincode,
-        //     country,
-        //     state,
-        //     image,
-        //     isAdmin,
-        // }
+        if (formData.password !== formData.retypePassword) {
+            setError('Passwords do not match');
+            return;
+        }
 
-        // const {
-        //     firstName,
-        //     lastName,
-        //     email,
-        //     password,
-        //     retypePassword,
-        //     phone,
-        //     address1,
-        //     address2,
-        //     city,
-        //     pincode,
-        //     country,
-        //     state,
-        //     image,
-        //     isAdmin,
-        // } = formData;
-
-        // if (password !== retypePassword) {
-        //     setError('Passwords do not match');
-        //     return;
-        // }
-        debugger
-
-        const res = await register(formData);
-        debugger
-        console.log(res)
+        try {
+            const res = await register(formData);
+            console.log(res);
+            navigate('/some-route'); // Redirect after successful signup
+        } catch (err) {
+            setError('An error occurred');
+        }
     };
 
     return (
-        <section className="h-100" style={{ backgroundColor: '#d3d3d3' }}>
+        <section className="h-100" style={{ marginTop: '-100px' }} >
             <div className="container py-5 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-8">
@@ -122,40 +103,31 @@ function Signup() {
                                                 <label className="form-label" htmlFor="form3Example99">Address2</label>
                                             </div>
                                             <div className="row">
-                                                <div className="col-md-6 mb-3">
-                                                    <select className="form-control form-control-sm" name="state" value={formData.state} onChange={handleChange}>
-                                                        <option value="">State</option>
-                                                        <option value="Option 1">Option 1</option>
-                                                        <option value="Option 2">Option 2</option>
-                                                        <option value="Option 3">Option 3</option>
-                                                    </select>
+                                                <div className="col-md-6 mb-3 form-outline" >
+                                                    <Select
+                                                        options={countryOptions}
+                                                        name="country"
+                                                        value={countryOptions.find(option => option.value === formData.country)}
+                                                        onChange={(option) => setFormData({ ...formData, country: option.value })}
+                                                        placeholder="Select Country"
+                                                        
+                                                        className='form-control form-control-sm'
+                                                    />
                                                 </div>
-                                                <div className="col-md-6 mb-3">
-                                                    <select className="form-control form-control-sm" name="city" value={formData.city} onChange={handleChange}>
-                                                        <option value="">City</option>
-                                                        <option value="Option 1">Option 1</option>
-                                                        <option value="Option 2">Option 2</option>
-                                                        <option value="Option 3">Option 3</option>
-                                                    </select>
+                                                <div className="col-md-6 mb-3 form-outline">
+                                                    <Select
+                                                        options={cityOptions}
+                                                        name="city"
+                                                        value={cityOptions.find(option => option.value === formData.city)}
+                                                        onChange={(option) => setFormData({ ...formData, city: option.value })}
+                                                        placeholder="Select City"
+                                                        className='form-control form-control-sm'
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="form-outline mb-3">
-                                                <input type="text" id="form3Example98" name="country" className="form-control form-control-sm" value={formData.country} onChange={handleChange} />
-                                                <label className="form-label" htmlFor="form3Example98">Country</label>
-                                            </div>
-                                            <div className="form-outline mb-3">
-                                                <input
-                                                    type="file"
-                                                    className="form-control form-control-sm"
-                                                    id="uploadImage"
-                                                    accept="image/*"
-                                                    onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
-                                                />
-                                                <label className="form-label" htmlFor="uploadImage">Upload Image</label>
-                                            </div>
-                                            <div className="form-outline mb-3">
-                                                <input type="text" id="form3Example9" name="pincode" className="form-control form-control-sm" value={formData.pincode} onChange={handleChange} />
-                                                <label className="form-label" htmlFor="form3Example9">Pincode</label>
+                                                <input type="text" id="form3Example98" name="pincode" className="form-control form-control-sm" value={formData.pincode} onChange={handleChange} />
+                                                <label className="form-label" htmlFor="form3Example98">Pincode</label>
                                             </div>
                                             <div className="form-outline mb-3">
                                                 <input type="email" id="form3Example97" name="email" className="form-control form-control-sm" value={formData.email} onChange={handleChange} />
@@ -170,11 +142,26 @@ function Signup() {
                                                 <label className="form-label" htmlFor="form3Example99">Retype Password</label>
                                             </div>
                                             <div className="form-outline mb-3">
-                                                <input type="text" id="form3Example100" name="phone" className="form-control form-control-sm" value={formData.phone} onChange={handleChange} />
-                                                <label className="form-label" htmlFor="form3Example100">Phone</label>
+                                                <PhoneInput
+                                                    international
+                                                    defaultCountry="US"
+                                                    name="phone"
+                                                    value={formData.phone}
+                                                    onChange={(phone) => setFormData({ ...formData, phone })}
+                                                    className="form-control form-control-sm"
+                                                />
+                                                <label className="form-label" htmlFor="phone">Phone</label>
                                             </div>
-
-                                           
+                                            <div className="form-outline mb-3">
+                                                <input
+                                                    type="file"
+                                                    className="form-control form-control-sm"
+                                                    id="uploadImage"
+                                                    accept="image/*"
+                                                    onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
+                                                />
+                                                <label className="form-label" htmlFor="uploadImage">Upload Image</label>
+                                            </div>
 
                                             <button type="submit" className="btn btn-primary">Register</button>
                                         </form>

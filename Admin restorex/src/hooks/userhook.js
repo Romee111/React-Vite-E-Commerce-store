@@ -3,8 +3,8 @@ import axios from "axios";
 export function useUser() {
     const getUser = async () => {
         try {
-            const response = await axios.get("http://localhost:2900/user/getAllUsers");
-            const data = response.data; 
+            const response = await axios.get("http://localhost:2900/userauth/getAllUser");
+            const data = response.data.data; 
             console.log(data);
             return data;    
         } catch (err) {

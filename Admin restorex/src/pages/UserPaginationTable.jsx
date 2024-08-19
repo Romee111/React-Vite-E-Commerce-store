@@ -3,9 +3,9 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableFooter, TablePag
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddUserModal from '../components/addUser'; // Import AddUserModal
-import EditUserModal from '../components/editusermodal'; // Import EditUserModal
-import { useUser } from '../hooks/userhooks'; // Import useUser
-
+import EditUserModal from '../components/editprodocutmodal'; // Import EditUserModal
+import { useUser } from '../hooks/userhook'; // Import useUser
+import {Menu } from '@mui/icons-material';
 function UserPaginationTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -18,18 +18,19 @@ function UserPaginationTable() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userData = await getUser();
+        const userData = await getUser();
+        console.log("Fetched User Data:", userData); // Log to check if data is received correctly
 
-      if (Array.isArray(userData)) {
-        setRows(userData);
-        setFilteredRows(userData);
-      } else {
-        console.error("Unexpected user data structure:", userData);
-      }
+        if (Array.isArray(userData)) {
+            setRows(userData);
+            setFilteredRows(userData);
+        } else {
+            console.error("Unexpected user data structure:", userData);
+        }
     };
 
     fetchData();
-  }, [getUser]);
+}, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -42,6 +43,10 @@ function UserPaginationTable() {
 
   const handleAddUser = () => {
     setModalShow(true);
+  };
+
+  const handlefilterUser = () => {
+    setFilteredRows(rows);
   };
 
   const handleDeleteUser = async (id) => {
@@ -58,7 +63,7 @@ function UserPaginationTable() {
   };
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" style={{ marginTop: '-50%' }}>
+    <Box display="flex" flexDirection="column" alignItems="center" style={{ marginTop: '-30%' }}>
       <AddUserModal show={modalShow} onHide={() => setModalShow(false)} />
       <EditUserModal
         show={editModalShow}
@@ -74,17 +79,29 @@ function UserPaginationTable() {
         >
           Add User
         </Button>
+       
+        <Button
+          variant="contained"
+          style={{ backgroundColor: '#001F3F', color: 'white' }}
+          onClick={handlefilterUser}
+        >
+          Filter By
+        </Button>
+
       </Box>
 
-      <TableContainer component={Paper} sx={{ width: '90%' }} style={{ maxWidth: '100%', marginLeft: '40%' }}>
+      <TableContainer component={Paper} sx={{ width: '90%' }} style={{ maxWidth: '100%', marginLeft: '21.5%' }}>
         <Table sx={{ minWidth: 500 }} aria-label="user pagination table">
           <TableHead>
             <TableRow style={{ backgroundColor: '#001F3F', color: 'white' }}>
               <TableCell style={{ color: 'white' }}>#</TableCell>
-              <TableCell style={{ color: 'white' }}>Name</TableCell>
+              <TableCell style={{ color: 'white' }}>FirstName</TableCell>
+              <TableCell style={{color: 'white'}}>LastName</TableCell>
               <TableCell style={{ color: 'white' }} align="right">Email</TableCell>
               <TableCell style={{ color: 'white' }} align="right">Phone</TableCell>
-              <TableCell style={{ color: 'white' }} align="right">Address</TableCell>
+              <TableCell style={{ color: 'white' }} align="right">Address1</TableCell>
+              <TableCell style={{ color: 'white' }} align="right">isSeller</TableCell>
+ 
               <TableCell style={{ color: 'white' }} align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -97,10 +114,12 @@ function UserPaginationTable() {
                 <TableCell component="th" scope="row">
                   {page * rowsPerPage + index + 1}
                 </TableCell>
-                <TableCell>{row.name}</TableCell>
+                <TableCell>{row.firstName}</TableCell>
+                <TableCell>{row.lastName}</TableCell>
                 <TableCell align="right">{row.email}</TableCell>
                 <TableCell align="right">{row.phone}</TableCell>
-                <TableCell align="right">{row.address}</TableCell>
+                <TableCell align="right">{row.address1}</TableCell>
+                <TableCell align="right">{row.isSeller.toString()}</TableCell>
                 <TableCell align="center">
                   <IconButton
                     aria-label="edit"

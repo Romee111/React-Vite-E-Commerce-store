@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Box, Table, TableBody, TableCell, TableContainer, TableFooter, TablePagination, TableRow, TableHead, Paper, IconButton, Button, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import AddProductModal from '../components/addproduct';
-import EditProductModal from '../components/editprodocutmodal'; // Import EditProductModal
-import useProduct from '../hooks/producthooks';
-import { useCategories } from '../hooks/categoryhooks';
+ import AddProductModal from '../components/addingitem';
+// import EditProductModal from '../components/editprodocutmodal'; // Import EditProductModal
+import useProduct from '../hooks/producthook';
+ import { useCategories } from '../hooks/categoryhooks';
 
-function CustomPaginationActionsTable() {
+function SellersProductTable() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState([]);
@@ -65,10 +65,10 @@ function CustomPaginationActionsTable() {
     setFilteredRows(updatedRows);
   };
 
-  const handleEditProduct = (product) => {
-    setProductToEdit(product);
-    setEditModalShow(true); // Show the EditProductModal
-  };
+  // const handleEditProduct = (product) => {
+  //   setProductToEdit(product);
+  //   setEditModalShow(true); // Show the EditProductModal
+  // };
 
   const handleCategoryChange = (event) => {
     const selectedCat = event.target.value;
@@ -84,13 +84,13 @@ function CustomPaginationActionsTable() {
 
   return (
     
-    <Box display="flex" flexDirection="column" alignItems="center" style={{ marginTop: '-50%' }}>
-      <AddProductModal show={modalShow} onHide={() => setModalShow(false)} />
-      <EditProductModal
+    <Box display="flex" flexDirection="column" alignItems="center" style={{ marginTop: '10%' }}>
+     <AddProductModal show={modalShow} onHide={() => setModalShow(false)} />
+      {/* <EditProductModal
         show={editModalShow}
         onHide={() => setEditModalShow(false)}
         product={productToEdit}
-      />
+      />  */}
 
       <Box sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center', gap: 2 }}>
         <Button
@@ -192,4 +192,4 @@ function CustomPaginationActionsTable() {
   );
 }
 
-export default CustomPaginationActionsTable;
+export default SellersProductTable;

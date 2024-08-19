@@ -112,7 +112,7 @@ exports.login = async (req, res) => {
 
 exports.getAllUser = async (req, res) => {
     try {
-        const user = await users.find().select("-_id name email isAdmin");
+        const user = await users.find()
         res.status(200).json({
             status: "success",
             data:

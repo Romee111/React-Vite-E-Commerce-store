@@ -13,7 +13,7 @@ function TopHeader() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(true); // Set to true initially to show the modal on load
   const [showProfile, setShowProfile] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const { getSearch } = useProducts();
@@ -37,6 +37,10 @@ function TopHeader() {
       setSearchResults([]);
     }
   }, [searchTerm]);
+
+  useEffect(() => {
+    setShowModal(true); // Automatically show the login modal when the component mounts
+  }, []);
 
   const handleSearch = async () => {
     try {

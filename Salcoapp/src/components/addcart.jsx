@@ -6,6 +6,8 @@ import '../styling/addcart.css';
 
 function AddCart({ show, handleClose }) {
   const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log(cartItems);
+  
   const dispatch = useDispatch();
 
   const handleRemoveFromCart = (_id) => {

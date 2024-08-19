@@ -1,6 +1,6 @@
 import React from 'react'
 
-function addUser() {
+function saveproduct() {
   return (
     <div>
       
@@ -8,4 +8,4 @@ function addUser() {
   )
 }
 
-export default addUser
+export default saveproduct

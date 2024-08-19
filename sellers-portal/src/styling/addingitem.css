@@ -1,0 +1,14 @@
+.add-product-button{
+    background-color: #001F3F;
+    color: white;
+    border: none;
+    width: 10%;
+    height: 40px;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.add-product-button:hover{
+    background-color: #8697C4;
+    color: #070f2B;
+}

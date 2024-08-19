@@ -10,7 +10,7 @@ function AdminSidebar() {
   };
 
   return (
-    <aside className="sidebar" aria-label="Sidebar" >
+    <aside className="sidebar" aria-label="Sidebar" style={{width:'13rem'}} >
       <h1 style={{ color: 'white', textAlign: 'center',fontSize: '28px' }}>Admin Restorex</h1>
       <ul>
         <li>
