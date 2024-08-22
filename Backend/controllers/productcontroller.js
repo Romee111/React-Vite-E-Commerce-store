@@ -66,6 +66,19 @@ exports.createProduct = async (req, res) => {
     }
 };
 
+exports.addManyProducts=async(req,res )=>{
+    try{
+        const products = req.body;
+        const createdProducts = await Product.insertMany(products);
+        res.status(201).json({
+            success: true,
+            data: createdProducts,
+            message: "Products created successfully",
+        });
+    }catch(err){
+        res.status(400).json({message: err.message});
+    }
+}
   exports.getProduct= async (req, res) => {
     try{
         const id = req.params.id;

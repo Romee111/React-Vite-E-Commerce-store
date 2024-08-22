@@ -6,6 +6,7 @@
     max-width: 100px;
     border: none;
     border-radius: 5px;
+    z-index: 9999;
   }
 
   

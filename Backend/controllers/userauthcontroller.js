@@ -248,54 +248,111 @@ exports.forgetPassword = async (req, res) => {
     //         }
     //     })
     // }
-    try {
-        const { email } = req.body
-        const user = await users.findOne({ email: email })
-        if (!user) {
-            return res.status(401).json({
-                status: "fail",
-                message: "no email found"
-            })
-        }
+    // try {
+    //     const { email } = req.body
+    //     const user = await users.findOne({ email: email })
+    //     if (!user) {
+    //         return res.status(401).json({
+    //             status: "fail",
+    //             message: "no email found"
+    //         })
+    //     }
         
-        const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-        console.log(process.env.EMAIL,process.env.PASSWORD)
-        var transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-              user: 'ceorestorex@gmail.com',
-              pass: 'pwje ylws zzma gmf'
-            }
-          });
+    //     const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    //     console.log(process.env.EMAIL,process.env.PASSWORD)
+    //     var transporter = nodemailer.createTransport({
+    //         service: 'gmail',
+    //         auth: {
+    //           user: 'ceorestorex@gmail.com',
+    //           pass: 'pwje ylws zzma gmf'
+    //         }
+    //       });
           
-          var mailOptions = {
-            from: 'youremail@gmail.com',
-            to: 'myfriend@yahoo.com',
-            subject: 'Sending Email using Node.js',
-            text: 'That was easy!'
-          };
+    //       var mailOptions = {
+    //         from: 'youremail@gmail.com',
+    //         to: 'myfriend@yahoo.com',
+    //         subject: 'Sending Email using Node.js',
+    //         text: 'That was easy!'
+    //       };
           
-          transporter.sendMail(mailOptions, function(error, info){
-            data:{{
-                forgetToken
+    //       transporter.sendMail(mailOptions, function(error, info){
+    //         data:{{
+    //             forgetToken
 
-            }}
-            if (error) {
-              console.log(error);
-            } else {
-              console.log('Email sent: ' + info.response);
-            }
-          });
+    //         }}
+    //         if (error) {
+    //           console.log(error);
+    //         } else {
+    //           console.log('Email sent: ' + info.response);
+    //         }
+    //       });
           
           
-        }
+    //     }
         
-    catch (err) {
-        res.status(400).json({
-            status: "fail",
-            message: err
-        })
-    }
+    // catch (err) {
+    //     res.status(400).json({
+    //         status: "fail",
+    //         message: err
+    //     })
+    // }
+    exports.forgetPassword = async (req, res) => {
+        try {
+            const { email } = req.body;
+            const user = await users.findOne({ email: email });
+            if (!user) {
+                return res.status(401).json({
+                    status: "fail",
+                    message: "No email found"
+                });
+            }
+            
+            const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+            
+            // Use environment variables for credentials
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL, // Ensure this matches the sending email
+                    pass: process.env.PASSWORD
+                }
+            });
+    
+            const mailOptions = {
+                from: process.env.EMAIL, // Use the correct sending email
+                to: user.email,
+                subject: 'Forget Password',
+                html: `<h1>Forget Password</h1>
+                <p>Click on this <a href="http://localhost:2900/userauth/resetPassword/${forgetToken}">link</a> to reset your password</p>`
+            };
+    
+            // Send the email
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    console.log(error);
+                    return res.status(500).json({
+                        status: "fail",
+                        message: "Error sending email",
+                        error: error.message
+                    });
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    return res.status(200).json({
+                        status: "success",
+                        message: 'Email has been sent',
+                        data: {
+                            forgetToken
+                        }
+                    });
+                }
+            });
+        } catch (err) {
+            res.status(400).json({
+                status: "fail",
+                message: err.message
+            });
+        }
+    };
 }
 
 

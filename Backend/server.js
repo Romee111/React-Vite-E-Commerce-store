@@ -18,6 +18,7 @@ const addtocartroute=require('./routes/addtocartroute');
 const ratingroute=require('./routes/ratingroute');
 const reviewroute=require('./routes/reviewroute');
 const sellerroute=require('./routes/sellersroute');
+const paymentroute=require('./routes/paymentroute');
 mongoose.connect(process.env.DATABASEURL).then(()=>{
     console.log("database connected");
 })
@@ -32,6 +33,7 @@ app.use('/addtocart',addtocartroute);
 app.use('/rating',ratingroute);
 app.use('/review',reviewroute);
 app.use('/seller',sellerroute);
+app.use('/payment',paymentroute);
 
 app.listen(process.env.PORT,()=>{
     console.log(`server is running on http://localhost:${process.env.PORT}`);
