@@ -84,7 +84,7 @@ function CustomPaginationActionsTable() {
 
   return (
     
-    <Box display="flex" flexDirection="column" alignItems="center" style={{ marginTop: '-50%' }}>
+    <Box display="flex" flexDirection="column" alignItems="center" style={{ marginTop: '-50%' , marginLeft: '-5%'}}>
       <AddProductModal show={modalShow} onHide={() => setModalShow(false)} />
       <EditProductModal
         show={editModalShow}

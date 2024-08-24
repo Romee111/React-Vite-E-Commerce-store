@@ -121,7 +121,7 @@ function ListsProduct() {
     if (filterParams) {
       setFilter(filterParams);
     }
-  }, [filterParams]);
+  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -146,14 +146,14 @@ function ListsProduct() {
     };
 
     fetchProducts();
-  }, [filter, page]);
+  }, []);
 
   useEffect(() => {
     // Update products when the page changes
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     setProducts(fullProducts.slice(startIndex, endIndex));
-  }, [page, fullProducts]);
+  }, []);
 
   const handleProductdetailClick = (id) => {
     navigate(`/productdetail/${id}`);
