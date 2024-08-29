@@ -109,4 +109,28 @@ exports.getOrderById=async(req,res)=>{
         res.status(500).json(err);
     }
 }
+
+exports.trackOrder = async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const order = await order.findById(orderId);
+        
+        if (!order) {
+            return res.status(404).json({
+                success: false,
+                message: 'Order not found',
+            });
+        }
+        
+        res.status(200).json({
+            success: true,
+            data: order,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
  

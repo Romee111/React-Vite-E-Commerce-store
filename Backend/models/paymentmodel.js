@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
+
 const PaymentSchema = new mongoose.Schema({
-    amount: {
-        type: Number,
-        required: true,
-    },
-    currency: {
-        type: String,
+    
+    orderId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Order",
         required: true,
     },
     paymentIntentId: {
@@ -21,18 +20,7 @@ const PaymentSchema = new mongoose.Schema({
         type: String,
         required: true, // e.g., 'succeeded', 'pending', 'failed'
     },
-    country: {
-        type: String, // Country or region of the user
-        required: true,
-    },
-    region: {
-        type: String, // Specific region or state within the country
-        required: false,
-    },
-    raastId: {
-        type: String, // Used if payment method is 'raast_id'
-        default: null,
-    },
+  
     installmentPlan: {
         type: String, // 'monthly', 'bi-weekly', etc.
         default: null,

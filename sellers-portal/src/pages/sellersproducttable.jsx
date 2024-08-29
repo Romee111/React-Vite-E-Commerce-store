@@ -3,9 +3,12 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableFooter, TablePag
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
  import AddProductModal from '../components/addingitem';
+ import '../styling/sellersproducttable.css'
 // import EditProductModal from '../components/editprodocutmodal'; // Import EditProductModal
-import useProduct from '../hooks/producthook';
+
+import SaveProductModal from '../components/saveproduct';
  import { useCategories } from '../hooks/categoryhooks';
+ import useProduct from '../hooks/producthook';
 
 function SellersProductTable() {
   const [page, setPage] = useState(0);
@@ -65,10 +68,10 @@ function SellersProductTable() {
     setFilteredRows(updatedRows);
   };
 
-  // const handleEditProduct = (product) => {
-  //   setProductToEdit(product);
-  //   setEditModalShow(true); // Show the EditProductModal
-  // };
+  const handleEditProduct = (product) => {
+    setProductToEdit(product);
+    setEditModalShow(true); // Show the EditProductModal
+  };
 
   const handleCategoryChange = (event) => {
     const selectedCat = event.target.value;
@@ -84,13 +87,13 @@ function SellersProductTable() {
 
   return (
     
-    <Box display="flex" flexDirection="column" alignItems="center" style={{ marginTop: '10%' }}>
+    <Box display="flex" flexDirection="column" alignItems="center"  className="sellersproduct-table"> 
      <AddProductModal show={modalShow} onHide={() => setModalShow(false)} />
-      {/* <EditProductModal
+      <SaveProductModal
         show={editModalShow}
         onHide={() => setEditModalShow(false)}
         product={productToEdit}
-      />  */}
+      /> 
 
       <Box sx={{ marginBottom: 2, display: 'flex', justifyContent: 'center', gap: 2 }}>
         <Button
@@ -100,6 +103,7 @@ function SellersProductTable() {
         >
           Add Products
         </Button>
+      
 
         <FormControl variant="outlined" sx={{ minWidth: 200 }}>
           <InputLabel id="category-select-label" style={{ backgroundColor: '#001F3F', color: 'white' }}>Category</InputLabel>

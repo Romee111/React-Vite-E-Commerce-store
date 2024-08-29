@@ -1,0 +1,13 @@
+ .add-wallet-modal {
+    position: relative;
+    justify-items: center;
+    align-items: center;
+
+    margin-left: 30%;
+ }
+
+
+.wallet-input {
+    width: 70%;
+    align-items: center;
+}

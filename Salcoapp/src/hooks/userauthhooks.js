@@ -82,7 +82,20 @@ export function useAuth() {
             console.log(err)
         }
     };
-    return { loginApi, forgetPassword, register, logout, resetPassword, userbyId, user, setUser };
+    const UpdateUser = async (id, data) => {
+        try {
+            const response = await axios.put(`http://localhost:2900/userauth/updateUser/${id}`, data)
+            console.log(response.data)
+            const data = response.data
+            return data
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+    return { loginApi, forgetPassword, register, logout, resetPassword, userbyId, user, setUser, UpdateUser };
 
 }
 
+
+export default useAuth

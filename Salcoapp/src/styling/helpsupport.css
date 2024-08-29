@@ -1,0 +1,83 @@
+.help-support-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .help-support-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .intro-paragraph, .additional-help p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .faq-accordion {
+    margin-bottom: 30px;
+  }
+  
+  .contact-info-section, .additional-help {
+    margin-bottom: 30px;
+  }
+  
+  .contact-info-section h2, .additional-help h2 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .contact-detail i {
+    font-size: 24px;
+    color: #007bff;
+  }
+  
+  .contact-detail a, .contact-detail p {
+    font-size: 16px;
+    margin: 0;
+  }
+  
+  .contact-detail a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .contact-detail a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .help-support-container {
+      padding: 15px;
+    }
+  
+    .faq-accordion .accordion-button {
+      font-size: 16px;
+    }
+  
+    .contact-detail i {
+      font-size: 20px;
+    }
+  
+    .contact-detail a, .contact-detail p {
+      font-size: 14px;
+    }
+  }
+  

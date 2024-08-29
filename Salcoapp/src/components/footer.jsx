@@ -44,18 +44,18 @@ function footer (){
             <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 footer-links">
               <h6 className="text-uppercase fw-bold">Restorex support</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
-              <p><Link to="#!" className="text-white">Help Center</Link></p>
-              <p><Link to="#!" className="text-white">Contact Us</Link></p>
+              <p><Link to="/help-center" className="text-white">Help Center</Link></p>
+              <p><Link to="/contactus" className="text-white">Contact Us</Link></p>
               <p><Link to="#!" className="text-white">start selling</Link></p>
-              <p><Link to="#!" className="text-white">Become a member</Link></p>
+              <p><Link to="/restorex-blogs" className="text-white">Our Blogs</Link></p>
             </div>
             <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 footer-info">
               <h6 className="text-uppercase fw-bold">Know US</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{ width: '60px', backgroundColor: '#7c4dff', height: '2px' }} />
               <p><Link to="about" className="text-white">About us</Link></p>
               <p><Link to="/termconditions" className="text-white">Term & Condtions</Link></p>
-              <p><Link to="#!" className="text-white">Services & Polices</Link></p>
-              <p><Link to="#!" className="text-white">Help & Support</Link></p>
+              <p><Link to="" className="text-white">Services & Polices</Link></p>
+              <p><Link to="/help-support" className="text-white">Help & Support</Link></p>
             </div>
             <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 footer-address">
               <h6 className="text-uppercase fw-bold">Contact</h6>

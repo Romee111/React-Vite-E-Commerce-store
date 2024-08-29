@@ -3,7 +3,7 @@ const Payment = require('../models/paymentmodel');
 
 exports.createPayment = async (req, res) => {
     try {
-        const { amount, currency, raastId, paymentMethod, installmentPlan, bankDetails, isCOD, country, region } = req.body;
+        const {  paymentMethod, installmentPlan, bankDetails, isCOD, orderId,  } = req.body;
 
         let paymentIntent;
 
@@ -38,8 +38,7 @@ exports.createPayment = async (req, res) => {
             } else if (paymentMethod === 'card') {
                 // Payment by Card with region-specific bank details
                 paymentIntent = await stripe.paymentIntents.create({
-                    amount,
-                    currency,
+                    orderId,
                     payment_method_types: ['card'],
                     payment_method_options: {
                         card: {
@@ -51,22 +50,19 @@ exports.createPayment = async (req, res) => {
             } else if (!isKlarnaAvailable && paymentMethod === 'raast_id') {
                 // Fallback to Raast_ID if Klarna is not available
                 paymentIntent = await stripe.paymentIntents.create({
-                    amount,
-                    currency,
+                    orderId,
                     payment_method_types: ['card'], // Or another payment method supported by Raast_ID
                 });
             }
         }
 
         const payment = new Payment({
-            amount,
-            currency,
+            orderId,
             paymentIntentId: paymentIntent.id,
             payment_Method: paymentMethod,
             payment_Status: paymentIntent.status,
-            country,
-            region,
-            raastId: isCOD ? raastId : null,
+           
+           
             installmentPlan: isCOD ? null : installmentPlan, // No installments on COD
             bankDetails: paymentMethod === 'card' ? bankDetails : null,
             isCOD,

@@ -12,6 +12,7 @@ import Footer from './components/footer'
 import { Routes, Route } from 'react-router-dom'
 import ForgetPassword from './components/forgetpassword'
 import RouterRoutes from './routes/routerroutes'
+import ContactIcon from './components/contacticon'
 
 
 function App() {
@@ -23,8 +24,10 @@ function App() {
     <Navbar />
       <RouterRoutes />
      <Footer />
+     <ContactIcon />
     </div>
     
+
 )
 }
 

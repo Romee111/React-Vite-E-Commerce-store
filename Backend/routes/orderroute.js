@@ -23,6 +23,9 @@ router
 .route("/deleteOrder/:id")
 .delete(orderconroller.deleteOrder);
 
+router
+.route("/trackOrder")
+.post(orderconroller.trackOrder);
 module.exports = router;
 
 

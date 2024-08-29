@@ -109,7 +109,7 @@ const OrderPlace = () => {
                   
                     <Button variant="primary" type="submit" style={{backgroundColor: '#001F3F', color: 'white', 
                         border: 'none', borderRadius: '10px', marginTop: '10px'
-                    }}>Submit Order</Button>
+                    }}>Place Order</Button>
                 </Form>
             </div>
         </div>

@@ -21,7 +21,7 @@ router
 
 router
 .route("/updateProducts/:id")
-.patch(usermiddleware.isauthorized,productcontroller.updateProducts);
+.put(productcontroller.updateProducts);
 
 router
 .route("/deleteProducts/:id")    

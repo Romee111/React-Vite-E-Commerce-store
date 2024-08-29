@@ -13,8 +13,17 @@ import Checkout from "../pages/checkout";
 import SellersSignup from "../pages/sellersSignup";
 import ListProduct from "../components/listsproduct";
 import OrderPlace from "../pages/orderplace";
-
-
+import ContactUs from "../pages/contactus";
+import HelpSupport from "../pages/helpsupport";
+import HelpCenter from "../pages/helpcenter";
+import OrderTracking from '../components/ordertrack'
+import PaymentOption from '../components/paymentoption'
+import Profile from "../components/profile";
+import RestorexWallet from "../components/restorexwallet";
+import LocAddress from "../components/locadddress";
+import More from "../components/more";
+import ReturnsRefunds from "../components/returnsrefunds";
+import RestorexBlogs from "../components/restorexblogs";
 const RouterRoutes = () => {
     return (
 
@@ -32,6 +41,18 @@ const RouterRoutes = () => {
             <Route path="/order" element={<OrderPlace />} />
             <Route path="/sellersSignup" element={<SellersSignup />} />
             <Route path="/listProduct" element={<ListProduct />} />
+            <Route path="/contactus" element={<ContactUs />} />
+            <Route path="/help-support" element={<HelpSupport />} />
+            <Route path="/help-center"  element={<HelpCenter />} />
+            <Route path="/track-order" element={<OrderTracking />}></Route>
+            <Route path="/payment-options" element={<PaymentOption />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/restorex-wallet" element={<RestorexWallet />}></Route>
+            <Route path="/locaddress" element={<LocAddress />}></Route>
+            <Route path="/more" element={<More />}></Route>
+            <Route path='/returns-refunds' element={<ReturnsRefunds />}></Route>
+            <Route path='/restorex-blogs' element={<RestorexBlogs />}></Route>
+            
         </Routes>
       
     );
