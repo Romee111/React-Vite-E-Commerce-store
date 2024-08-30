@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import '../styling/ordertrack.css';
 
 const OrderTrack = () => {
   const [orderNumber, setOrderNumber] = useState('');
   const [trackingInfo, setTrackingInfo] = useState(null);
+
+
 
   // Simulated tracking data
   const sampleTrackingData = {
@@ -32,21 +35,21 @@ const OrderTrack = () => {
   };
 
   return (
-    <div className="container">
+    <div className="trackorder-container">
       <h2>Order Tracking</h2>
       <form className="mb-4" onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="orderNumber" className="form-label">Enter Tracking Number Here</label>
+        <div className=" d-flex" style={{textAlign: 'center'}}>
+          <label htmlFor="orderNumber" className="form-label-order">Enter Tracking Number Here:</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control-order"
             id="orderNumber"
             value={orderNumber}
             onChange={(e) => setOrderNumber(e.target.value)}
             placeholder="Order Number"
           />
         </div>
-        <button type="submit" className="btn btn-primary">Track Order</button>
+        <button type="submit" className="track-click">Track Order</button>
       </form>
 
       {trackingInfo && (

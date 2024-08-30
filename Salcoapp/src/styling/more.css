@@ -1,0 +1,29 @@
+.more-container {
+    max-width: 800px; /* Adjust based on your design needs */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px;
+    text-align: left; /* Align text to the left */
+  }
+  
+  .more-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between sections */
+  }
+  
+  .more-content section {
+    border-bottom: 1px solid #ddd; /* Optional: adds a border between sections */
+    padding-bottom: 15px; /* Space at the bottom of each section */
+  }
+  
+  .more-content h3 {
+    font-size: 1.5rem; /* Font size for headings */
+    margin-bottom: 10px; /* Space below headings */
+    color: #001F3F; /* Adjust based on your theme */
+  }
+  
+  .more-paragraph {
+    font-size: 1rem; /* Font size for paragraphs */
+    color: #333; /* Adjust based on your theme */
+  }
+  

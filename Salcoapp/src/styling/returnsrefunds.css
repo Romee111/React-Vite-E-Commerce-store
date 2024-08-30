@@ -1,56 +1,74 @@
-/* ReturnsRefunds.css */
+/* Ensure the container is responsive and centered */
+.returns-wrapper {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+  padding: 20px; /* Add padding around the container */
+}
 
-/* Ensure the container is responsive */
 .returns-container {
-    max-width: 800px; /* Adjust based on your design needs */
-    margin: 0 auto; /* Center container */
-    padding: 20px;
-  }
-  
-  /* Form styling */
-  .returns-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .returns-form .form-label {
-    font-weight: bold;
-  }
-  
-  .returns-form .form-control {
-    margin-bottom: 15px;
-  }
-  
-  .returns-click  {
-    align-self: flex-start; /* Align button to the start */
-       background-color: #001F3F;
-       color: #fff;
-       border: 2px solid #001F3F;
-       border-radius: 5px;
-       cursor: pointer; 
-       margin-top: 10px;
-       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }  
+  max-width: 800px; /* Adjust based on your design needs */
+  width: 100%; /* Full width of parent wrapper */
+  text-align: center; /* Center text inside the container */
+  padding: 20px;
+}
+.returns-title {  
+   text-align: center;
+
+}
+
+/* Form styling */
+.returns-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center form elements */
+  gap: 15px; /* Space between elements */
+}
+
+.form-label-return {
+  font-weight: bold;
+  display: block; /* Ensure label is a block element */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+/* Set form controls to block elements with 30% width */
+.form-control-return,
+textarea.form-control-return {
+  margin-bottom: 15px;
+  width: 50%; /* Set width to 30% */
+  padding: 10px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.returns-click {
+  background-color: #001F3F;
+  color: #fff;
+  border: 2px solid #001F3F;
+  border-radius: 5px;
+  cursor: pointer; 
+  padding: 10px 20px;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px; /* Set width to 30% */
+  display: block; /* Ensure button takes up full width */
+  text-align: center; /* Center text inside button */
+}
+
 .returns-click:hover {
   background-color: #001F3F;
   color: #fff;
-   border: 2px solid #001F3F;
-   filter: drop-shadow(0 0 2em #001F3F); ;
+  border: 2px solid #001F3F;
+  filter: drop-shadow(0 0 2em #001F3F);
 }
-  
-  /* Responsive styling */
-  @media (max-width: 768px) {
-    .returns-container {
-      padding: 15px;
-    }
-  
-    .returns-form .form-control {
-      font-size: 0.9rem;
-    }
-  
-    .returns-form .btn {
-      width: 100%; /* Full width button on small screens */
-      margin-top: 10px;
-    }
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .form-control-return,
+  textarea.form-control-return,
+  .returns-click {
+    width: 100%; /* Full width on small screens */
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
   }
-  
+}

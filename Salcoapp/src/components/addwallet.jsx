@@ -196,7 +196,7 @@ const AddFundsModal = ({ show, onHide, onAddFunds }) => {
 
           {/* Additional fields for other payment methods can be added here */}
 
-          <Button type="submit" variant="primary">Add Funds</Button>
+          <Button type="submit" className='add-funds-btn' style={{backgroundColor: '#001f3f', color: 'white', }}>Add Funds</Button>
         </Form>
       </Modal.Body>
     </Modal>

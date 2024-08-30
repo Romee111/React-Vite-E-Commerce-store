@@ -1,4 +1,81 @@
-.payment-option-list{
-    align-items:start ;
+.PaymentOptions-container {
+    padding: 20px;
+  }
+  
+  .PaymentOptions-main-heading {
+    margin-bottom: 20px;
+    font-size: 24px; /* Set font size to 24px */
+    text-align: center; /* Align the heading to the left */
+    font-weight: bold; 
 }
   
+  .PaymentOptions-flex-container {
+    display: flex;
+    /* justify-content: space-around; */
+    gap: 20%; /* Use a positive percentage for the gap */
+    flex-wrap: wrap; /* Make the container responsive */
+  }
+  
+  .PaymentOptions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%; /* Ensure full width in mobile view */
+    max-width: 45%; /* Set maximum width for each list */
+    text-align: left; /* Align list items to the left */
+  }
+  
+  .PaymentOptions-option {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    font-size: 24px; /* Set font size to 24px */
+    text-align: left; /* Align option content to the left */
+  }
+  
+  .PaymentOptions-option i {
+    margin-right: 10px;
+    font-size: 24px; /* Ensure icons match the font size */
+  }
+  
+  .PaymentOptions-option span {
+    font-weight: bold;
+    text-align: left; /* Align the span text to the left */
+  }
+  
+  .PaymentOptions-option p {
+    margin: 5px 0 0 0;
+    text-align: left; /* Align paragraphs to the left */
+  }
+  
+  .PaymentOptions-dropdown {
+    margin-top: 10px;
+    text-align: left; /* Align dropdown content to the left */
+  }
+  
+  .PaymentOptions-dropdown-toggle {
+    width: 30%;
+    background-color: #001F3F;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 24px; /* Set font size to 24px */
+    text-align: left; /* Align the dropdown toggle text to the left */
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .PaymentOptions-flex-container {
+      flex-direction: column;
+      gap: 10px; /* Reduce the gap for smaller screens */
+    }
+  
+    .PaymentOptions-list {
+      max-width: 100%; /* Full width on small screens */
+    }
+.PaymentOptions-dropdown-toggle {
+  width: 10%;
+
+  }
+}

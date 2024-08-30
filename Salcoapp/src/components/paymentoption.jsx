@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styling/paymentoption.css';
 
 const PaymentOptions = () => {
-  const [selectedBank, setSelectedBank] = useState('Select a bank');
+  const [selectedBank, setSelectedBank] = useState('See banks');
 
   const banks = [
     "Habib Bank Limited (HBL)",
@@ -28,51 +28,82 @@ const PaymentOptions = () => {
   ];
 
   return (
-    <div className="container">
-      <h2 className="main-heading">Payment Options</h2>
-      <ul className="list-unstyled payment-options-list" style={{alignItems: 'left'}}>
-        <li className="payment-option">
-          <i className="bi bi-credit-card"></i> Credit/Debit Cards
-        </li>
-        <li className="payment-option">
-          <i className="bi bi-bank"></i> Bank Transfers
-          <div className="dropdown mt-2">
-            <button
-              className="btn btn-secondary dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {selectedBank}
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              {banks.map((bank, index) => (
-                <li key={index}>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => setSelectedBank(bank)}
-                  >
-                    {bank}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </li>
-        <li className="payment-option">
-          <i className="bi bi-wallet"></i> Restorex Wallet
-        </li>
-        <li className="payment-option">
-          <i className="bi bi-paypal"></i> PayPal
-        </li>
-        <li className="payment-option">
-          <i className="bi bi-credit-card"></i> Klarna
-        </li>
-        <li className="payment-option">
-          <i className="bi bi-credit-card"></i> Raast_ID
-        </li>
-      </ul>
+    <div className="PaymentOptions-container">
+      <h2 className="PaymentOptions-main-heading">Payment Options</h2>
+      
+      <div className="PaymentOptions-flex-container">
+        <ul className="PaymentOptions-list">
+          <li className="PaymentOptions-option">
+            <i className="bi bi-credit-card"></i>
+            <div>
+              <span>Credit/Debit Cards</span>
+              <p>Use your credit or debit card for secure and instant payments. All major cards are accepted.</p>
+            </div>
+          </li>
+          <li className="PaymentOptions-option">
+            <i className="bi bi-bank"></i>
+            <div>
+              <span>Bank Transfers</span>
+              <p>Transfer funds directly from your bank account. Choose from a list of supported banks.</p>
+              <div className="PaymentOptions-dropdown mt-2">
+                <button
+                  className="btn  PaymentOptions-dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style={{ backgroundColor: '#001F3F',color : '#FFFFFF',borderColor: '#FFFFFF' }}
+                >
+                  {selectedBank}
+                </button>
+                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  {banks.map((bank, index) => (
+                    <li key={index}>
+                      <button
+                        className="dropdown-item"
+                        onClick={() => setSelectedBank(bank)}
+                      >
+                        {bank}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li className="PaymentOptions-option">
+            <i className="bi bi-wallet"></i>
+            <div>
+              <span>Restorex Wallet</span>
+              <p>Quick and easy payments with your Restorex Wallet balance. Manage your funds effortlessly.</p>
+            </div>
+          </li>
+        </ul>
+
+        <ul className="PaymentOptions-list">
+          <li className="PaymentOptions-option">
+            <i className="bi bi-paypal"></i>
+            <div>
+              <span>PayPal</span>
+              <p>Pay securely using your PayPal account. Ideal for international transactions.</p>
+            </div>
+          </li>
+          <li className="PaymentOptions-option">
+            <i className="bi bi-credit-card"></i>
+            <div>
+              <span>Klarna</span>
+              <p>Split your purchase into easy installments with Klarna. Flexible payment plans available.</p>
+            </div>
+          </li>
+          <li className="PaymentOptions-option">
+            <i className="bi bi-credit-card"></i>
+            <div>
+              <span>Raast_ID</span>
+              <p>Use Raast ID for instant and secure payments, specifically designed for local transactions.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
