@@ -44,13 +44,17 @@ const OrderPlace = () => {
         navigate('/order-confirmation');
     };
 
-    if (products.length === 0) {
-        return <div>No product data available</div>;
-    }
+    const handleOrder = () => {
+        navigate('/checkout', { state: { products: products, formData: formData } });
+    };
 
     const totalPayment = products.reduce((total, product) => {
         return total + product.price * product.quantities;
     }, 0);
+
+    if (products.length === 0) {
+        return <div>No product data available</div>;
+    }
 
     return (
         <div className="order-container mt-4">
@@ -71,22 +75,21 @@ const OrderPlace = () => {
                     <p>Total: <strong>${totalPayment.toFixed(2)}</strong></p>
                 </div>
             </div>
-            <div className="personal-details" style={{width: '500%' }}>
+            <div className="personal-details" style={{ width: '500%' }}>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formName">
                         <Form.Label>Name</Form.Label>
                         <Form.Control type="text" placeholder="Enter your name" name="name" value={formData.name} onChange={handleChange} required />
                     </Form.Group>
                     <Form.Group controlId="formAddress">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control type="text" placeholder="Enter your address" name="address" value={formData.address} onChange={handleChange} required />
-                        </Form.Group>
-                        <Form.Group controlId="formEmail">
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control type="text" placeholder="Enter your address" name="address" value={formData.address} onChange={handleChange} required />
+                    </Form.Group>
+                    <Form.Group controlId="formEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Enter your email" name="email" value={formData.email} onChange={handleChange} required />
                     </Form.Group>
                     <div className="flex-container">
-                       
                         <Form.Group controlId="formCity">
                             <Form.Label>City</Form.Label>
                             <Form.Control type="text" placeholder="Enter your city" name="city" value={formData.city} onChange={handleChange} required />
@@ -106,10 +109,9 @@ const OrderPlace = () => {
                             <Form.Control type="text" placeholder="Enter your ZIP code" name="zip" value={formData.zip} onChange={handleChange} required />
                         </Form.Group>
                     </div>
-                  
-                    <Button variant="primary" type="submit" style={{backgroundColor: '#001F3F', color: 'white', 
-                        border: 'none', borderRadius: '10px', marginTop: '10px'
-                    }}>Place Order</Button>
+                    <Button variant="primary" type="submit" onClick={handleOrder} style={{ backgroundColor: '#001F3F', color: 'white', border: 'none', borderRadius: '10px', marginTop: '10px' }}>
+                        Proceed to Payment
+                    </Button>
                 </Form>
             </div>
         </div>
