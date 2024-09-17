@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_QUANTITY } from "../../store/actions/constant"
+import { ADD_TO_CART, REMOVE_FROM_CART, UPDATE_QUANTITY, Clear_CART } from "../../store/actions/constant"
 
 // Action to add an item to the cart
 export const addToCart = (item) => {
@@ -15,6 +15,11 @@ export const removeFromCart = (id) => {
         payload:  id 
     };
 };
+export const clearCart = () => {
+    return {
+        type: Clear_CART
+    };
+}
 
 // Action to update the quantity of an item in the cart
 export const updateQuantity = (id, quantityChange) => {

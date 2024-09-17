@@ -5,56 +5,65 @@ import { useSelector } from 'react-redux';
 import '../styling/orderplace.css';
 
 const OrderPlace = () => {
-    const navigate = useNavigate();
     const location = useLocation();
     const cartItems = useSelector((state) => state.cart.cartItems);
 
     const [products, setProducts] = useState([]);
+    const [formData, setFormData] = useState({
+        name: '',
+        address: '',
+        email: '',
+        city: '',
+        country: '',
+        phone: '',
+        zip: ''
+    });
+    const [selectedInstallment, setSelectedInstallment] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (location.state && location.state.product) {
             setProducts([location.state.product]);
-        } else if (cartItems.length > 0) {
-            setProducts(cartItems);
+            setSelectedInstallment(location.state.product.selectedInstallment || '');
         }
-    }, [location.state, cartItems]);
-
-    const [formData, setFormData] = useState({
-        name: '',
-        address: '',
-        city: '',
-        country: '',
-        state: '',
-        zip: '',
-        phone: '',
-        email: '',
-    });
+    }, [location.state]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value,
+            [e.target.name]: e.target.value
         });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Order submitted:', formData);
-        navigate('/order-confirmation');
+        // Handle form submission logic
+        handleOrder();
     };
 
     const handleOrder = () => {
-        navigate('/checkout', { state: { products: products, formData: formData } });
+        navigate('/checkout', { state: { products, formData, selectedInstallment } });
     };
 
-    const totalPayment = products.reduce((total, product) => {
-        return total + product.price * product.quantities;
-    }, 0);
+    const calculateInstallmentAmount = (total, months) => {
+        const interestRate = 0.05; // Example interest rate
+        const totalAmount = total * (1 + interestRate);
+        return (totalAmount / months).toFixed(2);
+    };
 
-    if (products.length === 0) {
-        return <div>No product data available</div>;
-    }
+    const getInstallmentAmount = () => {
+        switch (selectedInstallment) {
+            case '3m':
+                return calculateInstallmentAmount(products[0].price, 3);
+            case '6m':
+                return calculateInstallmentAmount(products[0].price, 6);
+            default:
+                return 0;
+        }
+    };
+
+    const totalPayment = products.reduce((total, product) => total + product.price, 0);
 
     return (
         <div className="order-container mt-4">
@@ -62,20 +71,24 @@ const OrderPlace = () => {
                 <h2>Order Summary</h2>
                 {products.map((product) => (
                     <div key={product._id} className="item">
-                        <img src={product.images[0]} alt={product.name} className="order-image" />
+                        <img src={product.image} alt={product.name} className="order-image" />
                         <div className="item-details">
                             <h4>{product.name}</h4>
+                            <p>Quantity: {product.quantities}</p>
                             <p>Size: {product.selectedSize}</p>
                             <p>Color: {product.selectedColor}</p>
-                            <p>Price: ${product.price.toFixed(2)}</p>
+                            <p>Price: ${(product.price * product.quantities).toFixed(2)}</p>
                         </div>
                     </div>
                 ))}
                 <div className="order-total">
                     <p>Total: <strong>${totalPayment.toFixed(2)}</strong></p>
+                    {selectedInstallment && (
+                        <p>Installment Amount ({selectedInstallment}): <strong>${getInstallmentAmount()}</strong></p>
+                    )}
                 </div>
             </div>
-            <div className="personal-details" style={{ width: '500%' }}>
+            <div className="personal-details">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formName">
                         <Form.Label>Name</Form.Label>
@@ -89,8 +102,8 @@ const OrderPlace = () => {
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" placeholder="Enter your email" name="email" value={formData.email} onChange={handleChange} required />
                     </Form.Group>
-                    <div className="flex-container">
-                        <Form.Group controlId="formCity">
+                    <div className="d-flex">
+                        <Form.Group controlId="formCity" className="mr-2">
                             <Form.Label>City</Form.Label>
                             <Form.Control type="text" placeholder="Enter your city" name="city" value={formData.city} onChange={handleChange} required />
                         </Form.Group>
@@ -99,8 +112,8 @@ const OrderPlace = () => {
                             <Form.Control type="text" placeholder="Enter your country" name="country" value={formData.country} onChange={handleChange} required />
                         </Form.Group>
                     </div>
-                    <div className="flex-container">
-                        <Form.Group controlId="formPhone">
+                    <div className="d-flex">
+                        <Form.Group controlId="formPhone" className="mr-2">
                             <Form.Label>Phone</Form.Label>
                             <Form.Control type="text" placeholder="Enter your phone number" name="phone" value={formData.phone} onChange={handleChange} required />
                         </Form.Group>
@@ -109,7 +122,7 @@ const OrderPlace = () => {
                             <Form.Control type="text" placeholder="Enter your ZIP code" name="zip" value={formData.zip} onChange={handleChange} required />
                         </Form.Group>
                     </div>
-                    <Button variant="primary" type="submit" onClick={handleOrder} style={{ backgroundColor: '#001F3F', color: 'white', border: 'none', borderRadius: '10px', marginTop: '10px' }}>
+                    <Button variant="primary" type="submit" style={{ backgroundColor: '#001F3F', color: 'white', border: 'none', borderRadius: '10px', marginTop: '10px' }}>
                         Proceed to Payment
                     </Button>
                 </Form>

@@ -88,7 +88,7 @@ function Login({ show, handleClose }) {
                             Don't have an account? <Link to="/signup" style={{ color: '#ffffff', textAlign: 'center' }}>Signup</Link>
                         </p>
 
-                        <Button type="submit" className='loginbtn'>
+                        <Button type="submit" className='loginbtn' style={{ width: '30%',color:"#001F3F", backgroundColor: '#ffffff' }}>
                             Login
                         </Button>
                     </Form>

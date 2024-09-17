@@ -66,7 +66,7 @@ const HomeProducts = () => {
                                 
                                 <div className="detaprice d-flex" style={{justifyContent: 'space-between'}}>
                                     <p className="card-price">${data.price.toFixed(2)}</p>
-                                    <p style={{color:"data.instock ? 'green' : 'red'"}}>instock:{data.instock ? 'instock' : 'out of stock'   }</p>
+                                    <p style={data.instock ? {color: 'green'} : {color: 'red'}}> Instock:{data.instock} </p>
                                     {/* <p className="card-text">{data.rating}</p> */}
                                 </div>
                                

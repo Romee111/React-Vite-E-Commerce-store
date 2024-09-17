@@ -14,6 +14,8 @@ const steps = [
 const SellersSignup = () => {
   const { AddSeller } = useSellers();
   const [activeStep, setActiveStep] = useState(0);
+  const [ID_image1, setID_image1] = useState(null);
+  const [ID_image2, setID_image2] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -49,14 +51,37 @@ const SellersSignup = () => {
     });
   };
 
+  // const handleFileChange = (e) => {
+  //   const { name, files } = e.target;
+  //   if (files[0]) {
+  //     if (files[0].size > 500 * 1024) {
+  //       setFormData({ ...formData, imageError: 'File size must be less than 500KB' });
+  //     } else {
+  //       setFormData({ ...formData, [name]: files[0] });
+  //       setFormData({ ...formData, [`${name}Preview`]: URL.createObjectURL(files[0]) });
+  //     }
+  //   }
+  // };
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    if (files[0]) {
+    if (files && files[0]) {
       if (files[0].size > 500 * 1024) {
-        setFormData({ ...formData, imageError: 'File size must be less than 500KB' });
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          [name]: '',  // Clear the value if the file is too large
+          imageError: 'File size must be less than 500KB'
+        }));
       } else {
-        setFormData({ ...formData, [name]: files[0] });
-        setFormData({ ...formData, [`${name}Preview`]: URL.createObjectURL(files[0]) });
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          [name]: files[0],
+          imageError: ''  // Clear error if file is valid
+        }));
+        if (name === 'ID_image1') {
+          setID_image1Preview(URL.createObjectURL(files[0]));
+        } else if (name === 'ID_image2') {
+          setID_image2Preview(URL.createObjectURL(files[0]));
+        }
       }
     }
   };
@@ -282,7 +307,7 @@ const SellersSignup = () => {
                           {errors.ID_CardNumber}
                         </Form.Control.Feedback>
                       </Form.Group>
-                      <Form.Group className="form-group">
+                      {/* <Form.Group className="form-group">
                         <Form.Label className="form-label">ID Image (Front):</Form.Label>
                         <Form.Control
                           type="file"
@@ -308,7 +333,64 @@ const SellersSignup = () => {
                       </Form.Group>
                       {formData.imageError && (
                         <div className="text-danger">{formData.imageError}</div>
-                      )}
+                      )} */}
+                      <Form.Group controlId="formIDImage1" style={{ textAlign: 'left', marginBottom: '20px' }}>
+        <Form.Label style={{ color: '#001F3F', fontWeight: 'bold', marginLeft: '30%' }}>ID Image (Front):</Form.Label>
+        <div className="image-upload-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <label htmlFor="file-upload-front" className="image-upload-label" style={{ cursor: 'pointer', display: 'inline-block', border: '2px dashed #001F3F', borderRadius: '8px', padding: '20px', width: '100%', maxWidth: '300px', margin: '0 auto' }}>
+            <Image size={48} style={{ color: '#001F3F' }} />
+            <p style={{ color: '#001F3F', marginTop: '10px' }}>Click or Drag to upload front image</p>
+            <input
+              id="file-upload-front"
+              type="file"
+              name="ID_image1"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
+          </label>
+        </div>
+        {ID_image1 && (
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ margin: '10px' }}>
+              <img src={URL.createObjectURL(ID_image1)} alt="ID Image Front" style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '4px' }} />
+              <p style={{ textAlign: 'center', color: '#001F3F' }}>{ID_image1.name}</p>
+            </div>
+          </div>
+        )}
+        <Form.Control.Feedback type="invalid">
+          {errors.ID_image1}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group controlId="formIDImage2" style={{ textAlign: 'left', marginBottom: '20px' }}>
+        <Form.Label style={{ color: '#001F3F', fontWeight: 'bold', marginLeft: '30%' }}>ID Image (Back):</Form.Label>
+        <div className="image-upload-container" style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <label htmlFor="file-upload-back" className="image-upload-label" style={{ cursor: 'pointer', display: 'inline-block', border: '2px dashed #001F3F', borderRadius: '8px', padding: '20px', width: '100%', maxWidth: '300px', margin: '0 auto' }}>
+            <Image size={48} style={{ color: '#001F3F' }} />
+            <p style={{ color: '#001F3F', marginTop: '10px' }}>Click or Drag to upload back image</p>
+            <input
+              id="file-upload-back"
+              type="file"
+              name="ID_image2"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
+          </label>
+        </div>
+        {ID_image2 && (
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ margin: '10px' }}>
+              <img src={URL.createObjectURL(ID_image2)} alt="ID Image Back" style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '4px' }} />
+              <p style={{ textAlign: 'center', color: '#001F3F' }}>{ID_image2.name}</p>
+            </div>
+          </div>
+        )}
+        <Form.Control.Feedback type="invalid">
+          {errors.ID_image2}
+        </Form.Control.Feedback>
+      </Form.Group>
                     </React.Fragment>
                   )}
                   {activeStep === 3 && (
