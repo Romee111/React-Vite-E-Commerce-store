@@ -73,7 +73,7 @@ function ListsProduct() {
           {products.map((data) => (
             <div key={data._id} className="product-card d-flex" onClick={() => handleProductdetailClick(data._id)}>
               <div className="product-card-body">
-                <img src={data.image} className="product-card-img-top" alt="Product" />
+                <img src={data.images[0]} className="product-card-img-top" alt="Product" />
                 <h5 className="product-card-title">
                   {data.name.length > 20 ? data.name.slice(0, 20) + "..." : data.name}
                 </h5>

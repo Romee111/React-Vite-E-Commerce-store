@@ -29,6 +29,7 @@ exports.createProduct = async (req, res) => {
             brand,
             numReviews,
             category_id,
+            subcategory_id,
             user_id,
             colors,
             sizes,
@@ -48,6 +49,7 @@ exports.createProduct = async (req, res) => {
             brand,
             numReviews,
             category_id,
+            subcategory_id,
             user_id,
             colors,
             sizes,
@@ -112,19 +114,21 @@ exports.addManyProducts=async(req,res )=>{
   exports.updateProducts= async (req, res) => {
     try{
         const {id}=req.params;
-        const {name,description,price,image,rating,instock,brand,numReviews,countInStock,}=req.body;
+        const {name,description,price,images,rating,instock,brand,numReviews,countInStock,category_id,subcategory_id}=req.body;
         const product=await Product.findById(id);
         if(product){
             const updatedProduct=await Product.findByIdAndUpdate(id,{
                 name:name,
                 description:description,
                 price:price,
-                image:image,
+                images:images,
                 rating:rating,
                 instock:instock,
                 brand:brand,
                 numReviews:numReviews,
                 countInStock:countInStock,
+                category_id:category_id,
+                subcategory_id:subcategory_id
                 
                 
             })

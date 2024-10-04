@@ -89,7 +89,7 @@ const ProductDetail = () => {
             <div className="prd-row d-flex justify-content-center">
                 <div className="col-md-4 col-sm-3 d-flex align-items-center justify-content-center">
                     <img
-                        src={product.image}
+                        src={product.images[0]}
                         alt={product.name}
                         className="img-fluid"
                     />
