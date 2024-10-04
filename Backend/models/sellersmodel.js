@@ -25,11 +25,11 @@ const sellerSchema = new mongoose.Schema({
         type: Date,
         required: true  
     },
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true
-    },
+    // user_id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "User",
+    //     required: true
+    // },
     
     image: {
         type: String,
