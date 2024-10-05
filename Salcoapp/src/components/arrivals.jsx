@@ -66,7 +66,7 @@ const Arrivals = () => {
                         {newArrival.slice(0, visibleProducts).map((data) => (
                             <div key={data._id} className="arrival-cards" onClick={() => handleArrivalDetailClick(data._id)}>
                                 <img
-                                    src={data.image}
+                                    src={data.images[0]}
                                     alt={data.name}
                                     className="arrival-cards-img"
                                 />

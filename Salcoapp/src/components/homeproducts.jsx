@@ -55,7 +55,7 @@ const HomeProducts = () => {
                     {products.slice(0, visibleProducts).map((data) => (
                         <div key={data._id} className="home-card d-flex" onClick={() => handleHomedetailClick(data._id)}>
                             <div className="home-card-body">
-                                <img src={data.image} className="home-card-img-top" alt="Product" />
+                                <img src={data.images[0]} className="home-card-img-top" alt="Product" />
                                 <h5 className="card-title">
                                     {data.name.length > 10 ? data.name.slice(0, 10) + "..." : data.name}
                                     
