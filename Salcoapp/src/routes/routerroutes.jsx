@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/home";
 import Addcart from "../components/addcart";
+import Brands from "../components/brandss";
 import Signup from "../components/signup";
 import ForgetPassword from "../components/forgetpassword";
 import Seller from "../pages/seller";
@@ -52,6 +53,7 @@ const RouterRoutes = () => {
             <Route path="/more" element={<More />}></Route>
             <Route path='/returns-refunds' element={<ReturnsRefunds />}></Route>
             <Route path='/restorex-blogs' element={<RestorexBlogs />}></Route>
+            <Route path='/Brands' element={<Brands />}></Route>
             
         </Routes>
       

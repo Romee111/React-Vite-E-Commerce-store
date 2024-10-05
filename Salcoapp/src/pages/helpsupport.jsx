@@ -29,6 +29,24 @@ function HelpSupport() {
             Once your order is shipped, you will receive a tracking number via email. You can track your order using this number on our tracking page.
           </Accordion.Body>
         </Accordion.Item>
+        <Accordion.Item eventKey="3">
+          <Accordion.Header>What payment methods do you accept?</Accordion.Header>
+          <Accordion.Body>
+            We accept a variety of payment methods, including Visa, MasterCard, PayPal, and American Express. Your payment information is processed securely to protect your data.
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="4">
+          <Accordion.Header>Do you offer international shipping?</Accordion.Header>
+          <Accordion.Body>
+            Yes, we offer international shipping to select countries. Shipping fees may vary based on the destination.
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="5">
+          <Accordion.Header>How do I contact customer support?</Accordion.Header>
+          <Accordion.Body>
+            You can reach us via email at <a href="mailto:support@restorex.com">support@restorex.com</a> or call us at +92 318-7101450.
+          </Accordion.Body>
+        </Accordion.Item>
       </Accordion>
 
       <section className="contact-info-section">
@@ -49,9 +67,25 @@ function HelpSupport() {
           </div>
         </div>
       </section>
+
       <section className="additional-help">
         <h2>Need More Help?</h2>
         <p>If you still have questions or need personalized assistance, please don't hesitate to contact our support team. We’re here to help you every step of the way and ensure you have the best experience with Restorex.</p>
+      </section>
+
+      <section className="resources">
+        <h2>Resources and Guides</h2>
+        <p>Check out our helpful resources:</p>
+        <ul>
+          <li><a href="#">Product Guides</a></li>
+          <li><a href="#">Troubleshooting Tips</a></li>
+          <li><a href="#">How-To Videos</a></li>
+        </ul>
+      </section>
+
+      <section className="community-forums">
+        <h2>Join Our Community</h2>
+        <p>Connect with other customers and ask questions in our community forums. <a href="#">Join Now</a></p>
       </section>
     </Container>
   );
