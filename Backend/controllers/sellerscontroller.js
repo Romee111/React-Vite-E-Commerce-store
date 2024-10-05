@@ -2,14 +2,34 @@ const  seller= require("../models/sellersmodel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-exports.createSeller=async (req, res)=> {
-    try {   
-        const { name, email, password, phone, sellersAddress, image,dateOfBirth, ID_CardNumber,  ID_image1, ID_image2, Business_Name, Business_Address, Business_Type,  Business_registerationNumber,Tax_IDNumber, Bank_Name, Bank_AccountNumber,Bank_Branch,Account_HolderName,Branch_Code  } = req.body;
-        const   hashPassword = await bcrypt.hash(password, 10);
-        const newSellers = new seller({
+exports.createSeller = async (req, res) => {
+    try {
+        const { userId, name, email, password, phone, sellersAddress, image, dateOfBirth, ID_CardNumber, ID_image1, ID_image2, Business_Name, Business_Address, Business_Type, Business_registerationNumber, Tax_IDNumber, Bank_Name, Bank_AccountNumber, Bank_Branch, Account_HolderName, Branch_Code } = req.body;
+
+        // Check if the user exists
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Check if the user is already a seller
+        if (user.isSeller) {
+            return res.status(400).json({ message: "User is already a seller" });
+        }
+
+        // Hash the password if provided (for cases where a user might update their password)
+        let hashPassword;
+        if (password) {
+            hashPassword = await bcrypt.hash(password, 10);
+        }
+
+        // Create a new seller profile linked to the user
+        const newSeller = new seller({
+            userId: user._id,
             name,
-            email,
-            password: hashPassword,
+            email: user.email, // Use the existing email from the user
+            password: hashPassword || user.password, // Use the existing password if not updated
             phone,
             sellersAddress,
             dateOfBirth,
@@ -29,15 +49,19 @@ exports.createSeller=async (req, res)=> {
             isSeller: true
         });
 
-        await newSellers.save();
-        res.status(201).json(
-            {
-                success: true,
-            data: newSellers,
-            message: "Sellers created successfully"
-            }
-        );
+        // Save the seller profile
+        await newSeller.save();
+
+        // Update the user role to seller
+        user.isSeller = true;
+        await user.save();
+
+        res.status(201).json({
+            success: true,
+            data: newSeller,
+            message: "Seller account created successfully"
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-}
+};
