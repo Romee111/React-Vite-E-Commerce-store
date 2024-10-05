@@ -60,7 +60,7 @@ function Categories() {
         <div className="col-md-12">
           <div className="cat-card-1">
             <div className="cat-cards">
-              {visibleSubCategories.map((data) => (
+              {visibleSubCategories( ).map((data) => (
                 <div key={data.id} className="cat-card" onClick={handleCategoryClick}>
                   <div className="cat-card-body">
                     <img src={data.image} className="cat-card-img-top" alt="Product" />
