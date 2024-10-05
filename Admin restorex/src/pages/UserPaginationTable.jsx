@@ -124,7 +124,7 @@ function UserPaginationTable() {
                   <IconButton
                     aria-label="edit"
                     onClick={() => handleEditUser(row)}
-                    color="primary"
+                  
                   >
                     <EditIcon />
                   </IconButton>

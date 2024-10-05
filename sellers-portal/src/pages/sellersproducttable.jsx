@@ -162,7 +162,7 @@ function SellersProductTable() {
                   <IconButton
                     aria-label="edit"
                     onClick={() => handleEditProduct(row)}
-                    color="primary"
+               
                   >
                     <EditIcon />
                   </IconButton>

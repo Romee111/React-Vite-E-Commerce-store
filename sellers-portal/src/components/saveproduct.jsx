@@ -209,7 +209,7 @@ function SaveProductModal( props ) {
 
           {/* Save Button */}
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-            <Button type="submit" variant="primary" style={{ backgroundColor: '#001F3F', borderColor: '#001F3F' }}>
+            <Button type="submit"  style={{ backgroundColor: '#001F3F', borderColor: '#001F3F' }}>
               Save Changes
             </Button>
           </div>

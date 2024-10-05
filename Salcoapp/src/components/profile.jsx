@@ -167,7 +167,7 @@ const Profile = ({ userId }) => {
                         onChange={handleChange}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">Update Profile</button>
+                <button type="submit" className="btn-update-profile">Update Profile</button>
             </form>
         </div>
     );

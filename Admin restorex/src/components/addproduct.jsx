@@ -210,7 +210,7 @@ function MyVerticallyCenteredModal(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide} className='add-product-button'>Close</Button>
-        <Button type="submit" variant="primary" className='add-product-button'>Add</Button>
+        <Button type="submit"  className='add-product-button'>Add</Button>
       </Modal.Footer>
     </Modal>
   );

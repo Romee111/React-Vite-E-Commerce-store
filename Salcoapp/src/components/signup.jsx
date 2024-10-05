@@ -163,7 +163,7 @@ function Signup() {
                                                 <label className="form-label" htmlFor="uploadImage">Upload Image</label>
                                             </div>
 
-                                            <button type="submit" className="btn btn-primary">Register</button>
+                                            <button type="submit" className="btn-register-btn">Register</button>
                                         </form>
                                         {error && <p style={{ color: 'red' }}>{error}</p>}
                                     </div>

@@ -21,7 +21,7 @@ const LocationAddress = () => {
           <label htmlFor="zip" className="form-label">ZIP Code</label>
           <input type="text" className="form-control" id="zip" placeholder="Enter your ZIP code" />
         </div>
-        <button type="submit" className="btn btn-primary">Update Address</button>
+        <button type="submit" className="btn location-address-btn">Update Address</button>
       </form>
     </div>
   );

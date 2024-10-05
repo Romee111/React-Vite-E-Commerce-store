@@ -95,7 +95,7 @@ function Inbox() {
                   <TableCell>
                     <IconButton
                       aria-label="archive"
-                      color="primary"
+                   
                       onClick={() => handleArchiveEmail(email.id)}
                     >
                       <Archive />
@@ -133,7 +133,7 @@ function Inbox() {
                         />
                         <Button
                           variant="contained"
-                          color="primary"
+                      
                           endIcon={<Send />}
                           onClick={handleSendReply}
                           style={{ marginTop: '10px' }}

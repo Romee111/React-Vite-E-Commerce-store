@@ -47,7 +47,7 @@ function EmailDialog({ open, onClose, email }) {
         />
         <Button
           variant="contained"
-          color="primary"
+       
           endIcon={<Send />}
           onClick={handleSendReply}
           sx={{ mt: 2 }}

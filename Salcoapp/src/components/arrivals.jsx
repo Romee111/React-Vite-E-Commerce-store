@@ -4,17 +4,18 @@ import { useArrivals } from '../hooks/arrivals';
 import { useNavigate } from 'react-router-dom';
 
 const Arrivals = () => {
-    const [newArrival, setArrival] = useState([]);
-    const [filterProduct, setfilterProduct] = useState([]);
-    const [visibleProducts, setVisibleProducts] = useState(10);
+    const [newArrival, setArrival] = useState([]); // This applies to both filtered and full product lists
+    const [filterProduct, setfilterProduct] = useState([]); // Holds all products
+    const [visibleProducts, setVisibleProducts] = useState(10); // Controls the number of visible products
     const { getArrivals } = useArrivals();
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Fetch products and apply to both states
         const fetchProducts = async () => {
             const data = await getArrivals();
-            setArrival(data);
-            setfilterProduct(data);
+            setArrival(data);  // Initially show all products
+            setfilterProduct(data); // Keep all products here for filtering
         };
 
         fetchProducts();
@@ -23,9 +24,9 @@ const Arrivals = () => {
     useEffect(() => {
         const updateVisibleProducts = () => {
             if (window.innerWidth <= 768) {
-                setVisibleProducts(6);
+                setVisibleProducts(6); // Fewer products for smaller screens
             } else {
-                setVisibleProducts(16);
+                setVisibleProducts(16); // More products for larger screens
             }
         };
 
@@ -40,15 +41,13 @@ const Arrivals = () => {
 
     const handleFilter = (filter) => {
         if (filter === 'newArrivals') {
-            setArrival(filterProduct);
+            setArrival(filterProduct); // Reset to show all new arrivals
         } else if (filter === 'Featured') {
-            // Implement your logic to filter featured products
-            setfilterProduct([]);
-            setArrival([]);
+            const featuredProducts = filterProduct.filter(product => product.isFeatured);
+            setArrival(featuredProducts); // Apply filtering for featured products
         } else if (filter === 'TopRated') {
-            // Implement your logic to filter top-rated products
-            setfilterProduct([]);
-            setArrival([]);
+            const topRatedProducts = filterProduct.filter(product => product.rating >= 4.5);
+            setArrival(topRatedProducts); // Apply filtering for top-rated products
         }
     };
 
@@ -79,7 +78,6 @@ const Arrivals = () => {
                         ))}
                     </div>
                 </div>
-                
             </div>
         </div>
     );

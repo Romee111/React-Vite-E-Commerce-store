@@ -122,7 +122,7 @@ const OrderPlace = () => {
                             <Form.Control type="text" placeholder="Enter your ZIP code" name="zip" value={formData.zip} onChange={handleChange} required />
                         </Form.Group>
                     </div>
-                    <Button variant="primary" type="submit" style={{ backgroundColor: '#001F3F', color: 'white', border: 'none', borderRadius: '10px', marginTop: '10px' }}>
+                    <Button  type="submit" style={{ backgroundColor: '#001F3F', color: 'white', border: 'none', borderRadius: '10px', marginTop: '10px' }}>
                         Proceed to Payment
                     </Button>
                 </Form>

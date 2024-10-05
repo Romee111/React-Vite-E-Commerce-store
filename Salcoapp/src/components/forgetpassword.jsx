@@ -70,7 +70,7 @@ function ForgetPassword() {
                 {error && <p className="text-danger">{error}</p>}
                 {successMessage && <p className="text-success">{successMessage}</p>}
 
-                <Button variant="primary" type="submit" style={buttonStyle}>
+                <Button  type="submit" style={buttonStyle}>
                     Reset Password
                 </Button>
             </Form>

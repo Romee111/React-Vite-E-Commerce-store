@@ -96,7 +96,7 @@ function categorylist() {
                     <IconButton
                       aria-label="edit"
                       onClick={() => handleEditCategory(category)}
-                      color="primary"
+                   
                     >
                       <Edit />
                     </IconButton>
@@ -128,7 +128,7 @@ function categorylist() {
                                   <IconButton
                                     aria-label="edit"
                                     onClick={() => handleEditCategory(sub)}
-                                    color="primary"
+                             
                                   >
                                     <Edit />
                                   </IconButton>
