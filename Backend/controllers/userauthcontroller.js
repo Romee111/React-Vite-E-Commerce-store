@@ -132,7 +132,7 @@ exports.getAllUser = async (req, res) => {
 exports.getUser = async (req, res) => {
     try {
         const id = req.params.id
-        const user = await useAuth.findById({ _id: id })
+        const user = await users.findById({ _id: id })
         res.status(200).json({
             status: "success",
             data: {
