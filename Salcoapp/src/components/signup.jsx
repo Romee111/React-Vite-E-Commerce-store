@@ -60,7 +60,7 @@ function Signup() {
         try {
             const res = await register(formData);
             console.log(res);
-            navigate('/some-route'); // Redirect after successful signup
+            navigate('/'); // Redirect after successful signup
         } catch (err) {
             setError('An error occurred');
         }

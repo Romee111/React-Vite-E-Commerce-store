@@ -3,10 +3,10 @@ const Payment = require('../models/paymentmodel');
 
 exports.createPayment = async (req, res) => {
     try {
-        const {  paymentMethod, installmentPlan, bankDetails, isCOD, orderId,  } = req.body;
+        const {  paymentMethod, installmentPlan, bankDetails, isCOD, orderId,country, region  } = req.body;
 
         let paymentIntent;
-
+               
         // Determine whether Klarna is available based on country/region
         const isKlarnaAvailable = checkKlarnaAvailability(country, region);
 

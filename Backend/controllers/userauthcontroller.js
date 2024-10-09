@@ -50,41 +50,111 @@ exports.register = async (req, res) => {
 
 }
 
+// exports.login = async (req, res) => {
+//     try {
+
+//         console.log("API CALLED", req.body);
+//         const { email, password } = req.body
+//         const user = await users.findOne({ email: email })
+
+
+//         if (!user) {
+//             return res.status(401).json({
+//                 status: "fail",
+//                 message: "invalid credentials"
+//             })
+//         }
+//         const isMatch = await bcrypt.compare(password, user.password)
+
+//         if (!isMatch) {
+
+//             return res.status(401).json({
+//                 status: "fail",
+//                 message: "invalid credentials"
+//             })
+//         }
+//         const token = jwt.sign({ id: user._id, name: user.name, isAdmin: user.isAdmin, isSeller: user.isSeller }, process.env.JWT_SECRET, { expiresIn: "2 days" });
+//         res.cookie('jwt', token, {
+//             httpOnly: true,
+//         }
+//         )
+
+//         console.log(user, "USER");
+
+//         res.status(200).json({
+//             status: "success",
+//             isAdmin: user.isAdmin,
+//             isSeller: user.isSeller,
+//             user_id: user._id,
+//             firstName: user.firstName,
+//             lastName: user.lastName,
+//             email: user.email,
+//             phone: user.phone,
+//             address1: user.address1,
+//             address2: user.address2,
+//             city: user.city,
+//             pincode: user.pincode,
+//             country: user.country,
+//             state: user.state,
+//             image: user.image,
+            
+//             token,
+//         })
+//     }
+//     catch (err) {
+//         console.log(err)
+//         res.status(400).json({
+//             status: "fail",
+//             message: "invalid credentials"
+//         })
+//     }
+// }
 exports.login = async (req, res) => {
     try {
-
         console.log("API CALLED", req.body);
-        const { email, password } = req.body
-        const user = await users.findOne({ email: email })
-
+        const { email, password } = req.body;
+        
+        // Fetch user by email
+        const user = await users.findOne({ email: email });
 
         if (!user) {
             return res.status(401).json({
                 status: "fail",
-                message: "invalid credentials"
-            })
+                message: "Invalid credentials"  // More clear message
+            });
         }
-        const isMatch = await bcrypt.compare(password, user.password)
 
+        // Compare hashed passwords
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-
             return res.status(401).json({
                 status: "fail",
-                message: "invalid credentials"
-            })
+                message: "Invalid credentials"
+            });
         }
-        const token = jwt.sign({ id: user._id, name: user.name, isAdmin: user.isAdmin, isSeller: user.isSeller }, process.env.JWT_SECRET, { expiresIn: "2 days" });
-        res.cookie('jwt', token, {
-            httpOnly: true,
-        }
-        )
 
-        console.log(user, "USER");
+        // Generate a JWT token
+        const token = jwt.sign(
+            { 
+                id: user._id, 
+                name: user.name, 
+                isAdmin: user.isAdmin, 
+                isSeller: user.isSeller 
+            },
+            process.env.JWT_SECRET, 
+            { expiresIn: "2 days" }
+        );
 
+        // Set the token in cookies
+        res.cookie('jwt', token, { httpOnly: true });
+
+        console.log("User logged in: ", user);
+
+        // Return success response with user details
         res.status(200).json({
             status: "success",
-            isAdmin: user.isAdmin,
-            isSeller: user.isSeller,
+            isAdmin: user.isAdmin || false, // Default false if not present
+            isSeller: user.isSeller || false, // Default false if not present
             user_id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
@@ -97,18 +167,16 @@ exports.login = async (req, res) => {
             country: user.country,
             state: user.state,
             image: user.image,
-            
-            token,
-        })
-    }
-    catch (err) {
-        console.log(err)
+            token
+        });
+    } catch (err) {
+        console.log("Login error: ", err);
         res.status(400).json({
             status: "fail",
-            message: "invalid credentials"
-        })
+            message: "An error occurred while logging in."
+        });
     }
-}
+};
 
 exports.getAllUser = async (req, res) => {
     try {
