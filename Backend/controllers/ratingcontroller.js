@@ -48,3 +48,21 @@ exports.deleterating = async (req, res) => {
          }
 }
 
+exports.getRatings = async (req, res) => {
+         try{
+                 const ratings = await rating.find().populate('user_id', 'name').populate('product_id', 'name');
+                 res.status(200).json(ratings);
+         }catch(err){
+                 res.status(500).json(err);
+         }
+}
+
+ exports.getRatingsById = async (req, res) => {
+         try{
+                 const {id}=req.params;
+                 const ratings = await rating.findById(id).populate('user_id', 'name').populate('product_id', 'name');
+                 res.status(200).json(ratings);
+         }catch(err){
+                 res.status(500).json(err);
+         }
+}

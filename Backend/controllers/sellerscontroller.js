@@ -65,3 +65,43 @@ exports.createSeller = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+
+exports.getAllSellers = async (req, res) => {
+    try {
+        const sellers = await seller.find();
+        res.status(200).json(sellers);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+exports.getSellerById = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const seller = await seller.findById(id);
+        res.status(200).json(seller);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+exports.updateSeller = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const updatedSeller = await seller.findByIdAndUpdate(id, req.body, { new: true });
+        res.status(200).json(updatedSeller);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+exports.deleteSeller = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deletedSeller = await seller.findByIdAndDelete(id);
+        res.status(200).json(deletedSeller);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }   
+}

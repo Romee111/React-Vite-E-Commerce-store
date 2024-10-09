@@ -21,9 +21,29 @@ exports.addreview = async (req, res) => {
  exports.getreviewsById = async (req, res) => {
     try {
         const { user_id } = req.params;
-        const reviews = await review.find({ user_id }).populate('user_id', 'name');
+        const reviews = await review.find({ user_id }).populate('user_id', 'name').populate('product_id', 'name');
         res.status(200).json(reviews);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
+
+exports.getreviews = async (req, res) => {
+    try {
+        const reviews = await review.find().populate('user_id', 'name').populate('product_id', 'name');
+        res.status(200).json(reviews);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.deletereview = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const review = await review.findByIdAndDelete(id);
+        res.status(200).json(review);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

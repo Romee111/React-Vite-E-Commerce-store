@@ -10,6 +10,13 @@ router
 .route("/deleterating")
 .delete(ratingcontroller.deleterating);
 
+router
+.route("/getRatings")
+.get(ratingcontroller.getRatings);
+
+router
+.route("/getRatingsById/:id")
+.get(ratingcontroller.getRatingsById);
 
 
 module.exports = router

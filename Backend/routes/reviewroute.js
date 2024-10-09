@@ -11,4 +11,12 @@ router
 .route("/getreviewsById/:id")
 .get(reviewcontroller.getreviewsById);
 
+router
+.route("/getreviews")
+.get(reviewcontroller.getreviews);
+
+router
+.route("/deletereview")
+.delete(reviewcontroller.deletereview);
+
 module.exports = router
