@@ -9,46 +9,98 @@ const nodemailer = require("nodemailer");
 
 exports.register = async (req, res) => {
     try {
-        var { firstName, lastName, email, password, phone, isAdmin,isSeller, address1, address2, city, pincode, country, state, isShipper, image, retypePassword } = req.body;
-        const hashPassword = await bcrypt.hash(password, 10)
-        state = JSON.stringify(state);
-        const user = await users.create({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
+        let {
+            firstName,
+            lastName,
+            email,
+            password,
+            phone,
+            isAdmin,
+            isSeller,
+            address1,
+            address2,
+            city,
+            pincode,
+            country,
+            state,
+            image,
+            retypePassword,
+            sellersAddress,
+            dateOfBirth,
+            ID_CardNumber,
+            ID_image1,
+            ID_image2,
+            Business_Name,
+            Business_Address,
+            Business_Type,
+            Business_registrationNumber,
+            Tax_IDNumber,
+            Bank_AccountNumber,
+            Bank_Name,
+            Account_HolderName,
+            Branch_Code
+        } = req.body;
+
+        const hashPassword = await bcrypt.hash(password, 10);
+        state = JSON.stringify(state); // Ensure state is stored as string if it's an object
+
+        // Create a base user object
+        let userObj = {
+            firstName,
+            lastName,
+            email,
             password: hashPassword,
-            phone: phone,
-            address1: address1,
-            address2: address2,
-            city: city,
-            pincode: pincode,
-            country: country,
-            state: state,
+            phone,
+            address1,
+            address2,
+            city,
+            pincode,
+            country,
+            state,
             isAdmin: Boolean(isAdmin),
-            isSeller: Boolean(isShipper),
-            image: image || '../assests/reslogo.png',
-            retypePassword: retypePassword
+            isSeller: Boolean(isSeller),
+            image: image || '../assets/reslogo.png',
+            retypePassword
+        };
 
+        // If the user is a seller, add seller-specific fields
+        if (isSeller) {
+            Object.assign(userObj, {
+                sellersAddress,
+                dateOfBirth,
+                ID_CardNumber,
+                ID_image1,
+                ID_image2,
+                Business_Name,
+                Business_Address,
+                Business_Type,
+                Business_registrationNumber,
+                Tax_IDNumber,
+                Bank_AccountNumber,
+                Bank_Name,
+                Account_HolderName,
+                Branch_Code
+            });
+        }
 
-        })
+        // Create user in the database
+        const user = await users.create(userObj);
 
         res.status(201).json({
             status: "success",
             data: {
                 user
             }
-        })
-
-    }
-    catch (err) {
-        console.log(err)
+        });
+    } catch (err) {
+        console.log(err);
         res.status(400).json({
             status: "fail",
-            message: err
-        })
+            message: err.message
+        });
     }
+};
 
-}
 
 // exports.login = async (req, res) => {
 //     try {
@@ -97,7 +149,7 @@ exports.register = async (req, res) => {
 //             country: user.country,
 //             state: user.state,
 //             image: user.image,
-            
+
 //             token,
 //         })
 //     }
@@ -113,7 +165,7 @@ exports.login = async (req, res) => {
     try {
         console.log("API CALLED", req.body);
         const { email, password } = req.body;
-        
+
         // Fetch user by email
         const user = await users.findOne({ email: email });
 
@@ -135,13 +187,13 @@ exports.login = async (req, res) => {
 
         // Generate a JWT token
         const token = jwt.sign(
-            { 
-                id: user._id, 
-                name: user.name, 
-                isAdmin: user.isAdmin, 
-                isSeller: user.isSeller 
+            {
+                id: user._id,
+                name: user.name,
+                isAdmin: user.isAdmin,
+                isSeller: user.isSeller
             },
-            process.env.JWT_SECRET, 
+            process.env.JWT_SECRET,
             { expiresIn: "2 days" }
         );
 
@@ -221,22 +273,12 @@ exports.getUser = async (req, res) => {
 
 exports.updateUser = async (req, res) => {
     try {
-        const userExists = await users.findOne({ email: req.body.email })
-        if (userExists) {
+        let newPassword;
+        if (req.body.password) {
             newPassword = await bcrypt.hash(req.body.password, 10)
         }
-        else {
-            newPassword = req.body.password
-        }
-
-        const id = req.params.id
-        const { name, email, isShipper } = req.body
-        const user = await users.findByIdAndUpdate(id, {
-            name: name,
-            email: email,
-            isShipper: isShipper,
-
-        })
+        const id = req.params.id;
+        const user = await users.findByIdAndUpdate(id, {...req.body,newPassword},{ new: true })
         res.status(200).json({
             status: "success",
             data: {
@@ -244,7 +286,6 @@ exports.updateUser = async (req, res) => {
             }
         })
     }
-
     catch (err) {
         console.log(err)
         res.status(400).json({
@@ -276,152 +317,65 @@ exports.deleteUser = async (req, res) => {
 }
 
 exports.forgetPassword = async (req, res) => {
-    // try {
-    //     const { email } = req.body
-    //     const user = await users.findOne({ email: email })
-    //     if (!user) {
-    //         return res.status(401).json({
-    //             status: "fail",
-    //             message: "no email found"
-    //         })
-    //     }
-        
-    //     const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    //     console.log(process.env.EMAIL,process.env.PASSWORD)
-    //     const tranporter=nodemailer.createTransport({
-    //         service:"gmail",
-    //         auth:{
-    //             user:process.env.EMAIL,
-    //             pass:process.env.PASSWORD,
-                
-    //         }
-            
-            
-    //     })
-
-    //     const mailOptions = {
-    //         from: process.env.EMAIL,
-    //         to: user.email,
-    //         subject: "Forget Password",
-    //         html: `<h1>Forget Password</h1>
-    //         <p>click on this <a href="http://localhost:2900/userauth/resetPassword/${forgetToken}">link</a> to reset your password</p>`
-    //     };
-
-    //         await tranporter.sendMail(mailOptions);
-    //     res.status(200).json({
-    //         status: "success",
-    //         message:'Emaail has been sent',
-    //         data: {
-    //             forgetToken
-    //         }
-    //     })
-    // }
-    // try {
-    //     const { email } = req.body
-    //     const user = await users.findOne({ email: email })
-    //     if (!user) {
-    //         return res.status(401).json({
-    //             status: "fail",
-    //             message: "no email found"
-    //         })
-    //     }
-        
-    //     const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    //     console.log(process.env.EMAIL,process.env.PASSWORD)
-    //     var transporter = nodemailer.createTransport({
-    //         service: 'gmail',
-    //         auth: {
-    //           user: 'ceorestorex@gmail.com',
-    //           pass: 'pwje ylws zzma gmf'
-    //         }
-    //       });
-          
-    //       var mailOptions = {
-    //         from: 'youremail@gmail.com',
-    //         to: 'myfriend@yahoo.com',
-    //         subject: 'Sending Email using Node.js',
-    //         text: 'That was easy!'
-    //       };
-          
-    //       transporter.sendMail(mailOptions, function(error, info){
-    //         data:{{
-    //             forgetToken
-
-    //         }}
-    //         if (error) {
-    //           console.log(error);
-    //         } else {
-    //           console.log('Email sent: ' + info.response);
-    //         }
-    //       });
-          
-          
-    //     }
-        
-    // catch (err) {
-    //     res.status(400).json({
-    //         status: "fail",
-    //         message: err
-    //     })
-    // }
-    exports.forgetPassword = async (req, res) => {
-        try {
-            const { email } = req.body;
-            const user = await users.findOne({ email: email });
-            if (!user) {
-                return res.status(401).json({
-                    status: "fail",
-                    message: "No email found"
-                });
-            }
-            
-            const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-            
-            // Use environment variables for credentials
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.EMAIL, // Ensure this matches the sending email
-                    pass: process.env.PASSWORD
-                }
-            });
-    
-            const mailOptions = {
-                from: process.env.EMAIL, // Use the correct sending email
-                to: user.email,
-                subject: 'Forget Password',
-                html: `<h1>Forget Password</h1>
-                <p>Click on this <a href="http://localhost:2900/userauth/resetPassword/${forgetToken}">link</a> to reset your password</p>`
-            };
-    
-            // Send the email
-            transporter.sendMail(mailOptions, function(error, info) {
-                if (error) {
-                    console.log(error);
-                    return res.status(500).json({
-                        status: "fail",
-                        message: "Error sending email",
-                        error: error.message
-                    });
-                } else {
-                    console.log('Email sent: ' + info.response);
-                    return res.status(200).json({
-                        status: "success",
-                        message: 'Email has been sent',
-                        data: {
-                            forgetToken
-                        }
-                    });
-                }
-            });
-        } catch (err) {
-            res.status(400).json({
+    try {
+        const { email } = req.body;
+        const user = await users.findOne({ email: email });
+        if (!user) {
+            return res.status(401).json({
                 status: "fail",
-                message: err.message
+                message: "No email found"
             });
         }
-    };
-}
+
+        const forgetToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+        // Use environment variables for credentials
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 587,
+            // secure: false, // true for port 465, false for other ports
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.PASSWORD,
+            },
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL, // Use the correct sending email
+            to: user.email,
+            subject: 'Forget Password',
+            html: `<h1>Forget Password</h1>
+                <p>Click on this <a href="http://localhost:2900/userauth/resetPassword/${forgetToken}">link</a> to reset your password</p>`
+        };
+
+        // Send the email
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+                return res.status(500).json({
+                    status: "fail",
+                    message: "Error sending email",
+                    error: error.message
+                });
+            } else {
+                console.log('Email sent: ' + info.response);
+                return res.status(200).json({
+                    status: "success",
+                    message: 'Email has been sent',
+                    data: {
+                        forgetToken
+                    }
+                });
+            }
+        });
+    } catch (err) {
+        res.status(400).json({
+            status: "fail",
+            message: err.message
+        });
+    }
+};
+
 
 
 exports.resetPassword = async (req, res) => {

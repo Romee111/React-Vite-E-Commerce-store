@@ -72,9 +72,9 @@ exports.createOrder = async (req, res) => {
         const newOrder = new Order({
             user_id: mongoose.Types.ObjectId(user_id),  // Ensure it's ObjectId
             product_id: mongoose.Types.ObjectId(product_id),  // Ensure it's ObjectId
-            shipping_Address,
-            payment_Method,
-            payment_Status,
+            // shipping_Address,
+            // payment_Method,
+            // payment_Status,
             order_Status,
             manageOrderSchema: order_CreatedDate  // Assuming manageOrderSchema is correctly defined in your model
         });

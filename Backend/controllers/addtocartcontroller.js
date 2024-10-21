@@ -92,5 +92,3 @@ exports.deleteCart=async(req,res)=>{
         })
     }
 }
-
-

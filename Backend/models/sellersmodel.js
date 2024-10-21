@@ -1,4 +1,4 @@
-const  mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const sellerSchema = new mongoose.Schema({
     name: {
@@ -23,14 +23,13 @@ const sellerSchema = new mongoose.Schema({
     },
     dateOfBirth: {
         type: Date,
-        required: true  
+        required: true
     },
     user_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
     },
-    
     image: {
         type: String,
         required: true
@@ -72,7 +71,6 @@ const sellerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
- 
     Account_HolderName: {
         type: String,
         required: true
@@ -81,13 +79,12 @@ const sellerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
- 
     created_at: {
         type: Date,
         default: Date.now
     }
-    
-    
+
+
 
 
 });

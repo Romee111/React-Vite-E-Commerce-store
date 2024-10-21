@@ -32,7 +32,7 @@ app.use('/order',orderroute);
 app.use('/addtocart',addtocartroute);
 app.use('/rating',ratingroute);
 app.use('/review',reviewroute);
-app.use('/seller',sellerroute);
+// app.use('/seller',sellerroute);
 app.use('/payment',paymentroute);
 
 app.listen(process.env.PORT,()=>{
