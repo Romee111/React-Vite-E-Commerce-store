@@ -65,15 +65,11 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     }],
-    //  countInStock:{
-    //      type:Number,
-    //      required:true,
-
-    //        }   ,
-    //  dateCreated:{
-    //      type:Date,
-    //      default:Date.now(),
-    //       },
+   createdBy: {
+      ref: "User",
+      type: mongoose.Schema.Types.ObjectId
+   }
+    
 });
 const Product = mongoose.model("Product", productSchema);
 module.exports = Product;

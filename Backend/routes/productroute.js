@@ -5,7 +5,7 @@ const usermiddleware=require('../middlewares/userauthmiddleware')
 
 router
 .route("/createProduct")
-.post(productcontroller.createProduct);
+.post(middleware.isauthorized,productcontroller.createProduct);
 
 router
 .route("/addManyProducts")
@@ -21,11 +21,11 @@ router
 
 router
 .route("/updateProducts/:id")
-.put(productcontroller.updateProducts);
+.put( usermiddleware.isauthorized, productcontroller.updateProducts);
 
 router
 .route("/deleteProducts/:id")    
-.delete(usermiddleware.isauthorized,productcontroller.deleteProducts);
+.delete(  usermiddleware.isauthorized,productcontroller.deleteProducts);
 
 router
 .route("/searchProduct/:query")
@@ -34,4 +34,9 @@ router
 router
 .route('/newArrivals')
 .get(productcontroller.newArrivals)
+ 
+router
+.route('/getProductsBySeller')
+.get(middleware.isauthorized, productcontroller.getProductsBySeller)
+
 module.exports = router;
