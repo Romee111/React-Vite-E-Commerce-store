@@ -2,43 +2,6 @@ const order=require("../models/ordermodel")
 const mongoose=require("mongoose")
 
 
-exports.createOrder=async(req,res)=>{
-
-    try{
-        // const ordorder_CreatedDate = req.bosy.order_CreatedDate
-        // const orderCreated=manageOrderSchema.map( async order => {
-        //     let newManageOrderid =  new ManageOrder({
-        //         order_Quantity: order.order_Quantity,
-        //         order_TotalPrice: order.order_TotalPrice
-        //     })
-        //     newManageOrderid=await newManageOrderid.save();
-        //     return orderCreated
-            
-        // });
-        const matchuserProduct=await order.find({user_id:req.body.user_id,product_id:req.body.product_id})
-        if(!matchuserProduct){
-            return res.status(404).json({message:"product not found"})
-        }
-        const {user_id,product_id,shipping_Address,payment_Method,payment_Status,order_Status,order_CreatedDate }=req.body 
-    const newOrder=new order({
-      
-        user_id,
-        product_id,
-        shipping_Address,
-        payment_Method,
-        payment_Status,
-        order_Status,
-         manageOrderSchema:order_CreatedDate
-    });
-   
-          const savedOrder=await newOrder.save();
-        res.status(200).json(savedOrder);
-    }catch(err){
-        console.log(err);     
-        res.status(500).json(err);
-
-    }
-}
 
 // exports.getOrder=async(req,res)=>{
 //     try{
@@ -49,6 +12,7 @@ exports.createOrder=async(req,res)=>{
 //         res.status(500).json(err);
 //     }
 // }
+
 exports.createOrder = async (req, res) => {
     try {
         // Destructure the required fields from the request body
@@ -70,24 +34,111 @@ exports.createOrder = async (req, res) => {
 
         // Create a new order object
         const newOrder = new Order({
-            user_id: mongoose.Types.ObjectId(user_id),  // Ensure it's ObjectId
-            product_id: mongoose.Types.ObjectId(product_id),  // Ensure it's ObjectId
-            // shipping_Address,
-            // payment_Method,
-            // payment_Status,
+            user_id: mongoose.Types.ObjectId(user_id),
+            product_id: mongoose.Types.ObjectId(product_id),
+            shipping_Address,
+            payment_Method,
+            payment_Status,
             order_Status,
-            manageOrderSchema: order_CreatedDate  // Assuming manageOrderSchema is correctly defined in your model
+            order_CreatedDate,
         });
 
         // Save the new order
         const savedOrder = await newOrder.save();
-        res.status(200).json(savedOrder);
+
+        // Fetch user details (Assuming you have a User model)
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Set up nodemailer transporter
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 587,
+            auth: {
+                user: process.env.EMAIL, // Use environment variable for email
+                pass: process.env.PASSWORD, // Use environment variable for email password
+            },
+        });
+
+        // Email content
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: user.email, // Send to user's email
+            subject: 'Order Confirmation',
+            html: `
+                <h1>Your Order is Confirmed!</h1>
+                <p>Thank you for shopping with us.</p>
+                <p>Order Details:</p>
+                <ul>
+                    <li>Product ID: ${product_id}</li>
+                    <li>Shipping Address: ${shipping_Address}</li>
+                    <li>Payment Method: ${payment_Method}</li>
+                    <li>Order Status: ${order_Status}</li>
+                </ul>
+                <p>We will notify you once your order is shipped.</p>
+            `,
+        };
+
+
+
+        // Send email
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log("Error sending email:", error);
+                return res.status(500).json({ message: "Order created but error sending email", error: error.message });
+            } else {
+                console.log('Email sent: ' + info.response);
+                return res.status(200).json({ message: 'Order created and email sent', order: savedOrder });
+            }
+        });
 
     } catch (err) {
         console.error("Error creating order:", err);
         res.status(500).json({ message: "Server error", error: err });
     }
-};
+}
+
+// exports.createOrder = async (req, res) => {
+//     try {
+//         // Destructure the required fields from the request body
+//         const { user_id, product_id, shipping_Address, payment_Method, payment_Status, order_Status, order_CreatedDate } = req.body;
+
+//         // Ensure that user_id and product_id are valid ObjectId types
+//         const validUserId = mongoose.Types.ObjectId.isValid(user_id);
+//         const validProductId = mongoose.Types.ObjectId.isValid(product_id);
+
+//         if (!validUserId || !validProductId) {
+//             return res.status(400).json({ message: "Invalid user_id or product_id" });
+//         }
+
+//         // Check if the product already exists for the user
+//         const matchuserProduct = await Order.findOne({ user_id: user_id, product_id: product_id });
+//         if (!matchuserProduct) {
+//             return res.status(404).json({ message: "Product not found for the user" });
+//         }
+
+//         // Create a new order object
+//         const newOrder = new Order({
+//             user_id: mongoose.Types.ObjectId(user_id),  // Ensure it's ObjectId
+//             product_id: mongoose.Types.ObjectId(product_id),  // Ensure it's ObjectId
+//             // shipping_Address,
+//             // payment_Method,
+//             // payment_Status,
+//             order_Status,
+//             manageOrderSchema: order_CreatedDate  // Assuming manageOrderSchema is correctly defined in your model
+//         });
+
+//         // Save the new order
+//         const savedOrder = await newOrder.save();
+//         res.status(200).json(savedOrder);
+
+//     } catch (err) {
+//         console.error("Error creating order:", err);
+//         res.status(500).json({ message: "Server error", error: err });
+//     }
+// };
 
 exports.getlistOrder=async(req,res)=>{
     try{

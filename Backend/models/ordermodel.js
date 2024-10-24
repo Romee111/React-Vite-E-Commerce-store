@@ -12,18 +12,11 @@ const OrderSchema= new mongoose.Schema({
         ref:"Product",
         required:true,
     },
-    // shipping_Address:{
-    //     type:String,
-    //     required:true,
-    // },
-    // payment_Method:{
-    //     type:String,
-    //     required:true,
-    // },
-    // payment_Status:{
-    //     type:String,
-    //     required:true,
-    // },
+
+    payment_id:{
+        ref:"Payment",
+        type:mongoose.Schema.Types.ObjectId,
+    },
     order_Status:{
         type:String,
         required:true,
@@ -46,6 +39,7 @@ const OrderSchema= new mongoose.Schema({
             required:true,
         },}
     ]
+    
     
     // Order_Time:{
     //     type:Date,

@@ -3,10 +3,10 @@ const Addtocart = require("../models/addtocartmodel");
 
 exports.createCart=async(req,res)=>{
     try{
-         const {user_id,product_id,quantity,price,totalprice,name}=req.body
+         const {user_id,product_id,quantity,totalprice,name}=req.body
 
          const addtocart=await Addtocart.create({
-            user_id,product_id,quantity,price,totalprice,name
+            user_id,product_id,quantity,totalprice
          })
          res.status(200).json({
             status:"success",   

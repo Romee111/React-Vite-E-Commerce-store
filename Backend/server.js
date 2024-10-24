@@ -14,11 +14,12 @@ const productroute=require('./routes/productroute');
 const categoryroute=require('./routes/categoryroute');
 const subcategoryroute=require('./routes/subcategoryroute');
 const orderroute=require('./routes/orderroute');
-const addtocartroute=require('./routes/addtocartroute');
+const cartroute=require('./routes/cartroute');
 const ratingroute=require('./routes/ratingroute');
 const reviewroute=require('./routes/reviewroute');
-const sellerroute=require('./routes/sellersroute');
+
 const paymentroute=require('./routes/paymentroute');
+
 mongoose.connect(process.env.DATABASEURL).then(()=>{
     console.log("database connected");
 })
@@ -29,9 +30,10 @@ app.use('/userauth',userauthroute);
 app.use('/category',categoryroute);
 app.use('/subcategory',subcategoryroute);
 app.use('/order',orderroute);
-app.use('/addtocart',addtocartroute);
 app.use('/rating',ratingroute);
 app.use('/review',reviewroute);
+app.use('/cart',cartroute);
+
 // app.use('/seller',sellerroute);
 app.use('/payment',paymentroute);
 

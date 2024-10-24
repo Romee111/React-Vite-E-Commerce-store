@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const usermiddleware=require('../middlewares/userauthmiddleware')
 const categoryController=require("../controllers/categorycontroller");
 
 
 router
 .route("/createCategory")
-.post(categoryController.createCategory);
+.post(usermiddleware.isauthorized,categoryController.createCategory);
 
 router
 .route("/getCategory/:id")
@@ -17,11 +18,11 @@ router
 
 router
 .route("/updateCategory/:id")
-.put(categoryController.updateCategory);
+.put(usermiddleware.isauthorized,categoryController.updateCategory);
 
 router
 .route("/deleteCategory/:id")
-.delete(categoryController.deleteCategory);
+.delete(usermiddleware.isauthorized,categoryController.deleteCategory);
 
 router
 .route("/getsubCategorytoCategory/:id")
