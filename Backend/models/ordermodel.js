@@ -1,4 +1,4 @@
-const  express=require('express');
+
 const mongoose=require('mongoose');
 const OrderSchema= new mongoose.Schema({
    
@@ -11,6 +11,11 @@ const OrderSchema= new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"Product",
         required:true,
+    },
+    cart_id:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Cart",
+        required:false
     },
 
     payment_id:{

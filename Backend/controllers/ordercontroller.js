@@ -15,90 +15,70 @@ const mongoose=require("mongoose")
 
 exports.createOrder = async (req, res) => {
     try {
-        // Destructure the required fields from the request body
-        const { user_id, product_id, shipping_Address, payment_Method, payment_Status, order_Status, order_CreatedDate } = req.body;
-
-        // Ensure that user_id and product_id are valid ObjectId types
-        const validUserId = mongoose.Types.ObjectId.isValid(user_id);
-        const validProductId = mongoose.Types.ObjectId.isValid(product_id);
-
-        if (!validUserId || !validProductId) {
-            return res.status(400).json({ message: "Invalid user_id or product_id" });
-        }
-
-        // Check if the product already exists for the user
-        const matchuserProduct = await Order.findOne({ user_id: user_id, product_id: product_id });
-        if (!matchuserProduct) {
-            return res.status(404).json({ message: "Product not found for the user" });
-        }
-
-        // Create a new order object
-        const newOrder = new Order({
-            user_id: mongoose.Types.ObjectId(user_id),
-            product_id: mongoose.Types.ObjectId(product_id),
-            shipping_Address,
-            payment_Method,
-            payment_Status,
-            order_Status,
-            order_CreatedDate,
-        });
-
-        // Save the new order
-        const savedOrder = await newOrder.save();
-
-        // Fetch user details (Assuming you have a User model)
-        const user = await User.findById(user_id);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        // Set up nodemailer transporter
-        const transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 587,
-            auth: {
-                user: process.env.EMAIL, // Use environment variable for email
-                pass: process.env.PASSWORD, // Use environment variable for email password
-            },
-        });
-
-        // Email content
-        const mailOptions = {
-            from: process.env.EMAIL,
-            to: user.email, // Send to user's email
-            subject: 'Order Confirmation',
-            html: `
-                <h1>Your Order is Confirmed!</h1>
-                <p>Thank you for shopping with us.</p>
-                <p>Order Details:</p>
-                <ul>
-                    <li>Product ID: ${product_id}</li>
-                    <li>Shipping Address: ${shipping_Address}</li>
-                    <li>Payment Method: ${payment_Method}</li>
-                    <li>Order Status: ${order_Status}</li>
-                </ul>
-                <p>We will notify you once your order is shipped.</p>
-            `,
-        };
-
-
-
-        // Send email
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log("Error sending email:", error);
-                return res.status(500).json({ message: "Order created but error sending email", error: error.message });
-            } else {
-                console.log('Email sent: ' + info.response);
-                return res.status(200).json({ message: 'Order created and email sent', order: savedOrder });
-            }
-        });
-
-    } catch (err) {
-        console.error("Error creating order:", err);
-        res.status(500).json({ message: "Server error", error: err });
+      const { user_id, product_id, cart_id, payment_id, order_Status, manageOrderSchema } = req.body;
+  
+      // Fetch the user data
+      const user = await User.findById(user_id);
+      if (!user) return res.status(404).json({ message: 'User not found' });
+  
+      // Fetch the product data
+      const product = await Product.findById(product_id);
+      if (!product) return res.status(404).json({ message: 'Product not found' });
+  
+      // Fetch the cart if it's provided
+      let cart = null;
+      if (cart_id) {
+        cart = await Cart.findById(cart_id);
+        if (!cart) return res.status(404).json({ message: 'Cart not found' });
+      }
+  
+      // Create a new order
+      const newOrder = new Order({
+        user_id,
+        product_id,
+        cart_id,
+        payment_id,
+        order_Status,
+        manageOrderSchema,
+      });
+  
+      // Save the order to the database
+      const savedOrder = await newOrder.save();
+  
+      // Send email to the user
+      await sendOrderConfirmationEmail(user.email, savedOrder);
+  
+      res.status(201).json({ message: 'Order created successfully', order: savedOrder });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
     }
-}
+  };
+  
+  // Function to send email
+  async function sendOrderConfirmationEmail(userEmail, order) {
+    // Set up nodemailer transport configuration
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      // You can use other services like SendGrid, Outlook, etc.
+      auth: {
+        user: process.env.EMAIL, // Replace with your email
+        pass:process.env.PASSWORD // Replace with your password or app password if using Gmail
+      },
+    });
+  
+    // Email options
+    const mailOptions = {
+      from: process.env.EMAIL, // Sender address
+      to: user.email, // Recipient address
+      subject: 'Order Confirmation',
+      text: `Thank you for your order! Your order ID is ${order._id}. We are processing it and will update you soon.`,
+      html: `<p>Thank you for your order!</p><p>Your order ID is <strong>${order._id}</strong>.</p><p>We are processing it and will update you soon.</p>`,
+    };
+  
+    // Send email
+    return transporter.sendMail(mailOptions);
+  }
 
 // exports.createOrder = async (req, res) => {
 //     try {
